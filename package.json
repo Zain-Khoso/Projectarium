@@ -1,0 +1,24 @@
+{
+  "name": "opph",
+  "version": "1.0.0",
+  "description": "This is the place where you will find all my small/One_Page Projects.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tailwindcss -i ./input.css -o ./src/css/main.css",
+    "watch": "npx tailwindcss -i ./input.css -o ./src/css/main.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zain-Khoso/OPPH.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zain-Khoso/OPPH/issues"
+  },
+  "homepage": "https://github.com/Zain-Khoso/OPPH#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
+}
