@@ -4,14 +4,14 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>OPPH/Vowels</title>
         <link
             rel="shortcut icon"
             href="/assets/imgs/icons/logo/favicon.png"
             type="image/x-icon" />
         <link rel="stylesheet" href="/src/css/main.css" />
         <script defer src="/src/js/script.js"></script>
-        <script defer src="/src/js/todoApp.js"></script>
-        <title>OPPH/To-Do_App</title>
+        <script defer src="/src/js/vowels.js"></script>
     </head>
     <body>
         <!-- Header -->
@@ -27,7 +27,7 @@
                 <!-- Site Name -->
                 <h1
                     class="font-serif font-semibold text-2xl text-center pt-2 sm:font-bold sm:p-6 md:text-3xl md:p-6">
-                    OPPH/ To-Do_App
+                    OPPH/Vowels
                 </h1>
             </div>
             <!-- NavBar -->
@@ -132,23 +132,25 @@
 
         <!-- Main Contents -->
         <main class="w-full h-fit">
-            <!-- New Task -->
+            <!-- Input Field -->
             <section
-                class="w-fit h-fit bg-orange-400 p-2 mx-auto my-8 flex rounded-full">
+                class="w-fit h-fit bg-lime-600 p-2 mx-auto my-8 flex rounded-full">
                 <input
                     type="text"
-                    placeholder="Any new Task?"
-                    id="newTask"
+                    placeholder="Wanna find Vowels"
+                    id="newVerse"
                     class="bg-transparent border-r-2 placeholder:text-white outline-none mr-2" />
-                <button class="outline-none" id="newTaskBtn">
-                    <img src="/assets/imgs/deco/add.png" class="w-5 h-5" />
+                <button class="outline-none" id="newVerseBtn">
+                    <img src="/assets/imgs/deco/process.png" class="w-5 h-5" />
                 </button>
             </section>
 
-            <!-- Task List -->
-            <section class="w-56 h-fit mx-auto">
-                <ol id="list" class="w-full h-fit">
-                </ol>
+            <!-- Result Section -->
+            <section class="w-11/12 h-fit bg-amber-400 p-2 mx-auto rounded-xl">
+                <h1 id="resultNode" class="text-black text-xl font-mono">
+                    Type any sentence above to view all the vowels present in
+                    it.
+                </h1>
             </section>
         </main>
     </body>
