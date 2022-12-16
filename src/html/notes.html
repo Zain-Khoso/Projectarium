@@ -4,14 +4,14 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>OPPH/Vowels</title>
         <link
             rel="shortcut icon"
             href="/assets/imgs/icons/logo/favicon.png"
             type="image/x-icon" />
         <link rel="stylesheet" href="/src/css/main.css" />
         <script defer src="/src/js/script.js"></script>
-        <script defer src="/src/js/vowels.js"></script>
+        <script defer src="/src/js/notes.js"></script>
+        <title>OPPH/Notes</title>
     </head>
     <body>
         <!-- Header -->
@@ -27,7 +27,7 @@
                 <!-- Site Name -->
                 <h1
                     class="font-serif font-semibold text-2xl text-center pt-2 sm:font-bold sm:p-6 md:text-3xl md:p-6">
-                    OPPH/Vowels
+                    OPPH/Notes
                 </h1>
             </div>
             <!-- NavBar -->
@@ -37,7 +37,9 @@
                 <a href="/src/html/todoApp.html" class="text-xl mt-1.5 md:mt-4"
                     >To-Do</a
                 >
-                <a href="/src/html/notes.html" class="text-xl mt-1.5 md:mt-4">Notes</a>
+                <a href="/src/html/notes.html" class="text-xl mt-1.5 md:mt-4"
+                    >Notes</a
+                >
                 <a href="#" class="hidden text-xl mt-1.5 md:block md:mt-4"
                     >Dictionary</a
                 >
@@ -131,27 +133,88 @@
         </header>
 
         <!-- Main Contents -->
-        <main class="w-full h-fit">
-            <!-- Input Field -->
+        <main id="main" class="w-full h-fit bg-slate-200 p-4">
+            <!-- New Note Section -->
             <section
-                class="w-fit h-fit bg-lime-600 p-2 mx-auto my-8 flex rounded-full">
-                <input
-                    type="text"
-                    placeholder="Wanna find Vowels"
-                    id="newVerse"
-                    class="bg-transparent border-r-2 placeholder:text-white outline-none mr-2" />
-                <button class="outline-none" id="newVerseBtn">
-                    <img src="/assets/imgs/deco/process.png" class="w-5 h-5" />
+                class="w-full h-fit bg-red-500 flex p-2 justify-between rounded-2xl">
+                <h1 class="text-black text-3xl font-serif">Add Note</h1>
+                <button class="add-note-toggle bg-lime-500 p-1 rounded-xl">
+                    <img src="/assets/imgs/deco/add.png" class="w-8 h-8" />
                 </button>
             </section>
-
-            <!-- Result Section -->
-            <section class="w-11/12 h-fit bg-amber-400 p-2 mx-auto rounded-xl">
-                <h1 id="resultNode" class="text-black text-xl font-mono">
-                    Type any sentence above to view all the vowels present in
-                    it.
+            <div
+                id="newNote-win"
+                class="hidden relative -top-14 w-full h-96 bg-emerald-600 rounded-2xl z-10 p-2">
+                <h1 class="text-4xl text-black text-center border-b py-3">
+                    New Note
                 </h1>
+                <div class="w-full h-full flex flex-col mt-4">
+                    <input
+                        type="text"
+                        id="newNoteName"
+                        placeholder="Note Title"
+                        maxlength="10"
+                        class="text-xl outline-none placeholder:text-gray-700 py-1 px-2 rounded-xl" />
+                    <textarea
+                        id="newNoteText"
+                        rows="6"
+                        placeholder="Note"
+                        class="text-xl resize-none outline-none placeholder:text-gray-700 p-1 rounded-xl my-2"></textarea>
+                    <div class="flex justify-evenly">
+                        <button
+                            class="add-note-toggle w-2/5 h-fit p-2 bg-red-500 text-2xl rounded-full">
+                            Cancel
+                        </button>
+                        <button
+                            id="addNewNoteBtn"
+                            class="w-2/5 h-fit p-2 bg-lime-500 text-2xl rounded-full">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Note Collection Section -->
+            <section
+                id="noteContainer"
+                class="w-full h-fit flex flex-wrap justify-center my-4">
+                <div
+                    class="hidden bg-green-400 w-36 h-28 rounded-xl p-1 text-center m-4">
+                    <h1 class="text-xl text-black font-mono border-b p-2">
+                        Name
+                    </h1>
+
+                    <p hidden></p>
+                    <button
+                        class="text-white bg-blue-600 text-xl p-2 rounded-xl my-2">
+                        View
+                    </button>
+                    <button
+                        class="text-white bg-red-500 text-xl p-2 rounded-xl my-2"
+                        onclick="this.parentElement.remove()">
+                        Delete
+                    </button>
+                </div>
             </section>
+            <div
+                class="hidden fixed top-24 w-full h-96 bg-emerald-500 rounded-2xl z-10 p-2 sm:top-44">
+                <h1 class="text-4xl text-black text-center border-b py-3">
+                    Note Name
+                </h1>
+                <div class="w-full h-full flex flex-col mt-4">
+                    <h1
+                        class="w-full h-52 text-2xl text-black text-center border py-3 overflow-auto">
+                        Note Name
+                    </h1>
+                    <div class="flex justify-evenly mt-6">
+                        <button
+                            class="w-2/5 h-fit p-2 bg-lime-500 text-2xl rounded-full"
+                            onclick="this.parentElement.parentElement.parentElement.remove()">
+                            Hide
+                        </button>
+                    </div>
+                </div>
+            </div>
         </main>
     </body>
 </html>
