@@ -27,7 +27,7 @@
                 <!-- Site Name -->
                 <h1
                     class="font-serif font-semibold text-2xl text-center pt-2 sm:font-bold sm:p-6 md:text-3xl md:p-6">
-                    OPPH/ To-Do_App
+                    One Page Project Hub
                 </h1>
             </div>
             <!-- NavBar -->
@@ -40,16 +40,24 @@
                 <a href="/src/html/notes.html" class="text-xl mt-1.5 md:mt-4"
                     >Notes</a
                 >
-                <a href="#" class="hidden text-xl mt-1.5 md:block md:mt-4"
+                <a
+                    href="/src/html/dictionary.html"
+                    class="hidden text-xl mt-1.5 md:block md:mt-4"
                     >Dictionary</a
                 >
-                <a href="#" class="hidden text-xl mt-1.5 md:block md:mt-4"
+                <a
+                    href="/src/html/calculator.html"
+                    class="hidden text-xl mt-1.5 md:block md:mt-4"
                     >Calculator</a
                 >
-                <a href="#" class="hidden text-xl mt-1.5 md:block md:mt-4"
+                <a
+                    href="/src/html/expense.html"
+                    class="hidden text-xl mt-1.5 md:block md:mt-4"
                     >Expence</a
                 >
-                <a href="#" class="text-xl mt-1.5 md:mt-4">MCQs</a>
+                <a href="/src/html/mcqs.html" class="text-xl mt-1.5 md:mt-4"
+                    >MCQs</a
+                >
                 <button class="navMenuBtn text-xl">More</button>
 
                 <!-- Full Menu -->
@@ -80,49 +88,49 @@
                         </li>
                         <li class="mb-3">
                             <a
-                                href="#"
+                                href="/src/html/expense.html"
                                 class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
                                 >Expense Tracker</a
                             >
                         </li>
                         <li class="mb-3">
                             <a
-                                href="#"
+                                href="/src/html/memoryg.html"
                                 class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
                                 >Memory Game</a
                             >
                         </li>
                         <li class="mb-3">
                             <a
-                                href="#"
+                                href="/src/html/dictionary.html"
                                 class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
                                 >Dictionary</a
                             >
                         </li>
                         <li class="mb-3">
                             <a
-                                href="#"
+                                href="/src/html/calculator.html"
                                 class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
                                 >Calculator</a
                             >
                         </li>
                         <li class="mb-3">
                             <a
-                                href="#"
+                                href="/src/html/aqg.html"
                                 class="text-2xl underline bg-green-500 py-1 px-2 rounded-2xl"
                                 >Anime Quote Genertor</a
                             >
                         </li>
                         <li class="mb-3">
                             <a
-                                href="#"
+                                href="/src/html/mcqs.html"
                                 class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
                                 >MCQs</a
                             >
                         </li>
                         <li class="mb-3">
                             <a
-                                href="#"
+                                href="/src/html/guessg.html"
                                 class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
                                 >Guess the Number</a
                             >
@@ -150,11 +158,17 @@
             <!-- Task List -->
             <section class="w-56 h-fit mx-auto">
                 <ol id="list" class="w-full h-fit">
-                    <li class="w-56 h-10 bg-red-500 p-2 rounded-full my-4">
+                    <li class="hidden w-56 h-10 bg-red-500 p-2 rounded-full my-4">
                         <h1
-                            class="w-full h-6 bg-transparent pr-2 mr-2 float-left overflow-auto text-center">
-                            Write Your Plans.
+                            class="w-40 h-6 bg-transparent pr-2 mr-2 float-left overflow-auto">
+                            ${taskText}
                         </h1>
+                        <button
+                            class="float-right outline-none border-l-2 pl-2 mt-1">
+                            <img
+                                src="/assets/imgs/deco/tick.png"
+                                class="w-5 h-5" />
+                        </button>
                     </li>
                 </ol>
             </section>
