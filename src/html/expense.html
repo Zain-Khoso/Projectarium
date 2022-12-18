@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="/src/css/main.css" />
         <script defer src="/src/js/script.js"></script>
         <script defer src="/src/js/expense.js"></script>
-        <title>OPP/Expenses</title>
+        <title>OPPH/Expenses</title>
     </head>
     <body>
         <!-- Header -->
@@ -27,7 +27,7 @@
                 <!-- Site Name -->
                 <h1
                     class="font-serif font-semibold text-2xl text-center pt-2 sm:font-bold sm:p-6 md:text-3xl md:p-6">
-                    OPP/Expenses
+                    OPPH/Expenses
                 </h1>
             </div>
             <!-- NavBar -->
@@ -139,5 +139,57 @@
                 </div>
             </nav>
         </header>
+
+        <!-- Main Contents -->
+        <main class="w-full h-fit flex flex-col p-4">
+            <!-- Add-Expense Section -->
+            <section
+                class="w-full h-fit flex flex-col bg-emerald-400 p-2 mb-2 rounded-xl border border-black">
+                <div class="flex mb-2">
+                    <h1 class="text-xl text-black font-serif">Expense:</h1>
+                    <input
+                        maxlength="10"
+                        type="text"
+                        id="name"
+                        placeholder="Veges"
+                        class="w-full placeholder:text-left placeholder:text-gray-600 px-1 ml-2 rounded-lg" />
+                </div>
+
+                <div class="flex mb-2">
+                    <h1 class="text-xl text-black font-serif">Amount:</h1>
+                    <input
+                        type="number"
+                        id="amount"
+                        placeholder="320"
+                        class="w-full placeholder:text-left placeholder:text-gray-600 px-1 ml-2 rounded-lg" />
+                </div>
+
+                <div class="flex mb-2">
+                    <h1 class="text-xl text-black font-serif">Date:</h1>
+                    <input
+                        type="date"
+                        id="date"
+                        placeholder="01/01/2023"
+                        class="w-full placeholder:text-left placeholder:text-gray-600 px-1 ml-2 rounded-lg" />
+                </div>
+
+                <button
+                    id="button"
+                    class="w-full bg-emerald-500 text-xl rounded-full border border-black">
+                    Add
+                </button>
+            </section>
+
+            <!-- All-Expenses Section -->
+            <section class="w-full h-fit">
+                <ol id="list" class="w-full h-fit p-2">
+                    <li class="hidden justify-evenly bg-orange-400 my-4">
+                        <h1 class="w-1/3 md:text-xl overflow-hidden mx-2">Name</h1>
+                        <h1 class="w-1/3 md:text-xl overflow-auto mx-2">Amount</h1>
+                        <h1 class="w-1/3 md:text-xl overflow-hidden mx-2">Date</h1>
+                    </li>
+                </ol>
+            </section>
+        </main>
     </body>
 </html>
