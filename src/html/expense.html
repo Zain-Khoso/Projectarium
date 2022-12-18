@@ -10,8 +10,8 @@
             type="image/x-icon" />
         <link rel="stylesheet" href="/src/css/main.css" />
         <script defer src="/src/js/script.js"></script>
-        <script defer src="/src/js/notes.js"></script>
-        <title>OPPH/Notes</title>
+        <script defer src="/src/js/expense.js"></script>
+        <title>OPPH/Expenses</title>
     </head>
     <body>
         <!-- Header -->
@@ -27,7 +27,7 @@
                 <!-- Site Name -->
                 <h1
                     class="font-serif font-semibold text-2xl text-center pt-2 sm:font-bold sm:p-6 md:text-3xl md:p-6">
-                    One Page Project Hub
+                    OPPH/Expenses
                 </h1>
             </div>
             <!-- NavBar -->
@@ -141,88 +141,55 @@
         </header>
 
         <!-- Main Contents -->
-        <main id="main" class="w-full h-fit bg-slate-200 p-4">
-            <!-- New Note Section -->
+        <main class="w-full h-fit flex flex-col p-4">
+            <!-- Add-Expense Section -->
             <section
-                class="w-full h-fit bg-red-500 flex p-2 justify-between rounded-2xl">
-                <h1 class="text-black text-3xl font-serif">Add Note</h1>
-                <button class="add-note-toggle bg-lime-500 p-1 rounded-xl">
-                    <img src="/assets/imgs/deco/add.png" class="w-8 h-8" />
+                class="w-full h-fit flex flex-col bg-emerald-400 p-2 mb-2 rounded-xl border border-black">
+                <div class="flex mb-2">
+                    <h1 class="text-xl text-black font-serif">Expense:</h1>
+                    <input
+                        maxlength="10"
+                        type="text"
+                        id="name"
+                        placeholder="Veges"
+                        class="w-full placeholder:text-left placeholder:text-gray-600 px-1 ml-2 rounded-lg" />
+                </div>
+
+                <div class="flex mb-2">
+                    <h1 class="text-xl text-black font-serif">Amount:</h1>
+                    <input
+                        type="number"
+                        id="amount"
+                        placeholder="320"
+                        class="w-full placeholder:text-left placeholder:text-gray-600 px-1 ml-2 rounded-lg" />
+                </div>
+
+                <div class="flex mb-2">
+                    <h1 class="text-xl text-black font-serif">Date:</h1>
+                    <input
+                        type="date"
+                        id="date"
+                        placeholder="01/01/2023"
+                        class="w-full placeholder:text-left placeholder:text-gray-600 px-1 ml-2 rounded-lg" />
+                </div>
+
+                <button
+                    id="button"
+                    class="w-full bg-emerald-500 text-xl rounded-full border border-black">
+                    Add
                 </button>
             </section>
-            <div
-                id="newNote-win"
-                class="hidden relative -top-14 w-full h-96 bg-emerald-600 rounded-2xl z-10 p-2">
-                <h1 class="text-4xl text-black text-center border-b py-3">
-                    New Note
-                </h1>
-                <div class="w-full h-full flex flex-col mt-4">
-                    <input
-                        type="text"
-                        id="newNoteName"
-                        placeholder="Note Title"
-                        maxlength="10"
-                        class="text-xl outline-none placeholder:text-gray-700 py-1 px-2 rounded-xl" />
-                    <textarea
-                        id="newNoteText"
-                        rows="6"
-                        placeholder="Note"
-                        class="text-xl resize-none outline-none placeholder:text-gray-700 p-1 rounded-xl my-2"></textarea>
-                    <div class="flex justify-evenly">
-                        <button
-                            class="add-note-toggle w-2/5 h-fit p-2 bg-red-500 text-2xl rounded-full">
-                            Cancel
-                        </button>
-                        <button
-                            id="addNewNoteBtn"
-                            class="w-2/5 h-fit p-2 bg-lime-500 text-2xl rounded-full">
-                            Add
-                        </button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Note Collection Section -->
-            <section
-                id="noteContainer"
-                class="w-full h-fit flex flex-wrap justify-center my-4">
-                <div
-                    class="hidden bg-green-400 w-36 h-28 rounded-xl p-1 text-center m-4">
-                    <h1 class="text-xl text-black font-mono border-b p-2">
-                        Name
-                    </h1>
-
-                    <p hidden></p>
-                    <button
-                        class="text-white bg-blue-600 text-xl p-2 rounded-xl my-2">
-                        View
-                    </button>
-                    <button
-                        class="text-white bg-red-500 text-xl p-2 rounded-xl my-2"
-                        onclick="this.parentElement.remove()">
-                        Delete
-                    </button>
-                </div>
+            <!-- All-Expenses Section -->
+            <section class="w-full h-fit">
+                <ol id="list" class="w-full h-fit p-2">
+                    <li class="hidden justify-evenly bg-orange-400 my-4">
+                        <h1 class="w-1/3 md:text-xl overflow-hidden mx-2">Name</h1>
+                        <h1 class="w-1/3 md:text-xl overflow-auto mx-2">Amount</h1>
+                        <h1 class="w-1/3 md:text-xl overflow-hidden mx-2">Date</h1>
+                    </li>
+                </ol>
             </section>
-            <div
-                class="hidden fixed top-24 w-full h-96 bg-emerald-500 rounded-2xl z-10 p-2 sm:top-44">
-                <h1 class="text-4xl text-black text-center border-b py-3">
-                    Note Name
-                </h1>
-                <div class="w-full h-full flex flex-col mt-4">
-                    <h1
-                        class="w-full h-52 text-2xl text-black text-center border py-3 overflow-auto">
-                        Note Name
-                    </h1>
-                    <div class="flex justify-evenly mt-6">
-                        <button
-                            class="w-2/5 h-fit p-2 bg-lime-500 text-2xl rounded-full"
-                            onclick="this.parentElement.parentElement.parentElement.remove()">
-                            Hide
-                        </button>
-                    </div>
-                </div>
-            </div>
         </main>
     </body>
 </html>
