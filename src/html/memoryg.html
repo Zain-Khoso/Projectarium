@@ -10,8 +10,8 @@
             type="image/x-icon" />
         <link rel="stylesheet" href="/src/css/main.css" />
         <script defer src="/src/js/script.js"></script>
-        <script defer src="/src/js/todoApp.js"></script>
-        <title>OPPH/To-Do_App</title>
+        <script defer src="/src/js/memoryg.js"></script>
+        <title>OPPH/Memory-Game</title>
     </head>
     <body>
         <!-- Header -->
@@ -27,10 +27,9 @@
                 <!-- Site Name -->
                 <h1
                     class="font-serif font-semibold text-2xl text-center pt-2 sm:font-bold sm:p-6 md:text-3xl md:p-6">
-                    OPPH/ To-Do_App
+                    OPPH/Memory-Game
                 </h1>
             </div>
-            
             <!-- NavBar -->
             <nav
                 class="relative w-full h-10 bg-blue-400 flex justify-around md:h-16 align-baseline z-20">
@@ -142,30 +141,28 @@
         </header>
 
         <!-- Main Contents -->
-        <main class="w-full h-fit">
-            <!-- New Task -->
+        <main id="game" class="w-full h-screen flex flex-col justify-evenly">
+            <!-- Game Section -->
             <section
-                class="w-fit h-fit bg-orange-400 p-2 mx-auto my-8 flex rounded-full">
-                <input
-                    type="text"
-                    placeholder="Any new Task?"
-                    id="newTask"
-                    class="bg-transparent border-r-2 placeholder:text-white outline-none mr-2" />
-                <button class="outline-none" id="newTaskBtn">
-                    <img src="/assets/imgs/deco/add.png" class="w-5 h-5" />
-                </button>
+                class="gameSection w-72 flex justify-evenly p-4 mx-auto my-8 rounded-xl">
+                <div class="flex flex-col">
+                    <button class="w-16 h-16 bg-emerald-700 mb-2"></button
+                    ><button class="w-16 h-16 bg-emerald-700 mt-2"></button>
+                </div>
+                <div class="flex flex-col">
+                    <button class="w-16 h-16 bg-emerald-700 mb-2"></button
+                    ><button class="w-16 h-16 bg-emerald-700 mt-2"></button>
+                </div>
+                <div class="flex flex-col">
+                    <button class="w-16 h-16 bg-emerald-700 mb-2"></button
+                    ><button class="w-16 h-16 bg-emerald-700 mt-2"></button>
+                </div>
             </section>
 
-            <!-- Task List -->
-            <section class="w-56 h-fit mx-auto">
-                <ol id="list" class="w-full h-fit">
-                    <li class="w-56 h-10 bg-red-500 p-2 rounded-full my-4">
-                        <h1
-                            class="w-full h-6 bg-transparent pr-2 mr-2 float-left overflow-auto text-center">
-                            Write Your Plans.
-                        </h1>
-                    </li>
-                </ol>
+            <!-- Score Section -->
+            <section class="gameSection w-72 h-fit flex flex-col mx-auto rounded-2xl border border-amber-500">
+                <h1 class="text-3xl text-black font-mono mx-auto my-2">Attempts: 3</h1>
+                <h1 class="text-3xl text-black font-mono mx-auto my-2">Score: 0</h1>
             </section>
         </main>
     </body>
