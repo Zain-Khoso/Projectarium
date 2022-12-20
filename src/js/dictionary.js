@@ -1,6 +1,5 @@
 const search = document.getElementById("search");
 const searchBtn = document.getElementById("searchBtn");
-const randomBtn = document.getElementById("randomBtn");
 const word = document.getElementById("word");
 const meaning = document.getElementById("meaning");
 const alphabet = [
@@ -71,37 +70,5 @@ async function searchWord() {
     } else return;
 }
 
-async function randomWord() {
-    let words;
-    let data;
-    let keyword;
-    try {
-        words = await (
-            await fetch(
-                `/assets/data/words/${alphabet.at(
-                    Math.random() * alphabet.length
-                )}.json`
-            )
-        ).json();
-
-        let keyword = words.at(Math.random() * words.length);
-
-        data = await (
-            await fetch(
-                `https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`
-            )
-        ).json();
-
-        word.textContent = keyword;
-        meaning.textContent =
-            data[0]["meanings"][0]["definitions"][0]["definition"];
-        search.value = "";
-    } catch (err) {
-        alert("Sorry some error occured. Please try again");
-        search.value = "";
-        return;
-    }
-}
 
 searchBtn.addEventListener("click", searchWord);
-randomBtn.addEventListener("click", randomWord);
