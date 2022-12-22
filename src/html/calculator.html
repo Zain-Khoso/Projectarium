@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="shortcut icon"
+            href="/assets/imgs/icons/logo/favicon.png"
+            type="image/x-icon" />
+        <link rel="stylesheet" href="/src/css/main.css" />
+        <script defer src="/src/js/script.js"></script>
+        <script defer src="/src/js/calculator.js"></script>
+        <title>OPPH/Calculator</title>
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="w-full h-fit flex flex-col">
+            <!-- Heading -->
+            <div class="w-full h-fit flex justify-start bg-blue-500 z-20">
+                <!-- Logo -->
+                <img
+                    src="/assets/imgs/icons/logo/favicon.png"
+                    alt="Logo"
+                    class="box-content w-16 h-9 p-1 sm:h-16 sm:p-2 md:pt-4" />
+
+                <!-- Site Name -->
+                <h1
+                    class="font-serif font-semibold text-2xl text-center pt-2 sm:font-bold sm:p-6 md:text-3xl md:p-6">
+                    OPPH/Calculator
+                </h1>
+            </div>
+            <!-- NavBar -->
+            <nav
+                class="relative w-full h-10 bg-blue-400 flex justify-around md:h-16 align-baseline z-20">
+                <!-- Default Menu -->
+                <a href="/src/html/todoApp.html" class="text-xl mt-1.5 md:mt-4"
+                    >To-Do</a
+                >
+                <a href="/src/html/notes.html" class="text-xl mt-1.5 md:mt-4"
+                    >Notes</a
+                >
+                <a
+                    href="/src/html/dictionary.html"
+                    class="hidden text-xl mt-1.5 md:block md:mt-4"
+                    >Dictionary</a
+                >
+                <a
+                    href="/src/html/calculator.html"
+                    class="hidden text-xl mt-1.5 md:block md:mt-4"
+                    >Calculator</a
+                >
+                <a
+                    href="/src/html/expense.html"
+                    class="hidden text-xl mt-1.5 md:block md:mt-4"
+                    >Expence</a
+                >
+                <a href="/src/html/mcqs.html" class="text-xl mt-1.5 md:mt-4"
+                    >MCQs</a
+                >
+                <button class="navMenuBtn text-xl">More</button>
+
+                <!-- Full Menu -->
+                <div
+                    id="navMenu"
+                    class="hidden absolute top-12 w-fit h-fit bg-blue-400 py-4 px-4 z-10 rounded-3xl md:px-8 md:top-20">
+                    <ol class="font-semibold list-disc pl-4">
+                        <li class="mb-3">
+                            <a
+                                href="/src/html/todoApp.html"
+                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
+                                >To-Do_List</a
+                            >
+                        </li>
+                        <li class="mb-3">
+                            <a
+                                href="/src/html/vowels.html"
+                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
+                                >Vowels</a
+                            >
+                        </li>
+                        <li class="mb-3">
+                            <a
+                                href="/src/html/notes.html"
+                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
+                                >Notes</a
+                            >
+                        </li>
+                        <li class="mb-3">
+                            <a
+                                href="/src/html/expense.html"
+                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
+                                >Expense Tracker</a
+                            >
+                        </li>
+                        <li class="mb-3">
+                            <a
+                                href="/src/html/memoryg.html"
+                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
+                                >Memory Game</a
+                            >
+                        </li>
+                        <li class="mb-3">
+                            <a
+                                href="/src/html/dictionary.html"
+                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
+                                >Dictionary</a
+                            >
+                        </li>
+                        <li class="mb-3">
+                            <a
+                                href="/src/html/calculator.html"
+                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
+                                >Calculator</a
+                            >
+                        </li>
+                        <li class="mb-3">
+                            <a
+                                href="/src/html/aqg.html"
+                                class="text-2xl underline bg-green-500 py-1 px-2 rounded-2xl"
+                                >Anime Quote Genertor</a
+                            >
+                        </li>
+                        <li class="mb-3">
+                            <a
+                                href="/src/html/mcqs.html"
+                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
+                                >MCQs</a
+                            >
+                        </li>
+                        <li class="mb-3">
+                            <a
+                                href="/src/html/guessg.html"
+                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
+                                >Guess the Number</a
+                            >
+                        </li>
+                    </ol>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Contents -->
+        <main class="w-full h-fit flex justify-center">
+            <!-- Calculator -->
+            <section
+                class="w-4/5 h-fit bg-emerald-500 p-2 border border-black rounded-md my-4 flex flex-col sm:w-80">
+                <!-- Heading -->
+                <h1
+                    class="w-full h-fit text-4xl text-black text-center font-mono font-bold border-b border-b-black">
+                    Calculator
+                </h1>
+
+                <!-- Input -->
+                <input
+                    type="text"
+                    id="expresion"
+                    placeholder="2 + 2 = 4"
+                    class="w-full h-fit text-xl text-black font-sans border border-black placeholder:text-xl placeholder:text-gray-500  rounded-lg outline-none px-1 my-2" />
+
+                <!-- Button -->
+                <div
+                    class="w-full h-fit grid grid-cols-4 grid-flow-row place-items-stretch gap-2 mt-4">
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        7
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        8
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        9
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        +
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        4
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        5
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        6
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        -
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        1
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        2
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        3
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        X
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        <--
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        0
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        .
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none">
+                        /
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none col-span-2">
+                        AC
+                    </button>
+                    <button
+                        class="button h-10 bg-lime-500 text-2xl text-black font-sans border border-black outline-none col-span-2">
+                        =
+                    </button>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
