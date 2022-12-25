@@ -1,0 +1,191 @@
+[
+    {
+        "q": "Q: Charles Babbage is the ______ of Computers",
+        "options": [
+            {
+                "option": "Brother",
+                "correct": "no"
+            },
+            {
+                "option": "Uncle",
+                "correct": "no"
+            },
+            {
+                "option": "Father",
+                "correct": "yes"
+            },
+            {
+                "option": "Hasband",
+                "correct": "no"
+            }
+        ]
+    },
+    {
+        "q": "Q: Central Processing Unit is long for ______ .",
+        "options": [
+            {
+                "option": "SPU",
+                "correct": "no"
+            },
+            {
+                "option": "CPU",
+                "correct": "yes"
+            },
+            {
+                "option": "San-Pro-Unit",
+                "correct": "no"
+            },
+            {
+                "option": "CPY",
+                "correct": "no"
+            }
+        ]
+    },
+    {
+        "q": "Q: Mouse is an ______ device.",
+        "options": [
+            {
+                "option": "Output",
+                "correct": "no"
+            },
+            {
+                "option": "Processing",
+                "correct": "no"
+            },
+            {
+                "option": "Touch",
+                "correct": "no"
+            },
+            {
+                "option": "Input",
+                "correct": "yes"
+            }
+        ]
+    },
+    {
+        "q": "Q: Printer is an ______ device.",
+        "options": [
+            {
+                "option": "Output",
+                "correct": "yes"
+            },
+            {
+                "option": "Processing",
+                "correct": "no"
+            },
+            {
+                "option": "Touch",
+                "correct": "no"
+            },
+            {
+                "option": "Input",
+                "correct": "no"
+            }
+        ]
+    },
+    {
+        "q": "Q: Display is an ______ device.",
+        "options": [
+            {
+                "option": "Output",
+                "correct": "yes"
+            },
+            {
+                "option": "Processing",
+                "correct": "no"
+            },
+            {
+                "option": "Fast",
+                "correct": "no"
+            },
+            {
+                "option": "Input",
+                "correct": "no"
+            }
+        ]
+    },
+    {
+        "q": "Q: Keyboard is an ______ device.",
+        "options": [
+            {
+                "option": "Output",
+                "correct": "no"
+            },
+            {
+                "option": "Processing",
+                "correct": "no"
+            },
+            {
+                "option": "Touch",
+                "correct": "no"
+            },
+            {
+                "option": "Input",
+                "correct": "yes"
+            }
+        ]
+    },
+    {
+        "q": "Q: Photoshop is an ______ tool.",
+        "options": [
+            {
+                "option": "Browsing",
+                "correct": "no"
+            },
+            {
+                "option": "Mining",
+                "correct": "no"
+            },
+            {
+                "option": "Gaming",
+                "correct": "no"
+            },
+            {
+                "option": "Photo-Editing",
+                "correct": "yes"
+            }
+        ]
+    },
+    {
+        "q": "Q: Scanner is an ______ device.",
+        "options": [
+            {
+                "option": "Output",
+                "correct": "no"
+            },
+            {
+                "option": "Processing",
+                "correct": "no"
+            },
+            {
+                "option": "Touch",
+                "correct": "no"
+            },
+            {
+                "option": "Input",
+                "correct": "yes"
+            }
+        ]
+    },
+    {
+        "q": "Q: Central Processing Unit is a  ______ device .",
+        "options": [
+            {
+                "option": "Output",
+                "correct": "no"
+            },
+            {
+                "option": "Processing",
+                "correct": "yes"
+            },
+            {
+                "option": "Touch",
+                "correct": "no"
+            },
+            {
+                "option": "Input",
+                "correct": "no"
+            }
+        ]
+    }
+]
