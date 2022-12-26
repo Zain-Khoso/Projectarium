@@ -23,9 +23,9 @@ function setupNewQuestion(ques) {
     labels.forEach((label) => {
         options.forEach((option) => {
             if (option.value === "ok") {
-                label.classList.remove("text-green-500");
+                label.classList.remove("green-card");
             } else {
-                label.classList.remove("text-red-500");
+                label.classList.remove("red-card");
             }
         });
     });
@@ -72,9 +72,9 @@ function showAnswer() {
     labels.forEach((label) => {
         options.forEach((option) => {
             if (label.dataset.for === option.id && option.value === "ok") {
-                label.classList.add("text-green-500");
+                label.classList.add("green-card");
             } else {
-                label.classList.add("text-red-500");
+                label.classList.add("red-card");
             }
         });
     });
