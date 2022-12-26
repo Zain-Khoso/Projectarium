@@ -2,10 +2,9 @@
   "name": "opph",
   "version": "1.0.0",
   "description": "This is the place where you will find all my small/One_Page Projects.",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "build": "npx tailwindcss -i ./input.css -o ./src/css/main.css",
-    "watch": "npx tailwindcss -i ./input.css -o ./src/css/main.css --watch"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
