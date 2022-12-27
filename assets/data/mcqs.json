@@ -1,6 +1,6 @@
 [
     {
-        "q": "Q: Charles Babbage is the ______ of Computers",
+        "q": "Q2: Charles Babbage is the ______ of Computers",
         "options": [
             {
                 "option": "Brother",
@@ -21,7 +21,7 @@
         ]
     },
     {
-        "q": "Q: Central Processing Unit is long for ______ .",
+        "q": "Q3: Central Processing Unit is long for ______ .",
         "options": [
             {
                 "option": "SPU",
@@ -42,7 +42,7 @@
         ]
     },
     {
-        "q": "Q: Mouse is an ______ device.",
+        "q": "Q4: Mouse is an ______ device.",
         "options": [
             {
                 "option": "Output",
@@ -63,7 +63,7 @@
         ]
     },
     {
-        "q": "Q: Printer is an ______ device.",
+        "q": "Q5: Printer is an ______ device.",
         "options": [
             {
                 "option": "Output",
@@ -84,7 +84,7 @@
         ]
     },
     {
-        "q": "Q: Display is an ______ device.",
+        "q": "Q6: Display is an ______ device.",
         "options": [
             {
                 "option": "Output",
@@ -105,7 +105,7 @@
         ]
     },
     {
-        "q": "Q: Keyboard is an ______ device.",
+        "q": "Q7: Keyboard is an ______ device.",
         "options": [
             {
                 "option": "Output",
@@ -126,7 +126,7 @@
         ]
     },
     {
-        "q": "Q: Photoshop is an ______ tool.",
+        "q": "Q8: Photoshop is an ______ tool.",
         "options": [
             {
                 "option": "Browsing",
@@ -147,7 +147,7 @@
         ]
     },
     {
-        "q": "Q: Scanner is an ______ device.",
+        "q": "Q9: Scanner is an ______ device.",
         "options": [
             {
                 "option": "Output",
@@ -168,7 +168,7 @@
         ]
     },
     {
-        "q": "Q: Central Processing Unit is a  ______ device .",
+        "q": "Q10: Central Processing Unit is a  ______ device .",
         "options": [
             {
                 "option": "Output",
