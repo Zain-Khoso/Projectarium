@@ -1,23 +1,20 @@
 {
-  "name": "opph",
-  "version": "1.0.0",
-  "description": "This is the place where you will find all my small/One_Page Projects.",
-  "main": "index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Zain-Khoso/OPPH.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Zain-Khoso/OPPH/issues"
-  },
-  "homepage": "https://github.com/Zain-Khoso/OPPH#readme",
-  "devDependencies": {
-    "tailwindcss": "^3.2.4"
-  }
+    "name": "project_globe",
+    "version": "1.0.0",
+    "description": "One place for multiple projects, A place to help you get project ideas.",
+    "main": "index.html",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Zain-Khoso/Project_Globe.git"
+    },
+    "keywords": [],
+    "author": "Zain-Khoso",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Zain-Khoso/Project_Globe/issues"
+    },
+    "homepage": "https://github.com/Zain-Khoso/Project_Globe#readme"
 }

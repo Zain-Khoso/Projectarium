@@ -1,6 +1,3 @@
-# OPPH
-## One Page Project Hub
+# Project Globe
 
-This is the place where you will find all my small/One_Page Projects.
-
-#### Feel free to leave any suggestion or bugs.
+### One place for multiple projects, A place to help you get project ideas. 
