@@ -2,171 +2,97 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Favicon -->
         <link
             rel="shortcut icon"
-            href="/assets/imgs/icons/logo/favicon.png"
+            href="/assets/imgs/icons/logo/logo.png"
             type="image/x-icon" />
+
+        <!-- Tailwind -->
         <link rel="stylesheet" href="/src/css/main.css" />
-        <script defer src="/src/js/script.js"></script>
+
+        <!-- JavaScript -->
         <script defer src="/src/js/dictionary.js"></script>
-        <title>OPPH/Dictionary</title>
+
+        <title>Dictionary</title>
     </head>
-    <body>
+    <body class="w-screen h-screen bg-gray-900">
         <!-- Header -->
-        <header class="w-full h-fit flex flex-col">
-            <!-- Heading -->
-            <div class="w-full h-fit flex justify-start bg-blue-500 z-20">
-                <!-- Logo -->
-                <img
-                    src="/assets/imgs/icons/logo/favicon.png"
-                    alt="Logo"
-                    class="box-content w-9 h-9 p-1 sm:w-16 sm:h-16 sm:p-2 md:pt-4" />
-
-                <!-- Site Name -->
-                <h1
-                    class="font-serif font-semibold text-2xl text-center pt-2 sm:font-bold sm:p-6 md:text-3xl md:p-6">
-                    One Page Project Hub
-                </h1>
+        <header class="text-gray-400 bg-gray-900 body-font">
+            <div
+                class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+                <a
+                    href="/index.html"
+                    class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+                    <span class="ml-3 text-xl">Project Globe</span>
+                </a>
+                <nav
+                    class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                    <a href="/" class="mr-10 hover:text-white">Weather</a>
+                    <a
+                        href="/src/html/dictionary.html"
+                        class="mr-10 hover:text-white"
+                        >Dictionary</a
+                    >
+                    <a href="/" class="mr-10 hover:text-white">Clock</a>
+                </nav>
+                <a
+                    href="/src/html/projects.html"
+                    class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">
+                    More
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        class="w-4 h-4 ml-1"
+                        viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
             </div>
-            <!-- NavBar -->
-            <nav
-                class="relative w-full h-10 bg-blue-400 flex justify-around md:h-16 align-baseline z-20">
-                <!-- Default Menu -->
-                <a href="/src/html/todoApp.html" class="text-xl mt-1.5 md:mt-4"
-                    >To-Do</a
-                >
-                <a href="/src/html/notes.html" class="text-xl mt-1.5 md:mt-4">Notes</a>
-                <a href="/src/html/dictionary.html" class="hidden text-xl mt-1.5 md:block md:mt-4"
-                    >Dictionary</a
-                >
-                <a href="/src/html/calculator.html" class="hidden text-xl mt-1.5 md:block md:mt-4"
-                    >Calculator</a
-                >
-                <a href="/src/html/expense.html" class="hidden text-xl mt-1.5 md:block md:mt-4"
-                    >Expence</a
-                >
-                <a href="/src/html/mcqs.html" class="text-xl mt-1.5 md:mt-4">MCQs</a>
-                <button class="navMenuBtn text-xl">More</button>
-
-                <!-- Full Menu -->
-                <div
-                    id="navMenu"
-                    class="hidden absolute top-12 w-fit h-fit bg-blue-400 py-4 px-4 z-10 rounded-3xl md:px-8 md:top-20">
-                    <ol class="font-semibold list-disc pl-4">
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/todoApp.html"
-                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
-                                >To-Do_List</a
-                            >
-                        </li>
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/vowels.html"
-                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
-                                >Vowels</a
-                            >
-                        </li>
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/notes.html"
-                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
-                                >Notes</a
-                            >
-                        </li>
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/expense.html"
-                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
-                                >Expense Tracker</a
-                            >
-                        </li>
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/memoryg.html"
-                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
-                                >Memory Game</a
-                            >
-                        </li>
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/dictionary.html"
-                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
-                                >Dictionary</a
-                            >
-                        </li>
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/calculator.html"
-                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
-                                >Calculator</a
-                            >
-                        </li>
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/aqg.html"
-                                class="text-2xl underline bg-green-500 py-1 px-2 rounded-2xl"
-                                >Anime Quote Genertor</a
-                            >
-                        </li>
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/mcqs.html"
-                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
-                                >MCQs</a
-                            >
-                        </li>
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/guessg.html"
-                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
-                                >Guess the Number</a
-                            >
-                        </li>
-                        <li class="mb-3">
-                            <a
-                                href="/src/html/clock.html"
-                                class="text-2xl underline bg-green-500 py-1 px-4 rounded-2xl"
-                                >Clock</a
-                            >
-                        </li>
-                    </ol>
-                </div>
-            </nav>
         </header>
 
-        <!-- Main Contents -->
-        <main class="w-full h-fit">
-            <!-- Search Section -->
-            <section
-                class="w-4/5 h-fit bg-blue-600 p-2 my-4 mx-auto border border-black rounded-md flex md:w-3/5">
-                <input
-                    type="text"
-                    id="search"
-                    class="w-full outline-none text-xl text-black font-serif rounded-lg px-2" />
+        <!-- Content -->
+        <main
+            class="flex flex-col gap-8 my-8 md:my-2 sm:my-0 xs:my-0 justify-center">
+            <!-- Heading -->
+            <h1 class="text-4xl text-white text-center underline">
+                Dictionary
+            </h1>
+            <div class="flex w-full justify-center items-end">
+                <div
+                    class="relative mr-4 md:w-full lg:w-full xl:w-1/2 w-2/4 md:mx-8 lg:mx-8">
+                    <label
+                        for="search-field"
+                        class="leading-7 text-sm text-gray-400"
+                        >Search The Word From Here.</label
+                    >
+                    <input
+                        type="text"
+                        id="search-field"
+                        class="w-full bg-gray-800 rounded bg-opacity-40 border border-gray-700 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                </div>
                 <button
-                    id="searchBtn"
-                    class="w-2/6 h-fit text-xl text-black bg-emerald-500 px-2 mx-1 border border-black rounded-xl outline-none">
+                    id="search-btn"
+                    class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                     Search
                 </button>
-            </section>
-
-            <!-- Result Section -->
-            <section
-                class="w-4/5 h-fit bg-orange-500 p-2 mx-auto mb-4 rounded-md md:w-3/5">
+            </div>
+            <div class="w-1/2 h-2/5 bg-gray-700 p-4 rounded-xl mx-auto mt-10">
                 <h1
-                    id="word"
-                    class="w-full text-2xl text-black font-mono text-center mb-2 border-b-2 border-b-black">
+                    id="word-element"
+                    class="text-white text-xl text-center pb-2 border-b mb-2">
                     Word
                 </h1>
-                <h1
-                    id="meaning"
-                    class="w-full text-2xl text-black font-mono text-center">
-                    Meaning
-                </h1>
-            </section>
+                <p
+                    id="defination-element"
+                    class="text-white text-center text-md">
+                    Defination
+                </p>
+            </div>
         </main>
     </body>
 </html>
