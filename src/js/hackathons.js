@@ -94,15 +94,6 @@ const createCard = function (data) {
 
     footerDiv.appendChild(learnMore);
 
-    const arrow = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    arrow.classList.add("w-4", "h-4", "ml-2");
-    arrow.setAttribute("viewBox", "0 0 24 24");
-    arrow.setAttribute("stroke", "currentColor");
-    arrow.setAttribute("strokeWidth", "2");
-    arrow.setAttribute("fill", "none");
-    arrow.setAttribute("strokeLinecap", "round");
-    arrow.setAttribute("strokeLinejoin", "round");
-
     bodyDiv.appendChild(footerDiv);
 
     containerDiv.appendChild(bodyDiv);
