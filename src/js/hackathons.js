@@ -1,5 +1,10 @@
-const cardsRoot = document.getElementById("cards-root");
+"use strict";
 
+// DOM Selection
+const cardsRoot = document.getElementById("cards-root");
+const footer = document.getElementById("footer");
+
+// Functions
 const createCard = function (data) {
     const rootDiv = document.createElement("div");
     rootDiv.classList.add("p-4", "md:w-1/3");
@@ -107,6 +112,7 @@ const createCard = function (data) {
     cardsRoot.appendChild(rootDiv);
 };
 
+// IIFE to load the contents of the Page.
 (async function () {
     const request = await fetch("https://kontests.net/api/v1/hacker_earth");
     const data = await request.json();
@@ -115,4 +121,6 @@ const createCard = function (data) {
         item["thumbnail"] = Math.ceil(Math.random() * 13);
         createCard(item);
     }
-})();
+})().then(() => {
+    footer.classList.remove("hidden");
+});
