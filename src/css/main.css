@@ -2296,11 +2296,6 @@ video {
   line-height: 2.5rem;
 }
 
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -3080,6 +3075,10 @@ a:hover {
 
   .md\:mt-0 {
     margin-top: 0px;
+  }
+
+  .md\:inline {
+    display: inline;
   }
 
   .md\:h-36 {
