@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Favicon -->
+        <link
+            rel="shortcut icon"
+            href="/assets/imgs/icons/logo.png"
+            type="image/x-icon" />
+
+        <!-- Flowbite CSS -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css"
+            rel="stylesheet" />
+
+        <!-- Tailwind -->
+        <link rel="stylesheet" href="/src/css/main.css" />
+
+        <!-- JavaScript -->
+        <script defer src="/src/js/foriegn_exchange.js"></script>
+
+        <title>Foriegn Exchange | Project Globe</title>
+    </head>
+    <body class="w-screen h-screen bg-gray-900 overflow-x-hidden">
+        <!-- Header -->
+        <header class="text-gray-400 bg-gray-900 body-font">
+            <div
+                class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+                <a
+                    href="/index.html"
+                    class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+                    <span class="ml-3 text-xl">Project Globe</span>
+                </a>
+                <nav
+                    class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                    <a
+                        href="/src/html/dictionary.html"
+                        class="mr-10 hover:text-white"
+                        >Dictionary</a
+                    >
+                    <a
+                        href="/src/html/hackathons.html"
+                        class="mr-10 hover:text-white"
+                        >Hackathon</a
+                    >
+                    <a
+                        href="/src/html/movies_db.html"
+                        class="mr-10 hover:text-white"
+                        >Movies</a
+                    >
+                </nav>
+                <a
+                    href="/src/html/projects.html"
+                    class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">
+                    More
+                    <svg
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        class="w-4 h-4 ml-1"
+                        viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="my-4">
+            <h1 class="w-full text-2xl text-gray-50 text-center mb-8">
+                Foriegn Exchange
+            </h1>
+            <div class="w-full flex justify-center">
+                <select
+                    id="initial-currency"
+                    required
+                    class="border text-sm rounded-l-lg border-r-2 focus:ring-blue-500 focus:border-blue-500 block w-2/5 sm:w-1/5 p-2.5 bg-gray-800 border-gray-600 placeholder-gray-400 text-white">
+                    <option value="invalid" selected>Choose a Currency</option>
+                </select>
+                <div class="relative w-2/5 sm:h-3/4">
+                    <input
+                        type="number"
+                        id="input-amount"
+                        class="block p-2.5 w-full z-20 text-sm rounded-r-lg border-l-2 border focus:ring-blue-500 focus:border-blue-500 bg-gray-800 border-gray-600 placeholder-gray-400 text-white"
+                        placeholder="3.72"
+                        required />
+                </div>
+            </div>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="64"
+                height="64"
+                class="fill-blue-500 mx-auto my-4"
+                viewBox="0 0 16 16">
+                <path
+                    fill-rule="evenodd"
+                    d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+            </svg>
+            <div class="w-full flex justify-center">
+                <select
+                    id="change-to-currency"
+                    required
+                    class="border text-sm rounded-l-lg border-r-2 focus:ring-blue-500 focus:border-blue-500 block w-2/5 sm:w-1/5 p-2.5 bg-gray-800 border-gray-600 placeholder-gray-400 text-white">
+                    <option value="invalid" selected>Choose a Currency</option>
+                </select>
+                <div class="relative w-2/5 sm:h-3/4">
+                    <input
+                        type="number"
+                        id="output-amount"
+                        class="block p-2.5 w-full z-20 text-sm rounded-r-lg border-l-2 border focus:ring-blue-500 focus:border-blue-500 bg-gray-800 border-gray-600 placeholder-gray-400 text-white"
+                        placeholder="372"
+                        disabled />
+                </div>
+            </div>
+            <div class="w-full flex flex-col justify-center my-4">
+                <button
+                    type="button"
+                    id="calculate-btn"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none mx-auto">
+                    Calculate
+                </button>
+            </div>
+        </main>
+
+        <!-- Flowbite JavaScrpt -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
+    </body>
+</html>
