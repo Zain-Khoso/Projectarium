@@ -14,7 +14,7 @@
 
         <title>Projects | Project Globe</title>
     </head>
-    <body>
+    <body class="w-screen h-screen bg-gray-900 overflow-x-hidden">
         <!-- Header -->
         <header class="text-gray-400 bg-gray-900 body-font">
             <div
@@ -27,19 +27,19 @@
                 <nav
                     class="md:ml-auto flex flex-wrap items-center text-base justify-center">
                     <a
-                        href="/src/html/dictionary.html"
+                        href="/src/html/lexicon.html"
                         class="mr-10 hover:text-white"
-                        >Dictionary</a
+                        >Lexicon</a
                     >
                     <a
-                        href="/src/html/hackathons.html"
+                        href="/src/html/hack_vantage.html"
                         class="mr-10 hover:text-white"
-                        >Hackathon</a
+                        >HackVantage</a
                     >
                     <a
-                        href="/src/html/movies_db.html"
-                        class="mr-10 hover:text-white"
-                        >Movies</a
+                        href="/src/html/currency_hub.html"
+                        class="mr-10 hover:text-white hidden md:block"
+                        >CurrencyHub</a
                     >
                 </nav>
                 <a
@@ -63,7 +63,7 @@
         <!-- Content -->
         <main>
             <section class="text-gray-400 bg-gray-900 body-font">
-                <div class="container px-5 py-24 mx-auto">
+                <div class="container px-5 py-12 mx-auto">
                     <div
                         class="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-800 sm:flex-row flex-col">
                         <div
@@ -82,18 +82,20 @@
                             class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                             <h2
                                 class="text-white text-lg title-font font-medium mb-2">
-                                Dictionary
+                                Lexicon
                             </h2>
                             <p class="leading-relaxed text-base">
-                                Write down a word that is not in your
-                                dictionary, and this dictionary will help you to
-                                get the word's true meaning correctly without
-                                ever needing to google.
+                                Delve into the vast expanse of an
+                                all-encompassing lexicon, offering a multitude
+                                of entry words accompanied by their respective
+                                definitions, creating an invaluable and
+                                comprehensive linguistic resource at your
+                                disposal.
                             </p>
                             <a
-                                href="/src/html/dictionary.html"
+                                href="/src/html/lexicon.html"
                                 class="mt-3 text-indigo-400 inline-flex items-center"
-                                >Visit
+                                >Explore
                                 <svg
                                     fill="none"
                                     stroke="currentColor"
@@ -113,17 +115,20 @@
                             class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                             <h2
                                 class="text-white text-lg title-font font-medium mb-2">
-                                Quotes Fetcher
+                                QuotationQuest
                             </h2>
                             <p class="leading-relaxed text-base">
-                                Get random anime quotes that touch your heart
-                                and force you to look at your point of viewing
-                                life.
+                                Immerse yourself in poignant anime quotes that
+                                resonate deeply, compelling introspection and
+                                offering profound perspectives on life's
+                                journey. Experience the transformative power of
+                                words that stir the soul and inspire
+                                self-reflection.
                             </p>
                             <a
-                                href="/src/html/quotes_fetcher.html"
+                                href="/src/html/quotation_quest.html"
                                 class="mt-3 text-indigo-400 inline-flex items-center"
-                                >Visit
+                                >Explore
                                 <svg
                                     fill="none"
                                     stroke="currentColor"
@@ -170,17 +175,19 @@
                             class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                             <h2
                                 class="text-white text-lg title-font font-medium mb-2">
-                                Hackerthon Anchor
+                                HackVantage
                             </h2>
                             <p class="leading-relaxed text-base">
-                                Get daily updated news of hackathons and coding
-                                challenges happening around the world. See where
-                                you can demonstrate your own coding skills.
+                                Stay informed and sharpen your coding skills
+                                with daily updates on global coding challenges.
+                                Gain valuable insights and seize opportunities
+                                for growth in the ever-evolving world of
+                                programming.
                             </p>
                             <a
-                                href="/src/html/hackathons.html"
+                                href="/src/html/hack_vantage.html"
                                 class="mt-3 text-indigo-400 inline-flex items-center"
-                                >Visit
+                                >Explore
                                 <svg
                                     fill="none"
                                     stroke="currentColor"
@@ -195,22 +202,24 @@
                         </div>
                     </div>
                     <div
-                        class="flex items-center lg:w-3/5 mx-auto pb-10 mb-10 sm:flex-row flex-col">
+                        class="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-800 sm:flex-row flex-col">
                         <div
                             class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                             <h2
                                 class="text-white text-lg title-font font-medium mb-2">
-                                Movies DB
+                                MovieSensei
                             </h2>
                             <p class="leading-relaxed text-base">
-                                You like movies? and feel like You have watched
-                                every good one on the planet. Then try these
-                                surely you will like them as well.
+                                Are you a movie enthusiast who believes you've
+                                exhausted the best cinematic offerings? Indulge
+                                in these curated selections, certain to
+                                captivate and leave an indelible impression on
+                                your discerning taste.
                             </p>
                             <a
-                                href="/src/html/movies_db.html"
+                                href="/src/html/movie_sensei.html"
                                 class="mt-3 text-indigo-400 inline-flex items-center"
-                                >Visit
+                                >Explore
                                 <svg
                                     fill="none"
                                     stroke="currentColor"
@@ -236,6 +245,57 @@
                             </svg>
                         </div>
                     </div>
+                    <div
+                        class="flex items-center lg:w-3/5 mx-auto pb-10 mb-10 sm:flex-row flex-col">
+                        <div
+                            class="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full text-indigo-400 bg-gray-800 flex-shrink-0">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="sm:w-20 sm:h-20 w-10 h-10"
+                                fill="currentColor"
+                                class="bi bi-cash-coin"
+                                viewBox="0 0 16 16">
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
+                                <path
+                                    d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z" />
+                                <path
+                                    d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z" />
+                                <path
+                                    d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
+                            </svg>
+                        </div>
+                        <div
+                            class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
+                            <h2
+                                class="text-white text-lg title-font font-medium mb-2">
+                                CurrencyHub
+                            </h2>
+                            <p class="leading-relaxed text-base">
+                                Seeking the latest Exchange Rates for your
+                                travel destination? Look no further. Welcome to
+                                the ideal platform for acquiring up-to-date
+                                currency exchange information tailored to your
+                                needs.
+                            </p>
+                            <a
+                                href="/src/html/currency_hub.html"
+                                class="mt-3 text-indigo-400 inline-flex items-center"
+                                >Explore
+                                <svg
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    class="w-4 h-4 ml-2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -253,52 +313,13 @@
                     class="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4">
                     © 2023 Project Globe —
                     <a
-                        href="https://www.instagram.com/watashiwa_zain/"
+                        href="https://www.instagram.com/code_valour/"
                         class="text-gray-500 ml-1"
                         target="_blank"
                         rel="noopener noreferrer"
-                        >@watashiwa_zain</a
+                        >@code_valour</a
                     >
                 </p>
-                <span
-                    class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-                    <a
-                        href="https://www.facebook.com/ZAIN1KHOSO"
-                        class="text-gray-400">
-                        <svg
-                            fill="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            class="w-5 h-5"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                        </svg>
-                    </a>
-                    <a
-                        href="https://www.instagram.com/watashiwa_zain/"
-                        class="ml-3 text-gray-400">
-                        <svg
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            class="w-5 h-5"
-                            viewBox="0 0 24 24">
-                            <rect
-                                width="20"
-                                height="20"
-                                x="2"
-                                y="2"
-                                rx="5"
-                                ry="5"></rect>
-                            <path
-                                d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-                        </svg>
-                    </a>
-                </span>
             </div>
         </footer>
     </body>

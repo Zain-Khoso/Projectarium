@@ -2,7 +2,6 @@
 
 // DOM Selection
 const cardsRoot = document.getElementById("cards-root");
-const footer = document.getElementById("footer");
 
 // Functions
 const createCard = function (data) {
@@ -112,6 +111,4 @@ const createCard = function (data) {
         item["thumbnail"] = Math.ceil(Math.random() * 13);
         createCard(item);
     }
-})().then(() => {
-    footer.classList.remove("hidden");
-});
+})();
