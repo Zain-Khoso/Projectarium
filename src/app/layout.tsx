@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 
 // Local Imports.
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 // Types.
 type Props = {
@@ -16,7 +17,12 @@ const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }: Readonly<Props>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`w-screen overflow-x-hidden overflow-y-auto ${inter.className}`}
+      >
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
