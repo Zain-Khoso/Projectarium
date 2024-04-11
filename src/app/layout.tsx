@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 // Local Imports.
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Container from "@/components/Container";
 
 // Types.
 type Props = {
@@ -37,8 +38,10 @@ export default function RootLayout({ children }: Readonly<Props>) {
       <body
         className={`w-screen overflow-x-hidden overflow-y-auto ${inter.className}`}
       >
-        <Navbar />
-        {children}
+        <Container>
+          <Navbar />
+          {children}
+        </Container>
       </body>
     </html>
   );
