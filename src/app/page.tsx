@@ -13,22 +13,40 @@ import Footer from "@/components/Footer";
 export default function Home() {
   const features: FeatureT[] = [
     {
-      title: "Dictionary",
-      link: "/dictionary",
-      external: false,
-      desc: "A swift, user-friendly, and dependable dictionary tool, ensuring quick access to accurate definitions.",
-    },
-    {
       title: "Manga Trench",
       link: "https://manga-trench.vercel.app",
       external: true,
       desc: "A swift, user-friendly, and dependable manga reading application, ensuring an enjoyable and seamless experience.",
     },
     {
-      title: "Foreign Exchange",
-      link: "/foreign-exchange",
-      external: false,
-      desc: "A swift, user-friendly, and reliable foreign exchange rates platform, providing accurate and up-to-date information.",
+      title: "Belly Brains",
+      link: "https://belly-brains.vercel.app",
+      external: true,
+      desc: "Belly Brains is more than just a recipe center; it's a dynamic platform that showcases my journey in ReactJS, continually incorporating new features and best practices.",
+    },
+    {
+      title: "Chatto",
+      link: "https://chatto-chatto.vercel.app",
+      external: true,
+      desc: "Chatto is a personal project aimed at building a user-friendly, real-time messaging platform. It utilizes a stack of modern technologies to provide a seamless chatting experience.",
+    },
+    {
+      title: "SOE",
+      link: "https://soe-sukkur.netlify.app",
+      external: true,
+      desc: "This project includes various features to enhance user experience, such as responsiveness, animation on scroll using the Intersection Observer API.",
+    },
+    {
+      title: "SOE",
+      link: "https://weeb-web-zain.netlify.app",
+      external: true,
+      desc: "Weeb Web is a delightful front-end web project tailored for anime and manga enthusiasts.",
+    },
+    {
+      title: "Projectify Legacy",
+      link: "https://projectify-v1.netlify.app",
+      external: true,
+      desc: "Projectify Legacy is a curated collection of diverse projects designed to inspire and facilitate the generation of innovative ideas.",
     },
   ];
   return (
