@@ -2,33 +2,18 @@
 
 Projectify is a personal endeavour, here you find and look at projects created by other people, understand thier idea and build on that idea as ground work for yours. Its a place of never ending ideas.
 
-## Getting Started
+## Technologies.
 
-Clone the repository:
+- **Next.js**: Next.js is a React framework for building server-side rendered (SSR) and static web applications.
 
-```bash
-git clone https://github.com/Zain-Khoso/Projectify.git
-```
+## Contribution
 
-Install the dependencies:
+We welcome contributions from everyone. Before you get started, please take a moment to review the guidelines below:
 
-```bash
-cd Projectify
-npm install
-```
+- Fork the repository and create your branch from `master`.
+- Ensure your code adheres to the coding conventions used throughout the project.
+- Open a pull request, referencing any issues it addresses.
 
-Run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Contributing
-
-We welcome contributions and feedback! If you find any bugs, issues, or have suggestions for improvement, please create a pull request or issue. For major changes, please open an issue first to discuss the changes.
+Thank you for contributing to our project! 🎉
 
 Build with ❣️ by [Zain-Khoso](https://github.com/Zain-Khoso)
