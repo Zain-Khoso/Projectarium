@@ -1,5 +1,6 @@
 // Lib Imports.
 import Image from "next/image";
+import Link from "next/link";
 
 // Local Imports.
 import ColoredText from "@/components/ColoredText";
@@ -11,22 +12,10 @@ import ContactForm from "@/components/ContactForm";
 export default function Home() {
   const features: FeatureT[] = [
     {
-      title: "Notes",
-      link: "/notes",
-      external: false,
-      desc: "Efficient, intuitive, and dependable notes application offering swift accessibility and reliability.",
-    },
-    {
       title: "Dictionary",
       link: "/dictionary",
       external: false,
       desc: "A swift, user-friendly, and dependable dictionary tool, ensuring quick access to accurate definitions.",
-    },
-    {
-      title: "Quiz",
-      link: "/quiz",
-      external: false,
-      desc: "A rapid and engaging quiz application, offering both speed and a stimulating challenge.",
     },
     {
       title: "Manga Trench",
@@ -53,8 +42,12 @@ export default function Home() {
           <ColoredText> yours.</ColoredText>
         </h1>
         <div className="flex items-center gap-8 my-8">
-          <ButtonPrimary>Explore Projects</ButtonPrimary>
-          <ButtonSecondary>Explore Source Code</ButtonSecondary>
+          <Link href="#projects">
+            <ButtonPrimary>Explore Projects</ButtonPrimary>
+          </Link>
+          <Link href="https://github.com/Zain-Khoso/Projectify" target="_blank">
+            <ButtonSecondary>Explore Source Code</ButtonSecondary>
+          </Link>
         </div>
       </section>
 

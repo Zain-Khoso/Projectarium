@@ -16,21 +16,13 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="/#products" className="text-xl">
-            Products
+          <Link href="/#projects" className="text-xl">
+            Featured
           </Link>
         </li>
         <li>
-          <Link href="/#contact-us" className="text-xl">
+          <Link href="/#contact" className="text-xl">
             Contact Us
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/log-in"
-            className="text-xl bg-green-600 px-6 py-3 rounded-xl"
-          >
-            Log In
           </Link>
         </li>
       </ul>
