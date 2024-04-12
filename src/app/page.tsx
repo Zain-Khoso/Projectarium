@@ -96,7 +96,7 @@ export default function Home() {
           </h3>
           <Image
             alt="CEO at Projectify"
-            src="/brand/ceo.png"
+            src="/brand/ceo.webp"
             width={400}
             height={400}
           />

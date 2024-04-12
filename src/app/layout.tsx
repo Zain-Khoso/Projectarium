@@ -4,8 +4,9 @@ import type { Metadata } from "next";
 
 // Local Imports.
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import Container from "@/components/Container";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 // Types.
 type Props = {
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: Readonly<Props>) {
         <Container>
           <Navbar />
           {children}
+          <Footer />
         </Container>
       </body>
     </html>
