@@ -11,11 +11,6 @@ export default function Navbar() {
 
       <ul className="flex justify-between items-center gap-12">
         <li>
-          <Link href="/#about" className="text-xl">
-            About
-          </Link>
-        </li>
-        <li>
           <Link href="/#projects" className="text-xl">
             Featured
           </Link>
