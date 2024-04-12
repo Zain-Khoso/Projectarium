@@ -104,7 +104,20 @@ export default function Home() {
       </section>
 
       {/* Contact Form */}
-      <ContactForm />
+      <section id="contact" className="w-full">
+        <h2 className="text-3xl font-bold tracking-wide mb-8">Contact Us.</h2>
+
+        <div className="w-full max-h-screen flex justify-evenly items-center gap-8 py-16">
+          <Image
+            alt="Girl holding a form."
+            src="/illustrations/girl-with-form.svg"
+            width={500}
+            height={1200}
+          />
+
+          <ContactForm />
+        </div>
+      </section>
     </main>
   );
 }
