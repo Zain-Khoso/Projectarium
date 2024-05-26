@@ -7,12 +7,12 @@ import { getStorage } from 'firebase/storage';
 
 // Firebase Configuration Object.
 const firebaseConfig = {
-  apiKey: 'AIzaSyBiQkTmSNouRBbXWEjIBjbZf8J8pKRiXxI',
-  authDomain: 'the-projectarium.firebaseapp.com',
-  projectId: 'the-projectarium',
-  storageBucket: 'the-projectarium.appspot.com',
-  messagingSenderId: '630185915124',
-  appId: '1:630185915124:web:f46686bdf1fcbf1c0524a1',
+  apiKey: process.env.NEXT_PUBLIC_apiKey,
+  authDomain: process.env.NEXT_PUBLIC_authDomain,
+  projectId: process.env.NEXT_PUBLIC_projectId,
+  storageBucket: process.env.NEXT_PUBLIC_storageBucket,
+  messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
+  appId: process.env.NEXT_PUBLIC_appId,
 };
 
 // Firebase Services in-use.
