@@ -6,7 +6,7 @@ import { H1, Lead } from '@/components/ui/typography';
 export default function Register() {
   return (
     <main className={cn('min-w-dvw min-h-dvh flex flex-col justify-center items-center gap-2')}>
-      <H1>User Registeration</H1>
+      <H1>Forgot Password</H1>
       <Lead>This page is currently under development.</Lead>
     </main>
   );

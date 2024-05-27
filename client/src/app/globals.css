@@ -73,4 +73,16 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .text-theme {
+    @apply text-teal-600;
+  }
+
+  .border-theme {
+    @apply border-teal-600;
+  }
+
+  .bg-theme {
+    @apply bg-teal-600;
+  }
 }
