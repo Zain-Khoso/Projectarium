@@ -1,5 +1,5 @@
 // Lib Imports.
-import { initializeApp, getApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth/cordova';
 import { getFirestore } from 'firebase/firestore';
@@ -16,7 +16,7 @@ const firebaseConfig = {
 };
 
 // Firebase Services in-use.
-const app = getApp() || initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 const storage = getStorage(app);

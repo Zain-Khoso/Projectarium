@@ -1,6 +1,7 @@
 // Lib Imports.
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
+import { Toaster } from '@/components/ui/toaster';
 
 // Local Imports.
 import { cn } from '@/utils/utils';
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en" suppressHydrationWarning>
       <body className={cn('min-h-screen bg-background font-sans antialiased', Font.variable)}>
         {children}
+        <Toaster />
       </body>
     </html>
   );
