@@ -8,7 +8,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 // Local Imports.
-import { auth, GoogleAuth, GithubAuth } from '@/configs/firebase';
+import { auth, GoogleAuth, GithubAuth, FacebookAuth } from '@/configs/firebase';
 import { cn } from '@/utils/utils';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
@@ -35,12 +35,7 @@ export default function Options() {
           break;
 
         case 'facebook':
-          toast({
-            variant: 'destructive',
-            title: 'Not Available',
-            description:
-              'Facebook Registeration is not available at the moment, Please use another one.',
-          });
+          await signInWithPopup(auth, FacebookAuth);
           break;
 
         case 'twitter':

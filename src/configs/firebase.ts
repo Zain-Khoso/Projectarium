@@ -1,7 +1,12 @@
 // Lib Imports.
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  FacebookAuthProvider,
+  TwitterAuthProvider,
+} from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
@@ -24,5 +29,7 @@ const storage = getStorage(app);
 // Third-Party Authentication Providers.
 const GoogleAuth = new GoogleAuthProvider();
 const GithubAuth = new GithubAuthProvider();
+const FacebookAuth = new FacebookAuthProvider();
+const TwitterAuth = new TwitterAuthProvider();
 
-export { auth, firestore, storage, GoogleAuth, GithubAuth };
+export { auth, firestore, storage, GoogleAuth, GithubAuth, FacebookAuth, TwitterAuth };
