@@ -13,17 +13,19 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 188, 99%, 28%;
     --primary-foreground: 210 40% 98%;
 
+    --primary-2: 188, 100%, 16%;
+
     --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary-foreground: 188, 99%, 28%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
     --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent-foreground: 188, 99%, 28%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -72,17 +74,5 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-
-  .text-theme {
-    @apply text-teal-600;
-  }
-
-  .border-theme {
-    @apply border-teal-600;
-  }
-
-  .bg-theme {
-    @apply bg-teal-600;
   }
 }
