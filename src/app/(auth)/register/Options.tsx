@@ -24,38 +24,45 @@ export default function Options() {
   const registerWith = async function (provider: string) {
     setIsLoading(true);
 
-    switch (provider) {
-      case 'google':
-        await signInWithPopup(auth, GoogleAuth);
-        break;
+    try {
+      switch (provider) {
+        case 'google':
+          await signInWithPopup(auth, GoogleAuth);
+          break;
 
-      case 'github':
-        await signInWithPopup(auth, GithubAuth);
-        break;
+        case 'github':
+          await signInWithPopup(auth, GithubAuth);
+          break;
 
-      case 'facebook':
-        toast({
-          variant: 'destructive',
-          title: 'Not Available',
-          description:
-            'Facebook Registeration is not available at the moment, Please use another one.',
-        });
-        break;
+        case 'facebook':
+          toast({
+            variant: 'destructive',
+            title: 'Not Available',
+            description:
+              'Facebook Registeration is not available at the moment, Please use another one.',
+          });
+          break;
 
-      case 'twitter':
-        toast({
-          variant: 'destructive',
-          title: 'Not Available',
-          description:
-            'Twitter Registeration is not available at the moment, Please use another one.',
-        });
-        break;
+        case 'twitter':
+          toast({
+            variant: 'destructive',
+            title: 'Not Available',
+            description:
+              'Twitter Registeration is not available at the moment, Please use another one.',
+          });
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
+    } catch {
+      toast({
+        variant: 'destructive',
+        title: 'Try again',
+      });
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   if (isAuthLoading || isLoading)
