@@ -60,7 +60,7 @@ export default function Options() {
 
   if (isAuthLoading || isLoading)
     return (
-      <div className={cn('w-full flex flex-col gap-2')}>
+      <div className={cn('w-full flex flex-col gap-2 lg:max-w-[300px]')}>
         <Skeleton className={cn('w-full h-10 rounded-lg')} />
         <Skeleton className={cn('w-full h-10 rounded-lg')} />
         <Skeleton className={cn('w-full h-10 rounded-lg')} />
@@ -80,7 +80,7 @@ export default function Options() {
   if (user) router.push('/');
 
   return (
-    <div className={cn('w-full flex flex-col gap-2')}>
+    <div className={cn('w-full flex flex-col gap-2 md:max-w-screen-sm lg:max-w-[300px]')}>
       <Button
         variant="outline"
         className={cn('flex items-center justify-center gap-2')}

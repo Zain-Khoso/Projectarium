@@ -1,5 +1,6 @@
 // Lib Imports.
 import { Metadata } from 'next';
+import Image from 'next/image';
 
 // Local Imports.
 import { cn } from '@/utils/utils';
@@ -28,9 +29,28 @@ export const metadata: Metadata = {
 export default function Register() {
   return (
     <main className={cn('w-dvw h-dvh grid place-items-center')}>
-      <section className={cn('w-dvw h-dvh')}>
+      <section
+        className={cn(
+          'w-dvw h-dvh max-w-screen-sm lg:max-w-screen-md lg:max-h-[470px] lg:flex justify-center lg:rounded-xl lg:shadow-[0_0_2rem_rgba(0,0,0,0.3)] overflow-hidden'
+        )}
+      >
         <div
-          className={cn('w-dvw h-dvh flex flex-col justify-center items-center gap-8 px-2 py-4')}
+          className={cn(
+            'hidden w-[50%] lg:grid bg-gradient-to-br from-primary to-primary2 place-items-center flex-1'
+          )}
+        >
+          <Image
+            width={280}
+            height={400}
+            alt="User Register Illustration"
+            src="/illustrations/register.svg"
+          />
+        </div>
+
+        <div
+          className={cn(
+            'w-dvw h-dvh max-w-screen-sm flex flex-col justify-center items-center gap-8 px-2 py-4 lg:max-w-[350px] lg:max-h-full'
+          )}
         >
           <H1>Register</H1>
 
