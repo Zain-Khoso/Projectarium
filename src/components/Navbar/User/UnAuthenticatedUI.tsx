@@ -7,6 +7,8 @@ import Link from 'next/link';
 // Local Imports.
 import { cn } from '@/utils/utils';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
@@ -22,10 +24,16 @@ export default function UnAuthenticatedUI() {
     <Popover>
       {/* Popover Trigger */}
       <PopoverTrigger
-        className={cn('w-12 h-12 bg-primary rounded-full p-2 flex items-center justify-center')}
+        className={cn(
+          'w-10 h-10 bg-primary rounded-full p-2 flex items-center justify-center lg:w-12 lg:h-12'
+        )}
       >
-        {/* User Icon */}
-        <Image width={32} height={32} alt="Anonymous User Icon" src="/icons/user.svg" />
+        <Avatar className={cn('w-full h-full')}>
+          <AvatarImage alt="Anonymous User Icon" src="/icons/user.svg" />
+          <AvatarFallback>
+            <Skeleton />
+          </AvatarFallback>
+        </Avatar>
       </PopoverTrigger>
 
       {/* Popover Content */}

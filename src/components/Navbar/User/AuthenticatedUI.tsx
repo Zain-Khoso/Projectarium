@@ -10,6 +10,8 @@ import { User2, Settings, PlusSquare } from 'lucide-react';
 import { auth } from '@/configs/firebase';
 import { cn } from '@/utils/utils';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
@@ -32,16 +34,18 @@ export default function AuthenticatedUI({ user }: Props) {
     <Popover>
       {/* Popover Trigger */}
       <PopoverTrigger
-        className={cn('w-12 h-12 rounded-full flex items-center justify-center overflow-hidden')}
+        className={cn('w-10 h-10 rounded-full flex items-center justify-center lg:w-12 lg:h-12')}
       >
         {/* User Icon */}
-        <Image
-          width={520}
-          height={520}
-          alt={`${user.displayName}'s Profile Picture`}
-          src={user.photoURL || '/icons/user.svg'}
-          className={cn('w-full aspect-square')}
-        />
+        <Avatar className={cn('w-full h-full')}>
+          <AvatarImage
+            alt={`${user.displayName}'s Profile Picture`}
+            src={user.photoURL || '/icons/user.svg'}
+          />
+          <AvatarFallback>
+            <Skeleton />
+          </AvatarFallback>
+        </Avatar>
       </PopoverTrigger>
 
       {/* Popover Content */}
