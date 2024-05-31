@@ -1,7 +1,6 @@
 'use client';
 
 // Lib Imports.
-import Image from 'next/image';
 import Link from 'next/link';
 import { User, signOut } from 'firebase/auth';
 import { User2, Settings, PlusSquare } from 'lucide-react';
