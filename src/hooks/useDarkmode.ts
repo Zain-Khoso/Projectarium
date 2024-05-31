@@ -5,7 +5,9 @@ import { useState, useLayoutEffect } from 'react';
 
 // Hook.
 export default function useDarkmode() {
-  const [darkmode, setDarkmode] = useState(JSON.parse(localStorage.getItem('darkmode') || 'false'));
+  const [darkmode, setDarkmode] = useState(
+    JSON.parse(localStorage?.getItem('darkmode') || 'false')
+  );
 
   useLayoutEffect(() => {
     if (darkmode) document.body.classList.add('dark');
