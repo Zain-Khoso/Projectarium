@@ -96,7 +96,13 @@ export default function Options() {
         className={cn('flex items-center justify-center gap-2')}
         onClick={() => registerWith('github')}
       >
-        <Image width={24} height={24} alt="GitHub Icon" src="/icons/social-media/github.svg" />
+        <Image
+          width={24}
+          height={24}
+          alt="GitHub Icon"
+          src="/icons/social-media/github.svg"
+          className={cn('rounded-full')}
+        />
         Continue With GitHub
       </Button>
       <Button

@@ -31,7 +31,7 @@ export default function Register() {
     <main className={cn('w-dvw h-dvh grid place-items-center')}>
       <section
         className={cn(
-          'w-dvw h-dvh max-w-screen-sm lg:max-w-screen-md lg:max-h-[470px] lg:flex justify-center lg:rounded-xl lg:shadow-[0_0_2rem_rgba(0,0,0,0.3)] overflow-hidden'
+          'w-dvw h-dvh max-w-screen-sm lg:max-w-screen-md lg:max-h-[470px] lg:flex justify-center lg:rounded-xl lg:shadow-[0_0_0.1rem] shadow-foreground/5 overflow-hidden'
         )}
       >
         <div
@@ -49,7 +49,7 @@ export default function Register() {
 
         <div
           className={cn(
-            'w-dvw h-dvh max-w-screen-sm flex flex-col justify-center items-center gap-8 px-2 py-4 lg:max-w-[350px] lg:max-h-full'
+            'w-dvw h-dvh max-w-screen-sm flex flex-col justify-center items-center gap-8 px-2 py-4 bg-background lg:max-w-[350px] lg:max-h-full'
           )}
         >
           <H1>Register</H1>
