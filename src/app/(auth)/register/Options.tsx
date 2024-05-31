@@ -14,8 +14,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 
+// Hooks.
+import useDarkmode from '@/hooks/useDarkmode';
+
 // Component.
 export default function Options() {
+  useDarkmode();
   const router = useRouter();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -50,10 +54,12 @@ export default function Options() {
         default:
           break;
       }
-    } catch {
+    } catch (err) {
+      console.log(err);
       toast({
         variant: 'destructive',
-        title: 'Try again',
+        title: 'Something went wrong.',
+        description: 'Try using a different email.',
       });
     } finally {
       setIsLoading(false);

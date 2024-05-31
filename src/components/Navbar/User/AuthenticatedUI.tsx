@@ -36,8 +36,8 @@ export default function AuthenticatedUI({ user }: Props) {
       >
         {/* User Icon */}
         <Image
-          width={32}
-          height={32}
+          width={520}
+          height={520}
           alt={`${user.displayName}'s Profile Picture`}
           src={user.photoURL || '/icons/user.svg'}
           className={cn('w-full aspect-square')}
