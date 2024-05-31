@@ -1,19 +1,21 @@
-'use client';
-
 // Lib Imports.
-import { useState, useLayoutEffect } from 'react';
+import { useRef, useState, useLayoutEffect } from 'react';
 
 // Hook.
 export default function useDarkmode() {
-  const [darkmode, setDarkmode] = useState(
-    JSON.parse(localStorage?.getItem('darkmode') || 'false')
+  const darkmodeValue = useRef(
+    typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('darkmode') || 'false') : false
   );
 
-  useLayoutEffect(() => {
-    if (darkmode) document.body.classList.add('dark');
-    else document.body.classList.remove('dark');
+  const [darkmode, setDarkmode] = useState(darkmodeValue.current);
 
-    localStorage.setItem('darkmode', darkmode);
+  useLayoutEffect(() => {
+    if (window) {
+      if (darkmode) document.body.classList.add('dark');
+      else document.body.classList.remove('dark');
+
+      localStorage.setItem('darkmode', JSON.stringify(darkmode));
+    }
   }, [darkmode]);
 
   return [darkmode, setDarkmode];
