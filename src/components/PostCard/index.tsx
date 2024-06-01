@@ -24,7 +24,11 @@ import { Small, Muted } from '@/components/ui/typography';
 // Component.
 export default function PostCard() {
   return (
-    <Card className={cn('w-full shadow-[0_0_0.5rem] shadow-foreground/25 border-none transition-all hover:shadow-[0_0.3rem_0.5rem] hover:shadow-foreground/15 hover:-translate-y-1')}>
+    <Card
+      className={cn(
+        'w-full shadow-[0_0_0.5rem] shadow-foreground/25 border-none transition-all hover:shadow-[0_0.3rem_0.5rem] hover:shadow-foreground/15 hover:-translate-y-1'
+      )}
+    >
       {/* Header */}
       <CardHeader className={cn('space-y-4 p-0 mb-4')}>
         {/* Thumbnail */}
@@ -55,7 +59,7 @@ export default function PostCard() {
           their dream career and help companies find the perfect fit. Unlock your full potential
           today with SkillLink.
         </CardDescription>
-        
+
         {/* Category Badges */}
         <div className={cn('flex flex-wrap gap-2')}>
           <Badge variant={'secondary'}>Web Development</Badge>
@@ -72,7 +76,7 @@ export default function PostCard() {
       {/* Footer */}
       <CardFooter className={cn('flex justify-between')}>
         {/* Author */}
-        <div className={cn('flex items-center gap-2')}>
+        <Link href="/user/useridentification" className={cn('flex items-center gap-2')}>
           <Avatar>
             <AvatarImage
               alt="Creator Profile Picture"
@@ -86,10 +90,10 @@ export default function PostCard() {
           <Small>
             <Muted>Muhammad Imtiaz Hussain</Muted>
           </Small>
-        </div>
-        
+        </Link>
+
         {/* Details Button */}
-        <Link href="/useridentification/projectidentification">
+        <Link href="/project/projectidentification">
           <Button size={'sm'}>View Details</Button>
         </Link>
       </CardFooter>

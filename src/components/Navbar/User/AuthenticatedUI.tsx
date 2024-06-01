@@ -53,7 +53,7 @@ export default function AuthenticatedUI({ user }: Props) {
 
         <Separator className={cn('my-2')} />
 
-        <Link href={`/${user.uid}`}>
+        <Link href={`/user/${user.uid}`}>
           <Button
             variant="ghost"
             type="button"
@@ -64,7 +64,7 @@ export default function AuthenticatedUI({ user }: Props) {
           </Button>
         </Link>
 
-        <Link href={`/${user.uid}/create`}>
+        <Link href={`/project/create`}>
           <Button
             variant="ghost"
             type="button"
