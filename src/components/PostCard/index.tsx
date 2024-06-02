@@ -18,6 +18,7 @@ import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import { Small, Muted } from '@/components/ui/typography';
 
@@ -42,7 +43,7 @@ export default function PostCard({ project }: Props) {
           height={720}
           alt={`${project.title}'s Thumbnail`}
           src={project.images.at(-1)}
-          className={cn('w-full rounded-t-lg')}
+          className={cn('w-full rounded-t-lg aspect-video object-cover object-center')}
         />
 
         {/* Header Text Content */}
