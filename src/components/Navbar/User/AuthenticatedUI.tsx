@@ -71,7 +71,7 @@ export default function AuthenticatedUI({ user }: Props) {
             className={cn('flex items-center justify-center gap-2 px-1 hover:text-foreground')}
           >
             <PlusSquare size={16} />
-            Create New Post
+            Share New Project
           </Button>
         </Link>
 
