@@ -67,7 +67,7 @@ export default function ShareProjectForm() {
             <FormItem>
               <FormLabel>Project Title</FormLabel>
               <FormControl>
-                <Input placeholder="Projectarium" {...field} />
+                <Input placeholder="Projectarium" {...field} className={cn('max-w-screen-sm')} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -82,25 +82,12 @@ export default function ShareProjectForm() {
             <FormItem>
               <FormLabel>Images</FormLabel>
               <FormControl>
-                <Input type="file" multiple accept=".png, .jpg, .jpeg" {...fileInputRef} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Description */}
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Tell us a little bit about your project"
-                  className={cn('resize-y')}
-                  {...field}
+                <Input
+                  type="file"
+                  multiple
+                  accept=".png, .jpg, .jpeg"
+                  {...fileInputRef}
+                  className={cn('max-w-screen-sm')}
                 />
               </FormControl>
               <FormMessage />
@@ -117,11 +104,11 @@ export default function ShareProjectForm() {
               <FormLabel>Status</FormLabel>
               <Select onValueChange={field.onChange}>
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger className={cn('max-w-screen-sm')}>
                     <SelectValue placeholder="eg: Completed" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className={cn('max-w-screen-sm')}>
                   {enumsLoading ? (
                     <SelectItem key={'Status: Placeholder'} value="Idea">
                       Idea
@@ -148,7 +135,30 @@ export default function ShareProjectForm() {
             <FormItem>
               <FormLabel>Live View</FormLabel>
               <FormControl>
-                <Input placeholder="https://projectarium.vercel.app" {...field} />
+                <Input
+                  placeholder="https://projectarium.vercel.app"
+                  {...field}
+                  className={cn('max-w-screen-sm')}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Description */}
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Tell us a little bit about your project"
+                  className={cn('resize-y max-w-screen-sm')}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
