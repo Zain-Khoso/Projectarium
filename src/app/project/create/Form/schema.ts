@@ -23,6 +23,7 @@ const Schema = z.object({
     .max(500, { message: 'Project Description cannot exceed 500 characters.' }),
   status: z.string().min(1, { message: 'Project Status is required.' }),
   url: z.string().optional(),
+  repository: z.string().optional(),
   tags: z.string().array().min(1, { message: 'Please select at least one tag for better SEO.' }),
 });
 

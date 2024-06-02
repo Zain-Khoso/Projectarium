@@ -1,13 +1,17 @@
 'use client';
 
 // Lib Imports.
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Share } from 'lucide-react';
 
 // Local Imports.
+import { uploadFile } from '@/utils/firebase/storage';
+import { uploadDoc } from '@/utils/firebase/firestore';
 import { cn } from '@/utils/utils';
 import { Schema, SchemaT } from './schema';
+import ScreenSpinner from '@/components/ScreenSpinner';
 import {
   Form,
   FormControl,
@@ -27,6 +31,7 @@ import {
 } from '@/components/ui/select';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 import { Small } from '@/components/ui/typography';
 
 // Hooks.
@@ -42,17 +47,72 @@ export default function ShareProjectForm() {
       description: '',
       status: '',
       url: '',
+      repository: '',
       tags: [],
     },
   });
   const fileInputRef = form.register('images');
+
+  const router = useRouter();
+  const { toast } = useToast();
 
   // Custom States.
   const { enumsLoading, enums } = useEnums();
 
   // Form submission handler.
   const onSubmit: SubmitHandler<SchemaT> = async function (data) {
-    console.log(data);
+    const { images, ...rest }: { images?: FileList } = data;
+
+    /* 
+      Validing images, to see if they are actually images, 
+      That they are each under 5mb large.
+      And Only 5 are accepted.
+    */
+    let files = Array.from(images!).filter((file) => {
+      if (file?.size > 5242880) return false;
+
+      if (!['image/png', 'image/jpeg'].includes(file?.type)) return false;
+
+      return true;
+    });
+
+    if (files.length === 0) {
+      form.setError('images', {
+        type: 'pattern',
+        message: 'Provide at least one image, of size less than 5mb.',
+      });
+      return;
+    }
+
+    if (files.length > 5) files = files.slice(0, 5);
+
+    try {
+      // Uploading files.
+      const uploadedFiles = await Promise.all(
+        files.map(async (file) => {
+          const url = await uploadFile('/projects/thumbnails', file);
+          return url;
+        })
+      );
+
+      // Creating a new doc inside firestore.
+      const docId = await uploadDoc('projects', { images: uploadedFiles, ...rest });
+
+      toast({
+        title: 'Project Successfully Shared 🥳',
+        description: 'Now the world can witness your greatness',
+      });
+      router.push(`/project/${docId}`);
+    } catch {
+      toast({
+        variant: 'destructive',
+        title: 'Server Error',
+        description:
+          'We are unable to share your project right now, please try again or come back later.',
+      });
+    } finally {
+      return;
+    }
   };
 
   return (
@@ -66,7 +126,12 @@ export default function ShareProjectForm() {
             <FormItem>
               <FormLabel>Project Title</FormLabel>
               <FormControl>
-                <Input placeholder="Projectarium" {...field} className={cn('max-w-screen-sm')} />
+                <Input
+                  disabled={form.formState.isSubmitting}
+                  placeholder="Projectarium"
+                  {...field}
+                  className={cn('max-w-screen-sm')}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -82,6 +147,7 @@ export default function ShareProjectForm() {
               <FormLabel>Images</FormLabel>
               <FormControl>
                 <Input
+                  disabled={form.formState.isSubmitting}
                   type="file"
                   multiple
                   accept=".png, .jpg, .jpeg"
@@ -103,7 +169,10 @@ export default function ShareProjectForm() {
               <FormLabel>Status</FormLabel>
               <Select onValueChange={field.onChange}>
                 <FormControl>
-                  <SelectTrigger className={cn('max-w-screen-sm')}>
+                  <SelectTrigger
+                    disabled={form.formState.isSubmitting}
+                    className={cn('max-w-screen-sm')}
+                  >
                     <SelectValue placeholder="eg: Completed" />
                   </SelectTrigger>
                 </FormControl>
@@ -135,8 +204,30 @@ export default function ShareProjectForm() {
               <FormLabel>Live View</FormLabel>
               <FormControl>
                 <Input
+                  disabled={form.formState.isSubmitting}
                   type="url"
                   placeholder="https://projectarium.vercel.app"
+                  {...field}
+                  className={cn('max-w-screen-sm')}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Repository */}
+        <FormField
+          control={form.control}
+          name="repository"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Code Repository</FormLabel>
+              <FormControl>
+                <Input
+                  disabled={form.formState.isSubmitting}
+                  type="url"
+                  placeholder="eg: https://github.com/username/repo.git"
                   {...field}
                   className={cn('max-w-screen-sm')}
                 />
@@ -155,6 +246,7 @@ export default function ShareProjectForm() {
               <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea
+                  disabled={form.formState.isSubmitting}
                   placeholder="Tell us a little bit about your project"
                   className={cn('resize-y max-w-screen-sm')}
                   {...field}
@@ -174,6 +266,7 @@ export default function ShareProjectForm() {
               <FormLabel>Tags</FormLabel>
               <FormControl>
                 <ToggleGroup
+                  disabled={form.formState.isSubmitting}
                   size={'sm'}
                   type="multiple"
                   className={cn('flex items-center justify-start flex-wrap')}
@@ -206,12 +299,18 @@ export default function ShareProjectForm() {
 
         {/* Form Control */}
         <div className={cn('flex justify-end')}>
-          <Button type="submit" className={cn('flex items-center gap-2')}>
+          <Button
+            disabled={form.formState.isSubmitting}
+            type="submit"
+            className={cn('flex items-center gap-2')}
+          >
             <Share size={16} />
             Share This Project
           </Button>
         </div>
       </form>
+
+      {form.formState.isSubmitting && <ScreenSpinner />}
     </Form>
   );
 }
