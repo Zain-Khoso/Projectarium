@@ -136,6 +136,7 @@ export default function ShareProjectForm() {
               <FormLabel>Live View</FormLabel>
               <FormControl>
                 <Input
+                  type="url"
                   placeholder="https://projectarium.vercel.app"
                   {...field}
                   className={cn('max-w-screen-sm')}
