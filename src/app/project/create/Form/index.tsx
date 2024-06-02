@@ -43,7 +43,6 @@ export default function ShareProjectForm() {
       status: '',
       url: '',
       tags: [],
-      contributors: [],
     },
   });
   const fileInputRef = form.register('images');

@@ -24,7 +24,6 @@ const Schema = z.object({
   status: z.string().min(1, { message: 'Project Status is required.' }),
   url: z.string().optional(),
   tags: z.string().array().min(1, { message: 'Please select at least one tag for better SEO.' }),
-  contributors: z.string().array(),
 });
 
 // Type.
