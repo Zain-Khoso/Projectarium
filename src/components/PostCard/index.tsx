@@ -21,12 +21,17 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Small, Muted } from '@/components/ui/typography';
 
+// Types.
+type Props = {
+  project: Record<string, any>;
+};
+
 // Component.
-export default function PostCard() {
+export default function PostCard({ project }: Props) {
   return (
     <Card
       className={cn(
-        'w-full shadow-[0_0_0.5rem] shadow-foreground/25 border-none transition-all hover:shadow-[0_0.3rem_0.5rem] hover:shadow-foreground/15 hover:-translate-y-1'
+        'w-full h-full flex flex-col justify-between shadow-[0_0_0.5rem] shadow-foreground/25 border-none transition-all hover:shadow-[0_0.3rem_0.5rem] hover:shadow-foreground/15 hover:-translate-y-1'
       )}
     >
       {/* Header */}
@@ -35,15 +40,18 @@ export default function PostCard() {
         <Image
           width={1280}
           height={720}
-          alt="Post Thumbnail"
-          src="https://firebasestorage.googleapis.com/v0/b/the-projectarium.appspot.com/o/skilllink.png?alt=media&token=a095f3d2-0089-4c8c-975f-a18a38b8f144"
+          alt={`${project.title}'s Thumbnail`}
+          src={project.images.at(-1)}
           className={cn('w-full rounded-t-lg')}
         />
 
         {/* Header Text Content */}
         <div className={cn('px-6 space-y-4')}>
           <CardTitle className={cn('flex justify-between items-center')}>
-            Skill Link <Badge variant="default">Complete</Badge>
+            {project.title}
+            <Badge variant={project.status === 'Completed' ? 'default' : 'outline'}>
+              {project.status}
+            </Badge>
           </CardTitle>
 
           <Separator />
@@ -51,51 +59,44 @@ export default function PostCard() {
       </CardHeader>
 
       {/* Content */}
-      <CardContent className={cn('space-y-4')}>
+      <CardContent className={cn('space-y-4 flex-1')}>
         {/* Description */}
-        <CardDescription>
-          The ultimate job board connecting top talent with amazing opportunities. Our platform
-          leverages cutting-edge technology and vast industry connections to match job seekers with
-          their dream career and help companies find the perfect fit. Unlock your full potential
-          today with SkillLink.
-        </CardDescription>
+        <CardDescription>{project.description}</CardDescription>
 
         {/* Category Badges */}
         <div className={cn('flex flex-wrap gap-2')}>
-          <Badge variant={'secondary'}>Web Development</Badge>
-          <Badge variant={'secondary'}>Frontend</Badge>
-          <Badge variant={'secondary'}>Backend</Badge>
-          <Badge variant={'secondary'}>Nextjs</Badge>
-          <Badge variant={'secondary'}>MongoDB</Badge>
-          <Badge variant={'secondary'}>Job Board App</Badge>
+          {project.tags.map((item: string) => (
+            <Badge key={`Tag: ${item}`} variant={'secondary'}>
+              {item}
+            </Badge>
+          ))}
         </div>
-
-        <Separator />
       </CardContent>
 
       {/* Footer */}
-      <CardFooter className={cn('flex justify-between')}>
-        {/* Author */}
-        <Link href="/user/useridentification" className={cn('flex items-center gap-2')}>
-          <Avatar>
-            <AvatarImage
-              alt="Creator Profile Picture"
-              src="https://avatars.githubusercontent.com/u/108749606?v=4"
-            />
-            <AvatarFallback>
-              <Skeleton />
-            </AvatarFallback>
-          </Avatar>
+      <CardFooter className={cn('flex flex-col gap-4')}>
+        <Separator />
 
-          <Small>
-            <Muted>Muhammad Imtiaz Hussain</Muted>
-          </Small>
-        </Link>
+        <div className={cn('w-full flex justify-between')}>
+          {/* Author */}
+          <Link href={`/user/${project.creator.uid}`} className={cn('flex items-center gap-2')}>
+            <Avatar>
+              <AvatarImage alt={`${project.creator.name}'s Avatar`} src={project.creator.picture} />
+              <AvatarFallback>
+                <Skeleton />
+              </AvatarFallback>
+            </Avatar>
 
-        {/* Details Button */}
-        <Link href="/project/projectidentification">
-          <Button size={'sm'}>View Details</Button>
-        </Link>
+            <Small>
+              <Muted>{project.creator.name}</Muted>
+            </Small>
+          </Link>
+
+          {/* Details Button */}
+          <Link href={`/project/${project.id}`}>
+            <Button size={'sm'}>View Details</Button>
+          </Link>
+        </div>
       </CardFooter>
     </Card>
   );
