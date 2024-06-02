@@ -35,10 +35,13 @@ import { useToast } from '@/components/ui/use-toast';
 import { Small } from '@/components/ui/typography';
 
 // Hooks.
+import { useAuthRedirect } from '@/hooks/firebase/useAuthRedirect';
 import { useEnums } from '@/hooks/firebase/firestore/staticContent';
 
 // Component.
 export default function ShareProjectForm() {
+  useAuthRedirect();
+
   // React Hook Form Setup.
   const form = useForm<SchemaT>({
     resolver: zodResolver(Schema),
