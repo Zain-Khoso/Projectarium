@@ -3,6 +3,7 @@
 // Lib Imports.
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState, useLayoutEffect } from 'react';
 
 // Local Imports.
 import { cn } from '@/utils/utils';
@@ -18,7 +19,6 @@ import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import { Small, Muted } from '@/components/ui/typography';
 
@@ -29,6 +29,17 @@ type Props = {
 
 // Component.
 export default function PostCard({ project }: Props) {
+  // Shortening project description.
+  const [description, setDescription] = useState<string>(project.description);
+
+  useLayoutEffect(() => {
+    if (description.length <= 300) return;
+
+    setDescription(
+      description.substring(0, description.substring(0, 301).lastIndexOf(' ')) + '...'
+    );
+  }, []);
+
   return (
     <Card
       className={cn(
@@ -62,7 +73,7 @@ export default function PostCard({ project }: Props) {
       {/* Content */}
       <CardContent className={cn('space-y-4 flex-1')}>
         {/* Description */}
-        <CardDescription>{project.description}</CardDescription>
+        <CardDescription>{description}</CardDescription>
 
         {/* Category Badges */}
         <div className={cn('flex flex-wrap gap-2')}>
