@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import { cn } from '@/utils/utils';
 import Navbar from '@/components/Navbar';
 import ShareProjectForm from './Form';
-import { H2, Muted } from '@/components/ui/typography';
+import { H1, H2 } from '@/components/ui/typography';
 
 // Metadata.
 export const metadata: Metadata = {
@@ -28,10 +28,8 @@ export const metadata: Metadata = {
 export default function ShareProject() {
   return (
     <main className={cn('min-w-dvw min-h-dvh')}>
-      <Navbar />
-
-      <section className={cn('max-w-screen-xl mx-auto px-4 py-8 space-y-8')}>
-        <H2>Share Your New Project.</H2>
+      <section className={cn('max-w-screen-xl mx-auto px-4 py-8 space-y-12')}>
+        <H1>Share Your New Project.</H1>
 
         <ShareProjectForm />
       </section>
