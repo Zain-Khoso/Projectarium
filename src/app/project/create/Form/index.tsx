@@ -18,6 +18,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormDescription,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -120,7 +121,7 @@ export default function ShareProjectForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={cn('space-y-4')}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className={cn('space-y-6')}>
         {/* Title */}
         <FormField
           control={form.control}
@@ -136,6 +137,7 @@ export default function ShareProjectForm() {
                   className={cn('max-w-screen-sm')}
                 />
               </FormControl>
+              <FormDescription>Name of your Project.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -158,6 +160,7 @@ export default function ShareProjectForm() {
                   className={cn('max-w-screen-sm')}
                 />
               </FormControl>
+              <FormDescription>Project Visuals, Upto 5 images are allowed.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -193,6 +196,7 @@ export default function ShareProjectForm() {
                   )}
                 </SelectContent>
               </Select>
+              <FormDescription>Your project&apos;s development status.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -204,7 +208,7 @@ export default function ShareProjectForm() {
           name="url"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Live View</FormLabel>
+              <FormLabel>Live View ( Optional )</FormLabel>
               <FormControl>
                 <Input
                   disabled={form.formState.isSubmitting}
@@ -214,6 +218,7 @@ export default function ShareProjectForm() {
                   className={cn('max-w-screen-sm')}
                 />
               </FormControl>
+              <FormDescription>Your project&apos;s Live URL.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -225,7 +230,7 @@ export default function ShareProjectForm() {
           name="repository"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Code Repository</FormLabel>
+              <FormLabel>Code Repository ( Optional )</FormLabel>
               <FormControl>
                 <Input
                   disabled={form.formState.isSubmitting}
@@ -235,6 +240,7 @@ export default function ShareProjectForm() {
                   className={cn('max-w-screen-sm')}
                 />
               </FormControl>
+              <FormDescription>Your project&apos;s code Repository.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -255,6 +261,7 @@ export default function ShareProjectForm() {
                   {...field}
                 />
               </FormControl>
+              <FormDescription>Explain the your project&apos;s idea here.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

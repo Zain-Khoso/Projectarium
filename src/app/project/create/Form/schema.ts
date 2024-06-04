@@ -20,7 +20,7 @@ const Schema = z.object({
     .trim()
     .min(1, { message: 'Project Description is required.' })
     .min(20, { message: 'Project Description must be 20 characters long.' })
-    .max(500, { message: 'Project Description cannot exceed 500 characters.' }),
+    .max(3000, { message: 'Project Description cannot exceed 3000 characters.' }),
   status: z.string().min(1, { message: 'Project Status is required.' }),
   url: z.string().optional(),
   repository: z.string().optional(),
