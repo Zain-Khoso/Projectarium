@@ -1,13 +1,28 @@
 // Local Imports.
+import { fetchDoc } from '@/utils/firebase/firestore';
 import { cn } from '@/utils/utils';
-import { H1, Lead } from '@/components/ui/typography';
+import { H3, Lead } from '@/components/ui/typography';
+import DeleteButton from './DeleteButton';
+
+// Types.
+type Props = {
+  params: {
+    project: string;
+  };
+};
 
 // Component.
-export default function ProjectDelete() {
+export default async function ProjectDelete({ params }: Props) {
+  const project = await fetchDoc('projects', params.project);
+
   return (
-    <main className={cn('min-w-dvw min-h-dvh flex flex-col justify-center items-center gap-2')}>
-      <H1>Project Delete</H1>
-      <Lead>This page is currently under development.</Lead>
-    </main>
+    <section className={cn('w-full h-full px-4 py-8 space-y-4')}>
+      <H3>Are you sure, you want to delete {project?.title}?</H3>
+      <Lead className={cn('text-start')}>
+        Please take caution before continuing. You will not be able to recover this post EVER again.
+      </Lead>
+
+      <DeleteButton projectId={params.project} />
+    </section>
   );
 }
