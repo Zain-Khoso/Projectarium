@@ -58,7 +58,9 @@ export default function Navbar({ children }: Props) {
           'w-full min-h-12 max-w-screen-xl flex items-center gap-2 px-4 py-2 md:py-6 mx-auto md:gap-4'
         )}
       >
+        {/* Option to have a side ( sheet ) navigation. */}
         {children}
+
         <div className={cn('flex-1 flex gap-2 items-center justify-end')}>
           <Link href="/project/share">
             <Button type="button" size={'sm'} className={cn('flex items-center gap-2')}>

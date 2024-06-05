@@ -23,6 +23,7 @@ export default function SidenavSheet({ children }: Props) {
       >
         <Menu size={16} />
       </SheetTrigger>
+
       <SheetContent
         side="left"
         className={cn('lg:hidden w-80 h-full flex flex-col gap-4 py-8 px-4')}
@@ -32,6 +33,7 @@ export default function SidenavSheet({ children }: Props) {
             <SheetTitle className={cn('w-fit')}>Projectarium</SheetTitle>
           </Link>
         </SheetHeader>
+
         {children}
       </SheetContent>
     </Sheet>
