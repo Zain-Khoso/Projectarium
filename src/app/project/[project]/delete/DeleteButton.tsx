@@ -32,6 +32,8 @@ export default function DeleteButton({ project }: Props) {
 
     try {
       await removeDoc('projects', project.id);
+
+      router.push(`/user/${user?.uid}`);
     } catch {
       toast({
         title: 'Error',
