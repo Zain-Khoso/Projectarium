@@ -50,12 +50,10 @@ export async function fetchDocs(Q: Query): Promise<DocumentData[] | undefined> {
 }
 
 /*
-  This function accepts a premeter, projectId.
-  It deletes the specified project from firestore. And its images from storage.
+  This function accepts two premeters, collectionName & docId.
+  It deletes the specified document from firestore.
 */
-export async function deleteProject(docId: string) {
-  const reference = doc(firestore, 'projects', docId);
-  const snapshot = await getDoc(reference);
-
-  return snapshot.data();
+export async function removeDoc(collectionName: string, docId: string) {
+  const reference = doc(firestore, collectionName, docId);
+  await deleteDoc(reference);
 }

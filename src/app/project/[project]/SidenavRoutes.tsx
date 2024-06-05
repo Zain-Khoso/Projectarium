@@ -1,7 +1,8 @@
 // Lib Imports.
-import { Home, Award, Notebook, Trash, Users } from 'lucide-react';
+import { Home, Award, Notebook, Users } from 'lucide-react';
 
 // Local Imports
+import DeleleRouteButton from './DeleleRouteButton';
 import { LinkButton } from '@/components/Navigation';
 
 // Component.
@@ -24,9 +25,7 @@ export default function SidenavRoutes({ project }: { project: string }) {
         <Award size={16} /> Reviews
       </LinkButton>
 
-      <LinkButton variant="outline" link={`/project/${project}/delete`}>
-        <Trash size={16} /> Delete
-      </LinkButton>
+      <DeleleRouteButton projectId={project} />
     </>
   );
 }

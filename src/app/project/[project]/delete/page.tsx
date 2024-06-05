@@ -49,7 +49,7 @@ export default async function ProjectDelete({ params }: Props) {
 
       <div className={cn('flex items-center gap-4')}>
         <LinkButton link={`/project/${params.project}`}>No, Keep it.</LinkButton>
-        <DeleteButton projectId={params.project} />
+        <DeleteButton project={{id: params.project, ...project}} />
       </div>
     </section>
   );
