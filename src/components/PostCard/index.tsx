@@ -1,10 +1,13 @@
+'use client';
+
 // Lib Imports.
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState, useLayoutEffect } from 'react';
 
 // Local Imports.
 import { cn } from '@/utils/utils';
-import { LinkButton } from '@/components/Navigation';
+import { LinkButton } from '../Navigation';
 import {
   Card,
   CardHeader,
@@ -17,7 +20,6 @@ import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Small, Muted } from '@/components/ui/typography';
 
 // Types.
@@ -28,11 +30,17 @@ type Props = {
 // Component.
 export default function PostCard({ project }: Props) {
   // Shortening project description.
-  const description =
-    project.description.length <= 300
-      ? project.description
-      : project.description.substring(0, project.description.substring(0, 301).lastIndexOf(' ')) +
-        '...';
+  const [description, setDescription] = useState<string>(project.description);
+  const [tags, setTags] = useState<string[]>(project.tags);
+
+  useLayoutEffect(() => {
+    if (description.length > 300)
+      setDescription(
+        description.substring(0, description.substring(0, 301).lastIndexOf(' ')) + '...'
+      );
+
+    if (tags.length > 5) setTags(tags.slice(0, 5));
+  }, []);
 
   return (
     <Card
@@ -71,7 +79,7 @@ export default function PostCard({ project }: Props) {
 
         {/* Category Badges */}
         <div className={cn('flex flex-wrap gap-2')}>
-          {project.tags.map((item: string) => (
+          {tags.map((item: string) => (
             <Badge key={`Tag: ${item}`} variant={'secondary'}>
               {item}
             </Badge>
