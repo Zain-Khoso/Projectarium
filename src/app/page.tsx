@@ -1,6 +1,6 @@
 // Local Imports.
 import { cn } from '@/utils/utils';
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/Navigation';
 import InfiniteScroll from '@/components/InfiniteScroll';
 
 // Component.

@@ -30,9 +30,9 @@ export default function Navbar() {
             'w-full min-h-12 max-w-screen-xl flex justify-end items-center gap-2 px-4 py-2 md:py-6 mx-auto md:gap-4'
           )}
         >
-          <Skeleton className={cn('w-24 h-10  rounded-xl')}/>
+          <Skeleton className={cn('w-24 h-10  rounded-xl')} />
           <Skeleton className={cn('w-10 aspect-square rounded-full')} />
-          <Skeleton className={cn('w-10 aspect-square rounded-full')}/>
+          <Skeleton className={cn('w-10 aspect-square rounded-full')} />
         </nav>
 
         <Separator className={cn('bg-foreground/25')} />

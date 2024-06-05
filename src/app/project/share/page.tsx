@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 // Local Imports.
 import { cn } from '@/utils/utils';
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/Navigation';
 import ShareProjectForm from './Form';
 import { H1, H2 } from '@/components/ui/typography';
 
