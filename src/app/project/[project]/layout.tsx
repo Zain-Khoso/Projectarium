@@ -23,7 +23,7 @@ export default function ProjectSectionLayout({ children, params: { project } }: 
       <main className={cn('flex-1 h-full')}>
         <Navbar>
           <SidenavSheet>
-            <SidenavRoutes project="project" />
+            <SidenavRoutes project={project} />
           </SidenavSheet>
         </Navbar>
 
