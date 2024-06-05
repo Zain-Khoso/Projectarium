@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 // Lib Imports
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -27,7 +27,7 @@ export default function DeleleRouteButton({ projectId }: Props) {
     projectLoading ||
     projectError ||
     !user ||
-    user.uid !== project.creator.uid
+    user?.uid !== project?.creator?.uid
   )
     return '';
   return (
