@@ -16,6 +16,8 @@ type Props = {
 export default async function ProjectDetailsPage({ params }: Props) {
   const project = await fetchDoc('projects', params.project);
 
+  if (!project) throw new Error("project-does-not-exist")
+
   return (
     <section className={cn('w-full h-full px-4 py-8')}>
       <Blackquote className={cn('my-8')}>This page is still under development.</Blackquote>
