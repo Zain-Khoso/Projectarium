@@ -10,5 +10,5 @@ type Props = {
 
 // Component.
 export default function DeleteButton({}: Props) {
-  return <Button variant="destructive">Delete</Button>;
+  return <Button variant="destructive">Yes, Delete it.</Button>;
 }
