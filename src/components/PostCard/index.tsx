@@ -1,12 +1,10 @@
-'use client';
-
 // Lib Imports.
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useLayoutEffect } from 'react';
 
 // Local Imports.
 import { cn } from '@/utils/utils';
+import { LinkButton } from '@/components/Navigation';
 import {
   Card,
   CardHeader,
@@ -30,15 +28,11 @@ type Props = {
 // Component.
 export default function PostCard({ project }: Props) {
   // Shortening project description.
-  const [description, setDescription] = useState<string>(project.description);
-
-  useLayoutEffect(() => {
-    if (description.length <= 300) return;
-
-    setDescription(
-      description.substring(0, description.substring(0, 301).lastIndexOf(' ')) + '...'
-    );
-  }, []);
+  const description =
+    project.description.length <= 300
+      ? project.description
+      : project.description.substring(0, project.description.substring(0, 301).lastIndexOf(' ')) +
+        '...';
 
   return (
     <Card
@@ -105,9 +99,7 @@ export default function PostCard({ project }: Props) {
           </Link>
 
           {/* Details Button */}
-          <Link href={`/project/${project.id}`}>
-            <Button size={'sm'}>View Details</Button>
-          </Link>
+          <LinkButton link={`/project/${project.id}`}>View Details</LinkButton>
         </div>
       </CardFooter>
     </Card>

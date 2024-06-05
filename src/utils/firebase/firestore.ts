@@ -1,5 +1,14 @@
 // Lib Imports.
-import { collection, doc, getDoc, addDoc, deleteDoc, DocumentData } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  DocumentData,
+  Query,
+} from 'firebase/firestore';
 
 // Local Imports.
 import { firestore } from '@/configs/firebase';
@@ -32,11 +41,20 @@ export async function fetchDoc(
 }
 
 /*
+  This function accepts a premeter, a firestore query.
+  It returns the resulting data.
+*/
+export async function fetchDocs(Q: Query): Promise<DocumentData[] | undefined> {
+  const snapshot = await getDocs(Q);
+  return snapshot.docs;
+}
+
+/*
   This function accepts a premeter, projectId.
   It deletes the specified project from firestore. And its images from storage.
 */
 export async function deleteProject(docId: string) {
-  const reference = doc(firestore, "projects", docId);
+  const reference = doc(firestore, 'projects', docId);
   const snapshot = await getDoc(reference);
 
   return snapshot.data();
