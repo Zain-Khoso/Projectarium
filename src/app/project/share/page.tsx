@@ -3,9 +3,8 @@ import { Metadata } from 'next';
 
 // Local Imports.
 import { cn } from '@/utils/utils';
-import Navbar from '@/components/Navigation';
 import ShareProjectForm from './Form';
-import { H1, H2 } from '@/components/ui/typography';
+import { H1 } from '@/components/ui/typography';
 
 // Metadata.
 export const metadata: Metadata = {
