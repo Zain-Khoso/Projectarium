@@ -1,37 +1,28 @@
-import { Button } from '@/components/ui/button';
-import { cn } from '@/utils/utils';
-import { Link, Notebook } from 'lucide-react';
+// Lib Imports.
+import { Award, Notebook, Trash, Users } from 'lucide-react';
 
+// Local Imports
+import { LinkButton } from '@/components/Navigation';
+
+// Component.
 export default function SidenavRoutes({ project }: { project: string }) {
   return (
     <>
-      <Link href={`/project/${project}`}>
-        <Button type="button" variant="outline" className={cn('w-full flex items-center gap-2')}>
-          <Notebook size={16} />
-          Detail
-        </Button>
-      </Link>
+      <LinkButton variant="outline" link={`/project/${project}`}>
+          <Notebook size={16} /> Detail
+        </LinkButton>
 
-      <Link href={`/project/${project}/contributors`}>
-        <Button type="button" variant="outline" className={cn('w-full flex items-center gap-2')}>
-          <Notebook size={16} />
-          Contributors
-        </Button>
-      </Link>
+        <LinkButton variant="outline" link={`/project/${project}/contributors`}>
+          <Users size={16} /> Contributors
+        </LinkButton>
 
-      <Link href={`/project/${project}/reviews`}>
-        <Button type="button" variant="outline" className={cn('w-full flex items-center gap-2')}>
-          <Notebook size={16} />
-          Reviews
-        </Button>
-      </Link>
+        <LinkButton variant="outline" link={`/project/${project}/reviews`}>
+          <Award size={16} /> Reviews
+        </LinkButton>
 
-      <Link href={`/project/${project}/delete`}>
-        <Button type="button" variant="outline" className={cn('w-full flex items-center gap-2')}>
-          <Notebook size={16} />
-          Delete
-        </Button>
-      </Link>
+        <LinkButton variant="outline" link={`/project/${project}/delete`}>
+          <Trash size={16} /> Delete
+        </LinkButton>
     </>
   );
 }

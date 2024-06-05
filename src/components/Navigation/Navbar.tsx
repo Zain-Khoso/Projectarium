@@ -2,7 +2,6 @@
 
 // Lib Imports.
 import Link from 'next/link';
-import { Button } from '../ui/button';
 import { PlusSquare, Search } from 'lucide-react';
 
 // Local Imports.
@@ -12,13 +11,18 @@ import UserPopover from './UserPopover';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '../ui/separator';
 import { useToast } from '@/components/ui/use-toast';
-import { H3 } from '../ui/typography';
+import { Button } from '../ui/button';
 
 // Hooks.
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+// Types.
+type Props = {
+  children?: React.ReactNode;
+};
+
 // Component.
-export default function Navbar() {
+export default function Navbar({ children }: Props) {
   const [user, userIsLoading, userError] = useAuthState(auth);
   const { toast } = useToast();
 
@@ -51,32 +55,26 @@ export default function Navbar() {
     <>
       <nav
         className={cn(
-          'w-full min-h-12 max-w-screen-xl flex items-center gap-2 px-4 py-2 md:py-6 mx-auto md:gap-4',
-          user ? 'justify-end' : 'justify-between'
+          'w-full min-h-12 max-w-screen-xl flex items-center gap-2 px-4 py-2 md:py-6 mx-auto md:gap-4'
         )}
       >
-        {user ? (
-          <>
-            <Link href="/project/share">
-              <Button type="button" size={'sm'} className={cn('flex items-center gap-2')}>
-                <PlusSquare size={16} />
-                Share
-              </Button>
-            </Link>
-
-            <Link href="/search">
-              <Button type="button" className={cn('aspect-square p-2 rounded-full')}>
-                <Search size={16} />
-              </Button>
-            </Link>
-          </>
-        ) : (
-          <Link href="/">
-            <H3 className={cn('md:text-4xl')}>Projectarium</H3>
+        {children}
+        <div className={cn('flex-1 flex gap-2 items-center justify-end')}>
+          <Link href="/project/share">
+            <Button type="button" size={'sm'} className={cn('flex items-center gap-2')}>
+              <PlusSquare size={16} />
+              Share
+            </Button>
           </Link>
-        )}
 
-        <UserPopover user={user!} />
+          <Link href="/search">
+            <Button type="button" className={cn('aspect-square p-2 rounded-full')}>
+              <Search size={16} />
+            </Button>
+          </Link>
+
+          <UserPopover user={user!} />
+        </div>
       </nav>
 
       <Separator className={cn('bg-foreground/25')} />
