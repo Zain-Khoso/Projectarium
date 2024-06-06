@@ -24,9 +24,6 @@ export const contentType = 'image/png';
 export default async function Image({ params }: Props) {
   const project = await fetchDoc('projects', params.project);
 
-  // Font
-  const font = fetch(new URL('/fonts/montserrat.ttf')).then((res) => res.arrayBuffer());
-
   return new ImageResponse(
     (
       <div
@@ -43,17 +40,6 @@ export default async function Image({ params }: Props) {
       >
         {project?.title || 'View on Projectarium'}
       </div>
-    ),
-    {
-      ...size,
-      fonts: [
-        {
-          name: 'Montserrat',
-          data: await font,
-          style: 'normal',
-          weight: 400,
-        },
-      ],
-    }
+    )
   );
 }

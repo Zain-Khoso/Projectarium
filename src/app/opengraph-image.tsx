@@ -1,9 +1,6 @@
 // Lib Imports.
 import { ImageResponse } from 'next/og';
 
-// Local Imports.
-import { cn } from '@/utils/utils';
-
 // Route segment config
 export const runtime = 'edge';
 
@@ -18,9 +15,6 @@ export const contentType = 'image/png';
 
 // Image generation
 export default async function Image() {
-  // Font
-  const font = fetch(new URL('/fonts/montserrat.ttf')).then((res) => res.arrayBuffer());
-
   return new ImageResponse(
     (
       <div
@@ -37,17 +31,6 @@ export default async function Image() {
       >
         Projectarium
       </div>
-    ),
-    {
-      ...size,
-      fonts: [
-        {
-          name: 'Montserrat',
-          data: await font,
-          style: 'normal',
-          weight: 400,
-        },
-      ],
-    }
+    )
   );
 }
