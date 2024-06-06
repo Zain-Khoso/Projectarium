@@ -3,18 +3,24 @@ import { ImageResponse } from 'next/og';
 
 // Local Imports.
 import { cn } from '@/utils/utils';
-import { H1 } from '@/components/ui/typography';
 
+// Route segment config
 export const runtime = 'edge';
-export const alt = 'Projectarium';
+
+// Image metadata
+export const alt = 'Share your project';
 export const size = {
   width: 1200,
   height: 630,
 };
+
 export const contentType = 'image/png';
 
 // Image generation
 export default async function Image() {
+  // Font
+  const font = fetch(new URL('/fonts/montserrat.ttf')).then((res) => res.arrayBuffer());
+
   return new ImageResponse(
     (
       <div
@@ -31,6 +37,17 @@ export default async function Image() {
       >
         Projectarium
       </div>
-    )
+    ),
+    {
+      ...size,
+      fonts: [
+        {
+          name: 'Montserrat',
+          data: await font,
+          style: 'normal',
+          weight: 400,
+        },
+      ],
+    }
   );
 }

@@ -2,7 +2,6 @@
 import { ImageResponse } from 'next/og';
 
 // Local Imports.
-import { cn } from '@/utils/utils';
 import { fetchDoc } from '@/utils/firebase/firestore';
 
 // Types.
@@ -25,11 +24,36 @@ export const contentType = 'image/png';
 export default async function Image({ params }: Props) {
   const project = await fetchDoc('projects', params.project);
 
+  // Font
+  const font = fetch(new URL('/fonts/montserrat.ttf')).then((res) => res.arrayBuffer());
+
   return new ImageResponse(
     (
-      <div className={cn('w-full h-full bg-white flex items-center justify-center text-2xl')}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '3rem',
+          color: 'black',
+        }}
+      >
         {project?.title || 'View on Projectarium'}
       </div>
-    )
+    ),
+    {
+      ...size,
+      fonts: [
+        {
+          name: 'Montserrat',
+          data: await font,
+          style: 'normal',
+          weight: 400,
+        },
+      ],
+    }
   );
 }
