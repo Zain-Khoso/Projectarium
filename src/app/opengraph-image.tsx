@@ -5,7 +5,7 @@ import { ImageResponse } from 'next/og';
 export const runtime = 'edge';
 
 // Image metadata
-export const alt = 'Share your project';
+export const alt = 'Projectarium';
 export const size = {
   width: 1200,
   height: 630,
