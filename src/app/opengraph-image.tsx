@@ -17,8 +17,8 @@ export const contentType = 'image/png';
 export default async function Image() {
   return new ImageResponse(
     (
-      <div className={cn('w-full h-full bg-white flex items-center justify-center')}>
-        <H1 className={cn('text-black')}>Projectarium</H1>
+      <div className={cn('!w-full !h-full !bg-white !flex !items-center !justify-center')}>
+        <H1 className={cn('!text-black')}>Projectarium</H1>
       </div>
     )
   );
