@@ -12,6 +12,18 @@ type Props = {
   };
 };
 
+// Metadata.
+export async function generateMetadata({ params }: Props) {
+  const project = await fetchDoc('projects', params.project);
+
+  return {
+    title: project?.title,
+    description: project?.discription,
+    keywords: project?.tags,
+    
+  };
+}
+
 // Component.
 export default async function ProjectDetailsPage({ params }: Props) {
   const project = await fetchDoc('projects', params.project);

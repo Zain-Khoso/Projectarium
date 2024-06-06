@@ -20,37 +20,39 @@ const Font = Montserrat({
 
 // Metadata.
 export const metadata: Metadata = {
-  title: 'Projectarium: Share, Innovate, Connect',
+  title: {
+    template: '%s | Projectarium',
+    default: 'Share, Innovate, Connect | Projectarium',
+  },
   description:
-    'Projectarium is a dynamic platform for programmers to showcase their latest projects, receive feedback, and connect with like-minded peers. Join us and be part of a supportive and interactive programming community.',
+    'Welcome to Projectarium, the leading platform for programmers to share their latest projects, get feedback, and connect with fellow developers. Join our community to showcase your work, collaborate, and drive innovation in the programming world.',
   keywords: [
     'projectarium',
-    'programming',
-    'project sharing',
-    'feedback',
-    'collaboration',
-    'innovation',
+    'programming community',
+    'share projects',
+    'developer collaboration',
+    'programming innovation',
+    'project showcase',
+    'developer network',
   ],
+  applicationName: 'Projectaruim',
+  referrer: 'origin',
+  creator: 'Zain Khoso',
+  publisher: 'Zain Khoso',
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: true,
+  },
   authors: [
     {
       name: 'Zain Khoso',
-      url: 'https://github.com/Zain-Khoso/Projectarium.git',
+      url: 'https://www.linkedin.com/in/zain-khoso/',
     },
   ],
-  robots: { index: true, follow: true },
-  openGraph: {
-    title: 'Projectarium: Share, Innovate, Connect',
-    description:
-      'Projectarium is a dynamic platform for programmers to showcase their latest projects, receive feedback, and connect with like-minded peers.',
-    images: '/brand/logo.ico',
-    url: 'https://github.com/Zain-Khoso/Projectarium.git',
-  },
-  twitter: {
-    title: 'Projectarium: Share, Innovate, Connect',
-    description:
-      'Projectarium is a dynamic platform for programmers to showcase their latest projects, receive feedback, and connect with like-minded peers.',
-    images: '/brand/logo.ico',
-    card: 'summary_large_image',
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

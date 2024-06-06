@@ -1,4 +1,5 @@
 // Local Imports.
+import { fetchDoc } from '@/utils/firebase/firestore';
 import { cn } from '@/utils/utils';
 import { Navbar, Sidenav, SidenavSheet } from '@/components/Navigation';
 import SidenavRoutes from './SidenavRoutes';
@@ -10,6 +11,25 @@ type Props = {
     project: string;
   };
 };
+
+// Metadata.
+export async function generateMetadata({ params }: Props) {
+  const project = await fetchDoc('projects', params.project);
+
+  return {
+    title: {
+      template: `%s ${project?.title} | Projectarium`,
+    },
+    description: project?.description,
+    keywords: project?.tags,
+    authors: [
+      {
+        name: project?.creator?.name,
+        url: `/users/${project?.creator?.uid}`,
+      },
+    ],
+  };
+}
 
 // Component.
 export default function ProjectSectionLayout({ children, params: { project } }: Props) {

@@ -9,16 +9,17 @@ import Options from './Options';
 
 // Metadata.
 export const metadata: Metadata = {
-  title: 'Register - Projectarium: Share, Innovate, Connect',
+  title: 'Register to Share and Innovate',
   description:
-    'Join Projectarium to showcase your latest projects, receive feedback, and connect with like-minded programmers. Use your social accounts like Google, GitHub, Twitter, or Facebook to get started and become part of our supportive and interactive programming community.',
+    'Create an account on Projectarium to showcase your latest projects, receive feedback, and connect with like-minded programmers. Join our supportive and interactive programming community today.',
   keywords: [
     'register',
     'login',
     'projectarium',
+    'projectarium',
     'programming',
     'project sharing',
-    'collaboration',
+    'developer collaboration',
     'innovation',
     'developer community',
     'social login',

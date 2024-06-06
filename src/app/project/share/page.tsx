@@ -8,18 +8,18 @@ import { H1 } from '@/components/ui/typography';
 
 // Metadata.
 export const metadata: Metadata = {
-  title: 'Share a New Project - Projectarium: Share, Innovate, Connect',
+  title: 'Share Your Project - Inspire and Collaborate',
   description:
     'Share your latest project on Projectarium. Fill in the details to showcase your work, receive feedback, and connect with like-minded programmers. Join our supportive and interactive programming community today.',
   keywords: [
-    'create project',
-    'new project',
-    'projectarium',
-    'programming',
-    'project sharing',
-    'collaboration',
-    'innovation',
-    'developer community',
+    "share project",
+    "projectarium",
+    "programming projects",
+    "developer collaboration",
+    "project showcase",
+    "inspire",
+    "feedback",
+    "developer community"
   ],
 };
 

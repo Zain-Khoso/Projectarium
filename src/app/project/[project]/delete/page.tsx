@@ -1,3 +1,6 @@
+// Lib Imports.
+import { Metadata } from 'next';
+
 // Local Imports.
 import { fetchDoc } from '@/utils/firebase/firestore';
 import DeleteButton from './DeleteButton';
@@ -13,23 +16,19 @@ type Props = {
 };
 
 // Metadata.
-export async function generateMetadata({ params }: Props) {
-  const project = await fetchDoc('projects', params.project);
-
-  return {
-    title: `Delete ${project?.title} - Projectarium`,
-    description:
-      'Proceed with caution: Deleting a project on Projectarium is irreversible. Ensure you want to permanently remove your project from the platform.',
-    keywords: [
-      'delete project',
-      'projectarium',
-      'project removal',
-      'irreversible action',
-      'permanent delete',
-      'programming',
-      'developer projects',
-    ],
-  };
+export const metadata: Metadata = {
+  title: `Delete`,
+  description:
+    'Proceed with caution: Deleting a project on Projectarium is irreversible. Ensure you want to permanently remove your project from the platform.',
+  keywords: [
+    'delete project',
+    'projectarium',
+    'project removal',
+    'irreversible action',
+    'permanent delete',
+    'programming',
+    'developer projects',
+  ],
 }
 
 // Component.
