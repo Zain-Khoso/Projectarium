@@ -10,6 +10,7 @@ import {
   addDoc,
   deleteDoc,
   DocumentData,
+  Query,
 } from 'firebase/firestore';
 
 // Local Imports.
@@ -43,16 +44,11 @@ export async function fetchDoc(
 }
 
 /*
-  This function accepts no premeter.
-  It returns all the published projects.
+  This function accepts a premeter, a firestore query.
+  It returns all the documents that satisfy the query.
 */
-export async function fetchPublishedProjects(): Promise<Record<string, any>[]> {
-  const projectsQ = query(
-    collection(firestore, 'projects'),
-    where('lifecycleStatus', '==', 'Published'),
-    orderBy('createdAt', 'desc')
-  );
-  const snapshot = await getDocs(projectsQ);
+export async function fetchDocs(Q: Query): Promise<Record<string, any>[]> {
+  const snapshot = await getDocs(Q);
 
   if (snapshot.empty) throw new Error('projects-not-found');
 

@@ -3,9 +3,11 @@
 // Lib Imports.
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
+import { collection, query, where, orderBy } from 'firebase/firestore';
 
 // Local Imports.
-import { fetchPublishedProjects } from '@/utils/firebase/firestore';
+import { firestore } from '@/configs/firebase';
+import { fetchDocs } from '@/utils/firebase/firestore';
 import { cn } from '@/utils/utils';
 import CardsContainer from './Container';
 import PostCard from './PostCard';
@@ -17,13 +19,19 @@ export default function InfiniteScroll() {
   const router = useRouter();
   const { toast } = useToast();
 
+  const projectQ = query(
+    collection(firestore, 'projects'),
+    where('lifecycleStatus', '==', 'Published'),
+    orderBy('createdAt', 'desc')
+  );
+
   const {
     isLoading,
     isError,
     data: projects,
   } = useQuery({
     queryKey: ['projects'],
-    queryFn: async () => await fetchPublishedProjects(),
+    queryFn: async () => await fetchDocs(projectQ),
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });

@@ -1,7 +1,5 @@
 // Local Imports.
 import { fetchDoc } from '@/utils/firebase/firestore';
-
-// Local Imports.
 import { cn } from '@/utils/utils';
 import { H1, P, Blackquote } from '@/components/ui/typography';
 
@@ -20,7 +18,6 @@ export async function generateMetadata({ params }: Props) {
     title: project?.title,
     description: project?.discription,
     keywords: project?.tags,
-    
   };
 }
 
