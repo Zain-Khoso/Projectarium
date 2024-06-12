@@ -1,13 +1,15 @@
 // Lib Imports.
 import {
-  collection,
   doc,
   getDoc,
+  collection,
+  query,
+  where,
+  orderBy,
   getDocs,
   addDoc,
   deleteDoc,
   DocumentData,
-  Query,
 } from 'firebase/firestore';
 
 // Local Imports.
@@ -41,12 +43,22 @@ export async function fetchDoc(
 }
 
 /*
-  This function accepts a premeter, a firestore query.
-  It returns the resulting data.
+  This function accepts no premeter.
+  It returns all the published projects.
 */
-export async function fetchDocs(Q: Query): Promise<DocumentData[] | undefined> {
-  const snapshot = await getDocs(Q);
-  return snapshot.docs;
+export async function fetchPublishedProjects(): Promise<Record<string, any>[]> {
+  const projectsQ = query(
+    collection(firestore, 'projects'),
+    where('lifecycleStatus', '==', 'Published'),
+    orderBy('createdAt', 'desc')
+  );
+  const snapshot = await getDocs(projectsQ);
+
+  if (snapshot.empty) throw new Error('projects-not-found');
+
+  return snapshot.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() };
+  });
 }
 
 /*
