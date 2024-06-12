@@ -2,60 +2,66 @@
 
 // Lib Imports.
 import { useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import { collection, query, where, orderBy } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
+import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 
 // Local Imports.
 import { firestore } from '@/configs/firebase';
-import { fetchDocs } from '@/utils/firebase/firestore';
 import { cn } from '@/utils/utils';
-import CardsContainer from './Container';
+import Container from './Container';
 import PostCard from './PostCard';
-import { useToast } from '@/components/ui/use-toast';
-import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '../ui/use-toast';
+import { Skeleton } from '../ui/skeleton';
 
 // Component.
 export default function InfiniteScroll() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const projectQ = query(
-    collection(firestore, 'projects'),
-    where('lifecycleStatus', '==', 'Published'),
-    orderBy('createdAt', 'desc')
-  );
+  // Custom States.
+  const [isLoading, setIsLoading] = useState(true);
+  const [projects, setProjects] = useState<Record<string, any>[]>([]);
 
-  const {
-    isLoading,
-    isError,
-    data: projects,
-  } = useQuery({
-    queryKey: ['projects'],
-    queryFn: async () => await fetchDocs(projectQ),
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-  });
+  useEffect(() => {
+    (async function () {
+      try {
+        const projectsQ = query(
+          collection(firestore, 'projects'),
+          where('lifecycleStatus', '==', 'Published'),
+          orderBy('createdAt', 'desc')
+        );
 
-  if (isError) {
-    toast({
-      variant: 'destructive',
-      title: 'Network Problem',
-      description: 'Check your internet connection.',
-    });
-    router.refresh();
-  }
+        const snapshot = await getDocs(projectsQ);
+
+        setProjects(
+          snapshot.docs.map((item) => {
+            return { id: item.id, ...item.data() };
+          })
+        );
+        setIsLoading(false);
+      } catch {
+        toast({
+          variant: 'destructive',
+          title: 'Connection Error',
+          description: 'You have an unstable network.',
+        });
+
+        setTimeout(() => router.refresh(), 3000);
+      }
+    })();
+  }, []);
 
   return (
-    <CardsContainer>
-      {isLoading || isError ? (
+    <Container>
+      {isLoading || !projects ? (
         <>
           <Skeleton className={cn('w-full min-h-[500px] rounded-lg')} />
           <Skeleton className={cn('w-full min-h-[500px] rounded-lg')} />
           <Skeleton className={cn('w-full min-h-[500px] rounded-lg')} />
         </>
       ) : (
-        projects?.map((project) => <PostCard key={project.id} project={project} />)
+        projects.map((project) => <PostCard key={project.id} project={project} />)
       )}
-    </CardsContainer>
+    </Container>
   );
 }
