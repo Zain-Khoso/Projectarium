@@ -4,7 +4,6 @@ import { Montserrat } from 'next/font/google';
 import { Toaster } from '@/components/ui/toaster';
 
 // Local Imports.
-import StoreProvider from './StoreProvider';
 import { cn } from '@/utils/utils';
 import './globals.css';
 
@@ -62,10 +61,8 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn('min-h-screen bg-background font-sans antialiased', Font.variable)}>
-        <StoreProvider>
-          {children}
-          <Toaster />
-        </StoreProvider>
+        {children}
+        <Toaster />
       </body>
     </html>
   );
