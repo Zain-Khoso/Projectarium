@@ -1,12 +1,10 @@
 'use client';
 
 // Lib Imports.
-import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
+import { useContext } from 'react';
 
 // Local Imports.
-import { firestore } from '@/configs/firebase';
+import { ScrollContext } from './context';
 import Container from './Container';
 import SkeletonUI from './SkeletonUI';
 import PostCard from './PostCard';
@@ -14,49 +12,24 @@ import { useToast } from '../ui/use-toast';
 
 // Component.
 export default function InfiniteScroll() {
-  const router = useRouter();
   const { toast } = useToast();
 
-  // Custom States.
-  const [isLoading, setIsLoading] = useState(true);
-  const [projects, setProjects] = useState<Record<string, any>[]>([]);
+  const [{ isLoading, isError, projects }] = useContext(ScrollContext);
 
-  useEffect(() => {
-    (async function () {
-      try {
-        const projectsQ = query(
-          collection(firestore, 'projects'),
-          where('lifecycleStatus', '==', 'Published'),
-          orderBy('createdAt', 'desc')
-        );
-
-        const snapshot = await getDocs(projectsQ);
-
-        setProjects(
-          snapshot.docs.map((item) => {
-            return { id: item.id, ...item.data() };
-          })
-        );
-        setIsLoading(false);
-      } catch {
-        toast({
-          variant: 'destructive',
-          title: 'Connection Error',
-          description: 'You have an unstable network.',
-        });
-
-        setTimeout(() => router.refresh(), 3000);
-      }
-    })();
-  }, []);
+  if (isError)
+    toast({
+      variant: 'destructive',
+      title: 'Network Problem',
+      description: 'Check your internet connection, and try again.',
+    });
 
   return (
     <Container>
-      {isLoading || !projects ? (
-        <SkeletonUI />
-      ) : (
-        projects.map((project) => <PostCard key={project.id} project={project} />)
-      )}
+      {projects.map((project) => (
+        <PostCard key={project.id} project={project} />
+      ))}
+
+      {isLoading && <SkeletonUI />}
     </Container>
   );
 }
