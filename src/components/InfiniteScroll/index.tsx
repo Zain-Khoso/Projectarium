@@ -7,11 +7,10 @@ import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 
 // Local Imports.
 import { firestore } from '@/configs/firebase';
-import { cn } from '@/utils/utils';
 import Container from './Container';
+import SkeletonUI from './SkeletonUI';
 import PostCard from './PostCard';
 import { useToast } from '../ui/use-toast';
-import { Skeleton } from '../ui/skeleton';
 
 // Component.
 export default function InfiniteScroll() {
@@ -54,11 +53,7 @@ export default function InfiniteScroll() {
   return (
     <Container>
       {isLoading || !projects ? (
-        <>
-          <Skeleton className={cn('w-full min-h-[500px] rounded-lg')} />
-          <Skeleton className={cn('w-full min-h-[500px] rounded-lg')} />
-          <Skeleton className={cn('w-full min-h-[500px] rounded-lg')} />
-        </>
+        <SkeletonUI />
       ) : (
         projects.map((project) => <PostCard key={project.id} project={project} />)
       )}
