@@ -1,7 +1,7 @@
 'use client';
 
 // Lib Imports.
-import { useContext } from 'react';
+import { useEffect, useContext } from 'react';
 
 // Local Imports.
 import { ScrollContext } from './context';
@@ -16,12 +16,14 @@ export default function InfiniteScroll() {
 
   const [{ isLoading, isError, projects }] = useContext(ScrollContext);
 
-  if (isError)
-    toast({
-      variant: 'destructive',
-      title: 'Network Problem',
-      description: 'Check your internet connection, and try again.',
-    });
+  useEffect(() => {
+    if (isError)
+      toast({
+        variant: 'destructive',
+        title: 'Network Problem',
+        description: 'Check your internet connection, and try again.',
+      });
+  }, [isError]);
 
   return (
     <Container>

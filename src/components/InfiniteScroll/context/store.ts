@@ -10,29 +10,34 @@ export const initialState: StateT = {
 
 // Reducer Function To Determine The Next State Of The Context.
 export function reducer(state: StateT, action: ActionT): StateT {
-  const results = state;
+  let { isLoading, isError, projects } = state;
 
   switch (action.type) {
     case 'Fetch':
-      results.isLoading = true;
+      isLoading = true;
       break;
 
     case 'Error':
-      results.isLoading = false;
-      results.isError = true;
+      isLoading = false;
+      isError = true;
+      console.log('LOL');
       break;
 
     case 'Update':
-      results.isLoading = false;
-      results.isError = false;
-      results.projects.concat(action?.projects || []);
+      isLoading = false;
+      isError = false;
+      projects.concat(action?.projects || []);
       break;
 
     default:
-      results.isLoading = false;
-      results.isError = false;
+      isLoading = false;
+      isError = false;
       break;
   }
 
-  return results;
+  return {
+    isLoading,
+    isError,
+    projects,
+  };
 }
