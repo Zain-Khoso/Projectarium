@@ -1,7 +1,18 @@
 // Lib Imports.
 import { useRef, useLayoutEffect, useContext } from 'react';
+import {
+  query,
+  collection,
+  where,
+  orderBy,
+  limit,
+  startAfter,
+  getDocs,
+  DocumentSnapshot,
+} from 'firebase/firestore';
 
 // Local Imports.
+import { firestore } from '@/configs/firebase';
 import { ScrollContext } from './context';
 import { cn } from '@/utils/utils';
 
@@ -28,11 +39,49 @@ export default function Scroll({ children }: Props) {
       threshold: 1,
     };
 
+    let lastDoc: DocumentSnapshot | null = null;
+    let isFetching = false;
+
     // Intersection Handler.
     const fetchMoreProjects: IntersectionObserverCallback = async function (entries) {
       const [{ isIntersecting }] = entries;
 
-      if (isIntersecting) dispatch({ type: 'Fetch' });
+      if (!isIntersecting) return;
+
+      dispatch({ type: 'Fetching' });
+      isFetching = true;
+
+      try {
+        const projectsQ = lastDoc
+          ? query(
+              collection(firestore, 'projects'),
+              where('lifecycleStatus', '==', 'Published'),
+              orderBy('createdAt', 'desc'),
+              limit(9),
+              startAfter(lastDoc)
+            )
+          : query(
+              collection(firestore, 'projects'),
+              where('lifecycleStatus', '==', 'Published'),
+              orderBy('createdAt', 'desc'),
+              limit(9)
+            );
+
+        const snapshot = await getDocs(projectsQ);
+
+        if (snapshot.empty) observer.disconnect();
+        else lastDoc = snapshot.docs.at(-1)!;
+
+        dispatch({
+          type: 'Update',
+          projects: snapshot.docs.map((item) => {
+            return { id: item.id, ...item.data() };
+          }),
+        });
+        isFetching = false;
+      } catch {
+        dispatch({ type: 'Error' });
+      }
     };
 
     const observer = new IntersectionObserver(fetchMoreProjects, observerOptions);

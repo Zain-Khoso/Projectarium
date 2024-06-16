@@ -13,20 +13,19 @@ export function reducer(state: StateT, action: ActionT): StateT {
   let { isLoading, isError, projects } = state;
 
   switch (action.type) {
-    case 'Fetch':
+    case 'Fetching':
       isLoading = true;
       break;
 
     case 'Error':
       isLoading = false;
       isError = true;
-      console.log('LOL');
       break;
 
     case 'Update':
       isLoading = false;
       isError = false;
-      projects.concat(action?.projects || []);
+      projects = projects.concat(action?.projects || []);
       break;
 
     default:

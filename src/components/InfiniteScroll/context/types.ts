@@ -7,6 +7,6 @@ export type StateT = {
 
 // Context Action.
 export type ActionT = {
-  type: 'Fetch' | 'Update' | 'Error';
+  type: 'Fetching' | 'Update' | 'Error';
   projects?: Dictionary[];
 };
