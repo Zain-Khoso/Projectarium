@@ -5,7 +5,7 @@ import { useEffect, useContext } from 'react';
 
 // Local Imports.
 import { ScrollContext } from './context';
-import Container from './Container';
+import Scroll from './Scroll';
 import SkeletonUI from './SkeletonUI';
 import PostCard from './PostCard';
 import { useToast } from '../ui/use-toast';
@@ -26,12 +26,12 @@ export default function InfiniteScroll() {
   }, [isError]);
 
   return (
-    <Container>
+    <Scroll>
       {projects.map((project) => (
         <PostCard key={project.id} project={project} />
       ))}
 
       {isLoading && <SkeletonUI />}
-    </Container>
+    </Scroll>
   );
 }

@@ -3,7 +3,7 @@ import { StateT, ActionT } from './types';
 
 // Initial State For The Context.
 export const initialState: StateT = {
-  isLoading: true,
+  isLoading: false,
   isError: false,
   projects: [],
 };
