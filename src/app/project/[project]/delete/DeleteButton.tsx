@@ -16,7 +16,7 @@ import { cn } from '@/utils/utils';
 
 // Types.
 type Props = {
-  project: Record<string, any>;
+  project: Dictionary;
 };
 
 // Component.

@@ -6,11 +6,6 @@ import { Menu } from 'lucide-react';
 import { cn } from '@/utils/utils';
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from '../ui/sheet';
 
-// Tpes.
-type Props = {
-  children: React.ReactNode;
-};
-
 // Component.
 export default function SidenavSheet({ children }: Props) {
   return (

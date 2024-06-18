@@ -8,10 +8,10 @@ import { fetchDoc } from '@/utils/firebase/firestore';
   This hook takes a single argument, docId.
   And returns, that specific document from projects collection.
 */
-export const useGetProject = function (docId: string): [boolean, boolean, Record<string, any>] {
+export const useGetProject = function (docId: string): [boolean, boolean, Dictionary] {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [project, setProject] = useState<Record<string, any>>({});
+  const [project, setProject] = useState<Dictionary>({});
 
   useEffect(() => {
     (async function () {

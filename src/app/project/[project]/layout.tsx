@@ -5,15 +5,14 @@ import { Navbar, Sidenav, SidenavSheet } from '@/components/Navigation';
 import SidenavRoutes from './SidenavRoutes';
 
 // Types.
-type Props = {
-  children: React.ReactNode;
+interface PropsT extends Props {
   params: {
     project: string;
   };
-};
+}
 
 // Metadata.
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: PropsT) {
   const project = await fetchDoc('projects', params.project);
 
   return {
@@ -32,7 +31,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 // Component.
-export default function ProjectSectionLayout({ children, params: { project } }: Props) {
+export default function ProjectSectionLayout({ children, params: { project } }: PropsT) {
   return (
     <main className={cn('w-full max-w-screen-xl h-dvh flex items-start overflow-hidden mx-auto')}>
       {/* Sidenav for larger displays */}

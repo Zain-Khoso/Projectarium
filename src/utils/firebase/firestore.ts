@@ -21,7 +21,7 @@ import { firestore } from '@/configs/firebase';
   And uploads the provided doc to the provided path inside of firestore.
   Returns doc id of the uploaded document.
 */
-export async function uploadDoc(path: string, doc: Record<string, any>): Promise<string> {
+export async function uploadDoc(path: string, doc: Dictionary): Promise<string> {
   const collectionRef = collection(firestore, path);
 
   const snapshot = await addDoc(collectionRef, doc);
@@ -47,7 +47,7 @@ export async function fetchDoc(
   This function accepts a premeter, a firestore query.
   It returns all the documents that satisfy the query.
 */
-export async function fetchDocs(Q: Query): Promise<Record<string, any>[]> {
+export async function fetchDocs(Q: Query): Promise<Dictionary[]> {
   const snapshot = await getDocs(Q);
 
   if (snapshot.empty) throw new Error('projects-not-found');

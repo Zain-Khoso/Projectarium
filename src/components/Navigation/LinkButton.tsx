@@ -6,15 +6,14 @@ import { cn } from '@/utils/utils';
 import { Button } from '../ui/button';
 
 // Types.
-type Props = {
+interface PropsT extends Props {
   link?: string;
   variant?: 'default' | 'destructive' | 'ghost' | 'link' | 'outline' | 'secondary';
   className?: string;
-  children: React.ReactNode;
-};
+}
 
 // Component.
-export default function LinkButton({ link, variant, className, children }: Props) {
+export default function LinkButton({ link, variant, className, children }: PropsT) {
   return (
     <Link href={link || ''}>
       <Button

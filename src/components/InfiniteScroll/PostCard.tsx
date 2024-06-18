@@ -24,7 +24,7 @@ import { Small, Muted } from '@/components/ui/typography';
 
 // Types.
 type Props = {
-  project: Record<string, any>;
+  project: Dictionary;
 };
 
 // Component.

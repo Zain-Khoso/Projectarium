@@ -6,11 +6,6 @@ import { H3 } from '@/components/ui/typography';
 import { cn } from '@/utils/utils';
 import { Separator } from '@/components/ui/separator';
 
-// Types.
-type Props = {
-  children: React.ReactNode;
-};
-
 // Component.
 export default function Sidenav({ children }: Props) {
   return (

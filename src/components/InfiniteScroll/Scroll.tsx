@@ -16,11 +16,6 @@ import { firestore } from '@/configs/firebase';
 import { ScrollContext } from './context';
 import { cn } from '@/utils/utils';
 
-// Types.
-type Props = {
-  children: React.ReactNode;
-};
-
 // Component.
 export default function Scroll({ children }: Props) {
   const isMounted = useRef(false);

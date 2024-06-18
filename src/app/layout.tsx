@@ -8,11 +8,6 @@ import ReactQueryProvider from '@/configs/reactQuery';
 import { cn } from '@/utils/utils';
 import './globals.css';
 
-// Types.
-type Props = {
-  children: React.ReactNode;
-};
-
 // Default Font.
 const Font = Montserrat({
   subsets: ['latin'],
