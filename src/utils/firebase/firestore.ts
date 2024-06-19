@@ -1,16 +1,19 @@
 // Lib Imports.
 import {
   doc,
-  getDoc,
-  collection,
   query,
+  collection,
   where,
   orderBy,
+  limit,
+  startAfter,
+  getDoc,
   getDocs,
   addDoc,
   deleteDoc,
-  DocumentData,
   Query,
+  DocumentData,
+  DocumentSnapshot,
 } from 'firebase/firestore';
 
 // Local Imports.
@@ -50,11 +53,35 @@ export async function fetchDoc(
 export async function fetchDocs(Q: Query): Promise<Dictionary[]> {
   const snapshot = await getDocs(Q);
 
-  if (snapshot.empty) throw new Error('projects-not-found');
+  if (snapshot.empty) return [];
 
   return snapshot.docs.map((doc) => {
     return { id: doc.id, ...doc.data() };
   });
+}
+
+/*
+  This function is solely used for projects infite scroll.
+  It accepts only one paremeter, lastDoc, which is a snapshot of the last document that was fetched.
+  it returns the next set of 9 snapshots of projects.
+*/
+export async function fetchPage(lastDoc: DocumentSnapshot | null) {
+  const projectsQ = lastDoc
+    ? query(
+        collection(firestore, 'projects'),
+        where('lifecycleStatus', '==', 'Published'),
+        orderBy('createdAt', 'desc'),
+        limit(9),
+        startAfter(lastDoc)
+      )
+    : query(
+        collection(firestore, 'projects'),
+        where('lifecycleStatus', '==', 'Published'),
+        orderBy('createdAt', 'desc'),
+        limit(9)
+      );
+
+  return await getDocs(projectsQ);
 }
 
 /*
