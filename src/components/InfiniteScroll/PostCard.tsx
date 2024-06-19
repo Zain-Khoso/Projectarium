@@ -63,7 +63,7 @@ export default function PostCard({ project }: Props) {
         <div className={cn('px-6 space-y-4')}>
           <CardTitle className={cn('flex justify-between items-center')}>
             {project.title}
-            <Badge variant={project.status === 'Completed' ? 'default' : 'outline'}>
+            <Badge variant={project.status === 'Completed' ? 'default' : 'secondary'}>
               {project.status}
             </Badge>
           </CardTitle>

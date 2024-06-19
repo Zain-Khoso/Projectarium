@@ -37,12 +37,11 @@ import { Small } from '@/components/ui/typography';
 
 // Hooks.
 import useDarkmode from '@/hooks/useDarkmode';
-import { useAuthRedirect } from '@/hooks/firebase/useAuthRedirect';
-import { useEnums } from '@/hooks/firebase/firestore/staticContent';
+import { useAuthRedirect, useEnums } from '@/hooks/firebase';
 
 // Component.
 export default function ShareProjectForm() {
-  useDarkmode()
+  useDarkmode();
   useAuthRedirect();
 
   // React Hook Form Setup.
@@ -63,7 +62,7 @@ export default function ShareProjectForm() {
   const { toast } = useToast();
 
   // Custom States.
-  const { enumsLoading, enums } = useEnums();
+  const [enumsLoading, enums] = useEnums();
 
   // Form submission handler.
   const onSubmit: SubmitHandler<SchemaT> = async function (data) {
@@ -190,7 +189,7 @@ export default function ShareProjectForm() {
                       Idea
                     </SelectItem>
                   ) : (
-                    enums?.status.map((item) => (
+                    enums?.status.map((item: string) => (
                       <SelectItem key={`Status: ${item}`} value={item}>
                         {item}
                       </SelectItem>
@@ -296,7 +295,7 @@ export default function ShareProjectForm() {
                       <Small>Other</Small>
                     </ToggleGroupItem>
                   ) : (
-                    enums?.tags.map((item) => (
+                    enums?.tags.map((item: string) => (
                       <ToggleGroupItem key={`Tag: ${item}`} value={item} aria-label="Toggle bold">
                         <Small>{item}</Small>
                       </ToggleGroupItem>

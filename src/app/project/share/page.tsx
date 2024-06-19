@@ -12,14 +12,14 @@ export const metadata: Metadata = {
   description:
     'Share your latest project on Projectarium. Fill in the details to showcase your work, receive feedback, and connect with like-minded programmers. Join our supportive and interactive programming community today.',
   keywords: [
-    "share project",
-    "projectarium",
-    "programming projects",
-    "developer collaboration",
-    "project showcase",
-    "inspire",
-    "feedback",
-    "developer community"
+    'share project',
+    'projectarium',
+    'programming projects',
+    'developer collaboration',
+    'project showcase',
+    'inspire',
+    'feedback',
+    'developer community',
   ],
 };
 

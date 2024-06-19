@@ -9,7 +9,7 @@ import { auth } from '@/configs/firebase';
 import { LinkButton } from '@/components/Navigation';
 
 // Hooks.
-import { useGetProject } from '@/hooks/firebase/firestore/projects';
+import { useGetProject } from '@/hooks/firebase';
 
 // Types.
 type Props = {

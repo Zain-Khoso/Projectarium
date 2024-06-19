@@ -39,7 +39,7 @@ export default function ProjectSectionLayout({ children, params: { project } }: 
         <SidenavRoutes project={project} />
       </Sidenav>
 
-      <main className={cn('flex-1 h-full')}>
+      <main className={cn('flex-1 flex flex-col h-full')}>
         <Navbar>
           <SidenavSheet>
             <SidenavRoutes project={project} />
