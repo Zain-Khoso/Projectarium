@@ -26,12 +26,16 @@ export default function InfiniteScroll() {
     queryFn: ({ pageParam }: { pageParam: DocumentSnapshot | null }) => fetchPage(pageParam),
     initialPageParam: null,
     getNextPageParam: (lastPage) => lastPage.docs.at(-1),
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
+  // Component Values.
   const { toast } = useToast();
   const isMounted = useRef(false);
   const scrollElem = useRef(null);
 
+  // Layout Effect for adding the Intersection Observer.
   useLayoutEffect(() => {
     if (!scrollElem.current || isMounted.current) return;
     isMounted.current = true;
@@ -54,6 +58,7 @@ export default function InfiniteScroll() {
     observer.observe(scrollElem.current);
   }, []);
 
+  // Effect to listen and act for any errors that might accure with the data fetching.
   useEffect(() => {
     if (isError)
       toast({
