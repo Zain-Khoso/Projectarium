@@ -9,13 +9,14 @@ import { Button } from '../ui/button';
 interface PropsT extends Props {
   link?: string;
   variant?: 'default' | 'destructive' | 'ghost' | 'link' | 'outline' | 'secondary';
+  target?: '_blank' | '_parent' | '_self' | '_top';
   className?: string;
 }
 
 // Component.
-export default function LinkButton({ link, variant, className, children }: PropsT) {
+export default function LinkButton({ link, variant, target, className, children }: PropsT) {
   return (
-    <Link href={link || ''}>
+    <Link href={link || ''} target={target || '_self'}>
       <Button
         type="button"
         variant={variant || 'default'}

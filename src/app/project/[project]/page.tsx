@@ -102,13 +102,13 @@ export default async function ProjectDetailsPage({ params }: Props) {
         {/* Actions */}
         <div className={cn('w-full h-full flex flex-wrap justify-end gap-2 mt-8')}>
           {project.repository && (
-            <LinkButton link={project.repository} variant="secondary">
+            <LinkButton link={project.repository} target="_blank" variant="secondary">
               Repository
             </LinkButton>
           )}
 
           {project.url && (
-            <LinkButton link={project.url} variant="secondary">
+            <LinkButton link={project.url} target="_blank" variant="secondary">
               Visit
             </LinkButton>
           )}
