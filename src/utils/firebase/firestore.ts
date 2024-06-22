@@ -14,6 +14,7 @@ import {
   Query,
   DocumentData,
   DocumentSnapshot,
+  setDoc,
 } from 'firebase/firestore';
 
 // Local Imports.
@@ -30,6 +31,17 @@ export async function uploadDoc(path: string, doc: Dictionary): Promise<string> 
   const snapshot = await addDoc(collectionRef, doc);
 
   return snapshot.id;
+}
+
+/*
+  This function accepts two premeters, path & doc.
+  And updates the doc at the provided path inside of firestore.
+*/
+export async function updateDoc(path: string, docId: string, data: Dictionary) {
+  const collectionRef = collection(firestore, path);
+  const docRef = doc(collectionRef, docId);
+
+  await setDoc(docRef, data, { merge: true });
 }
 
 /*

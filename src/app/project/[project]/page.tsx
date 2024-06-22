@@ -16,7 +16,7 @@ import {
 import { H1, P, Small, Muted } from '@/components/ui/typography';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import Update from './Update';
+import Edit from './edit';
 
 // Types.
 type Props = {
@@ -43,6 +43,8 @@ export default async function ProjectDetailsPage({ params }: Props) {
   if (!project) throw new Error('project-does-not-exist');
 
   const createdAt = new Date(project.createdAt?.seconds);
+
+  const { creator, title, description, url, repository, status } = project;
 
   return (
     <ScrollArea className={cn('flex-1 w-full px-4 pt-4 md:pt-8 pb-4')}>
@@ -113,7 +115,10 @@ export default async function ProjectDetailsPage({ params }: Props) {
             </LinkButton>
           )}
 
-          <Update creatorId={project.creator.uid} />
+          <Edit
+            project={{ creator, title, description, url, repository, status }}
+            projectId={params.project}
+          />
         </div>
       </section>
     </ScrollArea>
