@@ -68,7 +68,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
                   src={url}
                   width={500}
                   height={300}
-                  className={cn('w-full')}
+                  className={cn('w-full aspect-video object-cover object-center')}
                 />
               </CarouselItem>
             ))}
@@ -113,7 +113,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
             </LinkButton>
           )}
 
-          <Update />
+          <Update creatorId={project.creator.uid} />
         </div>
       </section>
     </ScrollArea>

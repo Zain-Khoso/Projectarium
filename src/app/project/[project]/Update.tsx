@@ -5,15 +5,18 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 // Local Imports.
 import { auth } from '@/configs/firebase';
-import { cn } from '@/utils/utils';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
+
+// Types.
+type Props = {
+  creatorId: string;
+};
 
 // Component.
-export default function Update() {
+export default function Update({ creatorId }: Props) {
   const [user, isAuthLoading, isAuthError] = useAuthState(auth);
 
-  if (isAuthLoading) return <Skeleton className={cn('w-24 h-10')} />;
+  if (isAuthLoading || isAuthError || !user) return <></>;
 
-  if (user) return <Button variant="outline">Update</Button>;
+  if (user.uid === creatorId) return <Button variant="outline">Update</Button>;
 }
