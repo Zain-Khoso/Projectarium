@@ -8,6 +8,7 @@ import { User2, Settings, Bell, MessageCircle } from 'lucide-react';
 // Local Imports.
 import { auth } from '@/configs/firebase';
 import { cn } from '@/utils/utils';
+import LinkButton from './LinkButton';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
@@ -70,49 +71,25 @@ export default function UserPopover({ user }: Props) {
 
             <Separator className={cn('my-2')} />
 
-            <Link href={`/user`}>
-              <Button
-                variant="ghost"
-                type="button"
-                className={cn('flex items-center justify-center gap-2 px-1 hover:text-foreground')}
-              >
-                <User2 size={16} />
-                Profile
-              </Button>
-            </Link>
+            <LinkButton link="/user" variant="ghost">
+              <User2 size={16} />
+              Profile
+            </LinkButton>
 
-            <Link href={`/chat`}>
-              <Button
-                variant="ghost"
-                type="button"
-                className={cn('flex items-center justify-center gap-2 px-1 hover:text-foreground')}
-              >
-                <MessageCircle size={16} />
-                Chat
-              </Button>
-            </Link>
+            <LinkButton link="/chat" variant="ghost">
+              <MessageCircle size={16} />
+              Chat
+            </LinkButton>
 
-            <Link href={`/user/notifications`}>
-              <Button
-                variant="ghost"
-                type="button"
-                className={cn('flex items-center justify-center gap-2 px-1 hover:text-foreground')}
-              >
-                <Bell size={16} />
-                Notifications
-              </Button>
-            </Link>
+            <LinkButton link="/user/notification" variant="ghost">
+              <Bell size={16} />
+              Notifications
+            </LinkButton>
 
-            <Link href="/settings">
-              <Button
-                variant="ghost"
-                type="button"
-                className={cn('flex items-center justify-center gap-2 px-1 hover:text-foreground')}
-              >
-                <Settings size={16} />
-                Settings
-              </Button>
-            </Link>
+            <LinkButton link="/user/settings" variant="ghost">
+              <Settings size={16} />
+              Settings
+            </LinkButton>
 
             <Separator className={cn('my-2')} />
           </>
