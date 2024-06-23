@@ -34,7 +34,18 @@ export async function uploadDoc(path: string, doc: Dictionary): Promise<string> 
 }
 
 /*
-  This function accepts two premeters, path & doc.
+  This function accepts three premeters, path, docId & doc.
+  And creates a new doc at the provided path, and docId inside of firestore.
+*/
+export async function createDoc(path: string, docId: string, data: Dictionary) {
+  const collectionRef = collection(firestore, path);
+  const docRef = doc(collectionRef, docId);
+
+  await setDoc(docRef, data);
+}
+
+/*
+  This function accepts three premeters, path, docId & doc.
   And updates the doc at the provided path inside of firestore.
 */
 export async function updateDoc(path: string, docId: string, data: Dictionary) {
