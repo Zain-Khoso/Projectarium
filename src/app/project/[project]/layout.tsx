@@ -1,3 +1,6 @@
+// Lib Imports.
+import { Metadata } from 'next';
+
 // Local Imports.
 import { fetchDoc } from '@/utils/firebase/firestore';
 import { cn } from '@/utils/utils';
@@ -12,14 +15,17 @@ interface PropsT extends Props {
 }
 
 // Metadata.
-export async function generateMetadata({ params }: PropsT) {
+export async function generateMetadata({ params }: PropsT): Promise<Metadata> {
   const project = await fetchDoc('projects', params.project);
 
   return {
     title: {
       template: `%s ${project?.title} | Projectarium`,
+      default: project?.title,
     },
-    description: project?.description,
+    description:
+      project?.description?.substring(0, project?.description?.substring(0, 150).lastIndexOf(' ')) +
+      '...',
     keywords: project?.tags,
     authors: [
       {
