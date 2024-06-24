@@ -1,16 +1,17 @@
 // Lib Imports.
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { collection } from 'firebase/firestore';
 import { useQuery } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Check, CheckIcon, SortAscIcon } from 'lucide-react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { SendHorizontal, CheckIcon, SortAscIcon } from 'lucide-react';
 
 // Local Imports.
+import { auth, firestore } from '@/configs/firebase';
 import { createDoc, fetchDocs } from '@/utils/firebase/firestore';
-import { firestore } from '@/configs/firebase';
 import { cn } from '@/utils/utils';
 import { Schema, SchemaT } from './schema';
 import ScreenSpinner from '@/components/ScreenSpinner';
@@ -20,7 +21,6 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-  DialogClose,
 } from '@/components/ui/dialog';
 import {
   Form,
@@ -46,10 +46,11 @@ import { Button } from '@/components/ui/button';
 // Types.
 type Props = {
   projectId: string;
+  setDialogOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 // Component.
-export default function CreateContributionForm({ projectId }: Props) {
+export default function CreateContributionForm({ projectId, setDialogOpen }: Props) {
   // React Query Setup.
   const {
     isLoading,
@@ -61,6 +62,7 @@ export default function CreateContributionForm({ projectId }: Props) {
     refetchOnWindowFocus: false,
   });
 
+  const [currUser] = useAuthState(auth);
   const [userId, setUserId] = useState('');
   const { toast } = useToast();
   const router = useRouter();
@@ -102,18 +104,24 @@ export default function CreateContributionForm({ projectId }: Props) {
       });
     } finally {
       form.reset();
+      setDialogOpen(false);
     }
   };
 
   return (
-    <DialogContent className="sm:max-w-[520px] md:max-h-[80dvh] overflow-y-auto">
+    <DialogContent
+      className={cn(
+        'sm:max-w-[520px] md:max-h-[80dvh] overflow-y-auto',
+        form.formState.isSubmitting && 'overflow-hidden'
+      )}
+    >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className={cn('space-y-6')}>
           <DialogHeader>
             <DialogTitle>Add Contributor</DialogTitle>
             <DialogDescription>
               Select a user as the contributor and describe their contribution a little bit. After
-              that click of the Add button at the bottom.
+              that click on the Send Request button at the bottom.
             </DialogDescription>
           </DialogHeader>
 
@@ -165,34 +173,37 @@ export default function CreateContributionForm({ projectId }: Props) {
                       <CommandInput placeholder="Search user..." className="h-9" />
                       <CommandEmpty>No user found.</CommandEmpty>
                       <CommandList className={cn('space-y-2 h-[200px] overflow-auto')}>
-                        {users?.map((user) => (
-                          <CommandItem
-                            value={user.name}
-                            key={user.id}
-                            onSelect={() => {
-                              form.setValue('name', user.name);
-                              setUserId(user.id);
-                            }}
-                          >
-                            <div className={cn('flex-1 flex items-center justify-start gap-2')}>
-                              <Image
-                                alt={`Picture of ${user.name}`}
-                                width={50}
-                                height={50}
-                                src={user.picture}
-                                className="w-6 aspect-square rounded-full"
-                              />
+                        {users?.map((user) => {
+                          if (user.id !== currUser?.uid)
+                            return (
+                              <CommandItem
+                                value={user.name}
+                                key={user.id}
+                                onSelect={() => {
+                                  form.setValue('name', user.name);
+                                  setUserId(user.id);
+                                }}
+                              >
+                                <div className={cn('flex-1 flex items-center justify-start gap-2')}>
+                                  <Image
+                                    alt={`Picture of ${user.name}`}
+                                    width={50}
+                                    height={50}
+                                    src={user.picture}
+                                    className="w-6 aspect-square rounded-full"
+                                  />
 
-                              {user.name}
-                            </div>
-                            <CheckIcon
-                              className={cn(
-                                'ml-auto h-4 w-4',
-                                user.name === field.value ? 'opacity-100' : 'opacity-0'
-                              )}
-                            />
-                          </CommandItem>
-                        ))}
+                                  {user.name}
+                                </div>
+                                <CheckIcon
+                                  className={cn(
+                                    'ml-auto h-4 w-4',
+                                    user.name === field.value ? 'opacity-100' : 'opacity-0'
+                                  )}
+                                />
+                              </CommandItem>
+                            );
+                        })}
                       </CommandList>
                     </Command>
                   </PopoverContent>
@@ -226,16 +237,15 @@ export default function CreateContributionForm({ projectId }: Props) {
           />
 
           <DialogFooter>
-            <DialogClose
+            <Button
               disabled={form.formState.isSubmitting}
               type="submit"
-              className={cn(
-                'max-w-fit flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary2 h-10 px-4 py-2 ml-auto'
-              )}
+              size={'sm'}
+              className="flex items-center gap-1"
             >
-              <Check size={16} />
-              Add
-            </DialogClose>
+              Send Request
+              <SendHorizontal size={12} />
+            </Button>
           </DialogFooter>
         </form>
 
