@@ -42,6 +42,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 // Types.
 type Props = {
@@ -179,39 +180,44 @@ export default function CreateContributionForm({ projectId, setDialogOpen }: Pro
                     <Command>
                       <CommandInput placeholder="Search user..." className="h-9" />
                       <CommandEmpty>No user found.</CommandEmpty>
-                      <CommandList className={cn('space-y-2 h-[200px] overflow-auto')}>
-                        {users?.map((user) => {
-                          if (user.id !== currUser?.uid)
-                            return (
-                              <CommandItem
-                                value={user.name}
-                                key={user.id}
-                                onSelect={() => {
-                                  form.setValue('name', user.name);
-                                  setUserId(user.id);
-                                }}
-                              >
-                                <div className={cn('flex-1 flex items-center justify-start gap-2')}>
-                                  <Image
-                                    alt={`Picture of ${user.name}`}
-                                    width={50}
-                                    height={50}
-                                    src={user.picture}
-                                    className="w-6 aspect-square rounded-full"
-                                  />
 
-                                  {user.name}
-                                </div>
-                                <CheckIcon
-                                  className={cn(
-                                    'ml-auto h-4 w-4',
-                                    user.name === field.value ? 'opacity-100' : 'opacity-0'
-                                  )}
-                                />
-                              </CommandItem>
-                            );
-                        })}
-                      </CommandList>
+                      <ScrollArea className="h-[200px]">
+                        <CommandList className={cn('space-y-2')}>
+                          {users?.map((user) => {
+                            if (user.id !== currUser?.uid)
+                              return (
+                                <CommandItem
+                                  value={user.name}
+                                  key={user.id}
+                                  onSelect={() => {
+                                    form.setValue('name', user.name);
+                                    setUserId(user.id);
+                                  }}
+                                >
+                                  <div
+                                    className={cn('flex-1 flex items-center justify-start gap-2')}
+                                  >
+                                    <Image
+                                      alt={`Picture of ${user.name}`}
+                                      width={50}
+                                      height={50}
+                                      src={user.picture}
+                                      className="w-6 aspect-square rounded-full"
+                                    />
+
+                                    {user.name}
+                                  </div>
+                                  <CheckIcon
+                                    className={cn(
+                                      'ml-auto h-4 w-4',
+                                      user.name === field.value ? 'opacity-100' : 'opacity-0'
+                                    )}
+                                  />
+                                </CommandItem>
+                              );
+                          })}
+                        </CommandList>
+                      </ScrollArea>
                     </Command>
                   </PopoverContent>
                 </Popover>
