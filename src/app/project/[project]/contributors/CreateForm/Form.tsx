@@ -95,13 +95,20 @@ export default function CreateContributionForm({ projectId, setDialogOpen }: Pro
         description:
           'This Contributor will recieve a request, if they accept, they will be shown in the contributors list.',
       });
-    } catch {
-      toast({
-        variant: 'destructive',
-        title: 'Server Error',
-        description:
-          'We are unable to send a request to this user, please try again or come back later.',
-      });
+    } catch (err: any) {
+      if (err.message == 'Missing or insufficient permissions.') {
+        toast({
+          title: 'Already a contributor. 😀',
+          description: 'You have already added this user as a contributor to this project.',
+        });
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Server Error',
+          description:
+            'We are unable to send a request to this user, please try again or come back later.',
+        });
+      }
     } finally {
       form.reset();
       setDialogOpen(false);
