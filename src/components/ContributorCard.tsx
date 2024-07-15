@@ -29,7 +29,7 @@ type Props = {
 // Component.
 export default function ContributorCard({ contributor }: Props) {
   return (
-    <Link href={`user/${contributor.id}`} target="_blank" className={cn('w-full ')}>
+    <Link href={`/user/${contributor.id}`} target="_blank" className={cn('w-full ')}>
       <div
         className={cn(
           'w-full flex items-center gap-2 text-lg px-4 py-2 border border-foreground/20 rounded-md'
