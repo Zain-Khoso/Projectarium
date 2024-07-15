@@ -28,7 +28,7 @@ export default async function ProjectContributors({ params: { project: projectId
   const contributors = await fetchDocs(
     query(
       collection(firestore, 'projects', projectId, 'contributors'),
-      // where('status', '==', 'Approved'),
+      where('status', '==', 'Approved'),
       orderBy('name', 'desc')
     )
   );
