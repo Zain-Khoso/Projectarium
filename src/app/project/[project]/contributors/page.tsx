@@ -53,11 +53,7 @@ export default async function ProjectContributors({ params: { project: projectId
         <AddContributor projectId={projectId} uid={project.creator.uid} />
       </section>
 
-      <section
-        className={cn(
-          'grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] place-items-start gap-8 px-2 py-8 mx-auto'
-        )}
-      >
+      <section className={cn('flex flex-col gap-8 px-2 py-8 mx-auto')}>
         {contributors.length ? (
           contributors.map((contributor) => (
             <ContributorCard
