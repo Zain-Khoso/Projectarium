@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import { cn } from '@/utils/utils';
 import { fetchDoc, fetchDocs } from '@/utils/firebase/firestore';
 import AddContributor from './CreateForm';
-import ContributorCard from '@/components/ContributorCard';
+import ContributorCard from '@/components/ContributorsCard';
 import { H4, Lead } from '@/components/ui/typography';
 import { collection, orderBy, query, where } from 'firebase/firestore';
 import { firestore } from '@/configs/firebase';
@@ -25,13 +25,18 @@ export const metadata: Metadata = {
 // Component.
 export default async function ProjectContributors({ params: { project: projectId } }: Props) {
   const project = await fetchDoc('projects', projectId);
-  const contributors = await fetchDocs(
+  const contributorsData = await fetchDocs(
     query(
       collection(firestore, 'projects', projectId, 'contributors'),
       where('status', '==', 'Approved'),
       orderBy('name', 'desc')
     )
   );
+
+  const contributors = contributorsData.map((contributor) => {
+    const { createdAt, ...rest } = contributor;
+    return rest;
+  });
 
   if (!project) throw new Error('project-does-not-exist');
 
@@ -55,7 +60,12 @@ export default async function ProjectContributors({ params: { project: projectId
       >
         {contributors.length ? (
           contributors.map((contributor) => (
-            <ContributorCard key={contributor.id} contributor={contributor} />
+            <ContributorCard
+              key={contributor.id}
+              projectId={projectId}
+              contributor={contributor}
+              uid={project.creator.uid}
+            />
           ))
         ) : (
           <Lead>No contributors.</Lead>
