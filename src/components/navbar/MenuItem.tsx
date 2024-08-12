@@ -1,10 +1,8 @@
 // Lib Imports.
 import Link from 'next/link';
 
-// Icon Imports.
-import { IconType } from 'react-icons';
-
 // Types.
+import { IconType } from 'react-icons';
 type Props = {
   href: string;
   label: string;

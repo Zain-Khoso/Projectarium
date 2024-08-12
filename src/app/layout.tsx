@@ -5,9 +5,6 @@ import { Nunito } from 'next/font/google';
 // Styles.
 import './globals.css';
 
-// Components.
-import Navbar from '@/components/navbar/Navbar';
-
 // Metadata.
 export const metadata: Metadata = {
   title: {
@@ -58,10 +55,7 @@ const font = Nunito({ subsets: ['latin'] });
 export default function RootLayout({ children }: Readonly<ChildrenProps>) {
   return (
     <html lang="en">
-      <body className={font.className}>
-        <Navbar />
-        {children}
-      </body>
+      <body className={font.className}>{children}</body>
     </html>
   );
 }
