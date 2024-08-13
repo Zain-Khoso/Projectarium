@@ -1,5 +1,11 @@
 'use client';
 
+// Lib Imports.
+import { useState } from 'react';
+
+// Icons.
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+
 // Types.
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 type Props = {
@@ -12,11 +18,13 @@ type Props = {
 };
 
 // Component.
-export default function Input({ id, label, disabled, required, register, errors }: Props) {
+export default function Password({ id, label, disabled, required, register, errors }: Props) {
+  const [show, setShow] = useState(false);
+
   return (
     <label
       className={`
-        relative w-full border-2 border-neutral-200 p-3 pt-4 rounded-md 
+        relative flex flex-row items-center gap-2 w-full border-2 border-neutral-200 p-3 pt-4 rounded-md 
         focus-within:border-black 
         ${errors[id] ? 'border-rose-500' : 'border-neutral-200'}
         ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
@@ -24,11 +32,15 @@ export default function Input({ id, label, disabled, required, register, errors 
     >
       <input
         id={id}
-        type="text"
+        type={show ? 'text' : 'password'}
         {...register(id, { required, disabled })}
         placeholder=" "
-        className={`w-full peer text-lg outline-none ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+        className={`flex-1 peer text-lg outline-none ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
       />
+
+      <button type="button" onClick={() => setShow((value) => !value)}>
+        {show ? <FaRegEyeSlash /> : <FaRegEye />}
+      </button>
 
       <label
         htmlFor={id}
