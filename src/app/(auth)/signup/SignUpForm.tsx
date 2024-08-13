@@ -1,8 +1,11 @@
 'use client';
 
 // Lib Imports.
+import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
+import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 // Local Imports.
 import { isValidEmail, isValidUsername } from '@/libs/validations';
@@ -16,10 +19,13 @@ import { FaUserPlus } from 'react-icons/fa';
 
 // Component.
 export default function SignUpForm() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors, isLoading, isSubmitting },
   } = useForm<FieldValues>({
     defaultValues: {
@@ -59,6 +65,25 @@ export default function SignUpForm() {
       toast.error('Password requires atleast 8 characters.');
       return;
     }
+
+    axios
+      .post('/api/auth/signup', data)
+      .then((data) => {
+        if (!data.data?.errorField) {
+          reset();
+          Swal.fire({
+            title: 'Account created successfully.',
+            icon: 'success',
+            confirmButtonColor: '#0ea5e9',
+          }).then(() => router.push('/login'));
+
+          return;
+        }
+
+        setError(data.data.errorField, { message: `${data.data.errorField} already in use.` });
+        toast.error(`${data.data.errorField} already in use.`);
+      })
+      .catch(() => toast.error('Signup Failed.'));
   };
 
   return (
@@ -96,6 +121,7 @@ export default function SignUpForm() {
         onClick={handleSubmit(onSubmit)}
         icon={FaUserPlus}
         iconSide="right"
+        disabled={isLoading || isSubmitting}
       />
     </form>
   );
