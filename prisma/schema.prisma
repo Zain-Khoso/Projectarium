@@ -1,0 +1,48 @@
+// Database client reference.
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Initializing db for the schemas.
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// Central user model of the app.
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  username String? @unique @default(uuid())
+  email String? @unique
+  emailVerified DateTime?
+  hashedPassword String?
+  fullname String?
+  image String?
+  bio String?
+  website String?
+  locationValue String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  account Account[]
+}
+
+// Additional user model for OAuth users.
+model Account {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String? @db.String
+  access_token String? @db.String
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String? @db.String
+  session_state String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}

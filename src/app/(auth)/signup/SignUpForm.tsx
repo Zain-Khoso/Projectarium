@@ -1,9 +1,13 @@
 'use client';
 
-import { Button } from '@/components/Button';
-// Components.
-import { Input } from '@/components/Input';
+// Lib Imports.
 import { useState } from 'react';
+
+// Components.
+import { Button } from '@/components/Button';
+import { Input } from '@/components/Input';
+
+// Icons.
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 
 // Types.
