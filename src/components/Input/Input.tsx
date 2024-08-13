@@ -1,20 +1,32 @@
 'use client';
 
+// Lib Imports.
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+
 // Types.
 type Props = {
+  id: string;
   label: string;
-  type: 'text' | 'email' | 'url';
   disabled?: boolean;
+  required?: boolean;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors;
 };
 
 // Component.
-export default function Input({ label, type, disabled }: Props) {
+export default function Input({ id, label, disabled, required, register, errors }: Props) {
   return (
     <label
-      className={`relative w-full border-2 border-neutral-200 p-3 pt-4 rounded-md focus-within:border-black ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+      className={`
+        relative w-full border-2 border-neutral-200 p-3 pt-4 rounded-md 
+        focus-within:border-black 
+        ${errors[id] ? 'border-rose-500' : 'border-neutral-200'}
+        ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
+        `}
     >
       <input
         type="text"
+        {...register(id, { required, disabled })}
         placeholder=" "
         className={`w-full peer text-lg outline-none ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
       />
@@ -35,7 +47,9 @@ export default function Input({ label, type, disabled }: Props) {
           peer-focus:-translate-y-[170%] 
           peer-focus:text-neutral-800
           transition
-          ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+          ${errors[id] && 'text-rose-500 peer-placeholder-shown:text-rose-500'}
+          ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
+          `}
       >
         {label}
       </label>
