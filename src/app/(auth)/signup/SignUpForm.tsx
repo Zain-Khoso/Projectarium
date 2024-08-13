@@ -32,7 +32,7 @@ export default function SignUpForm() {
     console.log('User created!');
   };
 
-  const bodyContent = (
+  let bodyContent = (
     <>
       <Input label="Email" type="email" />
       <Input label="Username" type="text" />
