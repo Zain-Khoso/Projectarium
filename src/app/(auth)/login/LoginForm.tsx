@@ -2,6 +2,7 @@
 
 // Lib Imports.
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -91,6 +92,14 @@ export default function LoginForm() {
         iconSide="right"
         disabled={isLoading || isSubmitting}
       />
+
+      <span className="text-sm text-neutral-500 font-light">
+        Don&apos;t have an account?{' '}
+        <Link href="/signup" className="font-semibold text-sky-500">
+          Sign Up
+        </Link>
+        .
+      </span>
     </form>
   );
 }

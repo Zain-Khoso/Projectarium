@@ -2,6 +2,7 @@
 
 // Lib Imports.
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
@@ -123,6 +124,14 @@ export default function SignUpForm() {
         iconSide="right"
         disabled={isLoading || isSubmitting}
       />
+
+      <span className="text-sm text-neutral-500 font-light">
+        Already have an account?{' '}
+        <Link href="/login" className="font-semibold text-sky-500">
+          Login
+        </Link>
+        .
+      </span>
     </form>
   );
 }
