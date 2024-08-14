@@ -1,7 +1,13 @@
 // Components.
+import Navbar from '@/components/navbar/Navbar';
 import UnderDevelopmentPage from '@/components/UnderDevelopmentPage';
 
 // Component.
 export default function Home() {
-  return <UnderDevelopmentPage title="Projectarium is currently under development." />;
+  return (
+    <>
+      <Navbar />
+      <UnderDevelopmentPage title="Projectarium is currently under development." />
+    </>
+  );
 }
