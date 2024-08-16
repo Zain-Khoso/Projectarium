@@ -2,7 +2,6 @@
 
 // Lib Imports.
 import { signIn } from 'next-auth/react';
-import router from 'next/router';
 import { useCallback } from 'react';
 import toast from 'react-hot-toast';
 
@@ -15,15 +14,13 @@ import { Button } from '@/components/Button';
 
 // Component.
 export default function SocialLogins() {
-  const login = useCallback((provider: 'google' | 'github') => {
-    signIn(provider).then((callback) => {
-      if (callback?.ok) {
-        toast.success('Logged in');
-        router.push('/');
-      }
-
-      if (callback?.error) toast.error(callback.error);
-    });
+  const login = useCallback(async (provider: 'google' | 'github') => {
+    try {
+      await signIn(provider, { callbackUrl: '/' });
+      toast.success('Logged in.');
+    } catch {
+      toast.error('Something went wrong.');
+    }
   }, []);
 
   return (
