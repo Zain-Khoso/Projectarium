@@ -1,8 +1,12 @@
+// Lib Imports.
+import { Suspense } from 'react';
+
 // Components
 import Container from '../Container';
 import Branding from './Branding';
 import Search from './Search';
 import UserMenu from './UserMenu';
+import UserProfileTabs from './UserProfileTabs';
 
 // Types.
 import { User } from '@prisma/client';
@@ -28,6 +32,10 @@ export default function Navbar({ currentUser }: Props) {
           </div>
         </Container>
       </div>
+
+      <Suspense>
+        <UserProfileTabs currentUser={currentUser} />
+      </Suspense>
     </nav>
   );
 }
