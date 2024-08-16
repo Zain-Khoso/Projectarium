@@ -25,7 +25,12 @@ export default function SocialLogins() {
 
   return (
     <div className="w-full flex flex-col gap-2">
-      <Button outline label="Continue with Google" icon={FcGoogle} onClick={() => {}} />
+      <Button
+        outline
+        label="Continue with Google"
+        icon={FcGoogle}
+        onClick={() => login('google')}
+      />
       <Button
         outline
         label="Continue with Github"
