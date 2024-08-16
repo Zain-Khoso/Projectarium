@@ -5,12 +5,12 @@ import { useState } from 'react';
 import { signOut } from 'next-auth/react';
 
 // Icons.
-import { FaUser } from 'react-icons/fa';
 import { RiLoginCircleFill, RiLogoutCircleFill } from 'react-icons/ri';
 import { FaUserPlus } from 'react-icons/fa';
 
 // Components.
 import MenuItem from './MenuItem';
+import Avatar from '../Avatar';
 
 // Types.
 import { User } from '@prisma/client';
@@ -27,9 +27,9 @@ export default function UserMenu({ currentUser }: Props) {
       <button
         type="button"
         onClick={() => setIsOpen((value) => !value)}
-        className="w-10 h-10 border-[1px] border-neutral-200 rounded-full cursor-pointer hover:shadow-md overflow-hidden"
+        className="w-fit h-fit border-[1px] border-neutral-200 rounded-full cursor-pointer hover:shadow-md overflow-hidden"
       >
-        <FaUser className="w-full h-full scale-90 translate-y-1 fill-neutral-400" />
+        <Avatar src={currentUser?.image} />
       </button>
 
       {isOpen && (
