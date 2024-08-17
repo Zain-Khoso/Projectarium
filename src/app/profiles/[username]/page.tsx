@@ -42,12 +42,16 @@ export async function generateMetadata({ params: { username } }: Props): Promise
 }
 
 // Component.
-export default async function ProfilePage() {
+export default async function ProfilePage({ params: { username } }: Props) {
   const currentUser = await getCurrentUser();
+  let profileUser;
+
+  if (currentUser?.username === username) profileUser = currentUser;
+  else profileUser = await getUserByUsername(username);
 
   return (
     <>
-      <Navbar currentUser={currentUser} />
+      <Navbar currentUser={currentUser} profileUser={profileUser} />
       <UnderDevelopmentPage title="The user section is currently under development." />
     </>
   );

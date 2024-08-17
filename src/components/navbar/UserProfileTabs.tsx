@@ -8,6 +8,7 @@ import { GoBook } from 'react-icons/go';
 import { RiGitRepositoryFill } from 'react-icons/ri';
 import { GrDiamond } from 'react-icons/gr';
 import { FiGitMerge } from 'react-icons/fi';
+import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 
 // Components.
 import Container from '../Container';
@@ -17,10 +18,11 @@ import UserProfileTab from '../UserProfileTab';
 import { User } from '@prisma/client';
 type Props = {
   currentUser: User | null;
+  profileUser?: User | null;
 };
 
 // Component.
-export default function UserProfileTabs({ currentUser }: Props) {
+export default function UserProfileTabs({ currentUser, profileUser }: Props) {
   const params = useSearchParams();
   const pathname = usePathname();
 
@@ -31,28 +33,37 @@ export default function UserProfileTabs({ currentUser }: Props) {
   return (
     <Container>
       <div className="pt-2 flex flex-row items-center justify-start gap-8 overflow-x-auto">
-        <UserProfileTab icon={GoBook} label="Overview" currentUser={currentUser} selected={!tab} />
+        <UserProfileTab icon={GoBook} label="Overview" profileUser={profileUser} selected={!tab} />
 
         <UserProfileTab
           icon={RiGitRepositoryFill}
           label="Projects"
-          currentUser={currentUser}
+          profileUser={profileUser}
           selected={tab === 'projects'}
         />
 
         <UserProfileTab
           icon={GrDiamond}
           label="Endorsements"
-          currentUser={currentUser}
+          profileUser={profileUser}
           selected={tab === 'endorsements'}
         />
 
         <UserProfileTab
           icon={FiGitMerge}
           label="Contributions"
-          currentUser={currentUser}
+          profileUser={profileUser}
           selected={tab === 'contributions'}
         />
+
+        {currentUser?.username === profileUser?.username && (
+          <UserProfileTab
+            icon={MdFavorite}
+            label="Favorites"
+            profileUser={profileUser}
+            selected={tab === 'favorites'}
+          />
+        )}
       </div>
     </Container>
   );

@@ -12,10 +12,11 @@ import UserProfileTabs from './UserProfileTabs';
 import { User } from '@prisma/client';
 type Props = {
   currentUser: User | null;
+  profileUser?: User | null;
 };
 
 // Component.
-export default function Navbar({ currentUser }: Props) {
+export default function Navbar({ currentUser, profileUser }: Props) {
   return (
     <nav className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -34,7 +35,7 @@ export default function Navbar({ currentUser }: Props) {
       </div>
 
       <Suspense>
-        <UserProfileTabs currentUser={currentUser} />
+        <UserProfileTabs currentUser={currentUser} profileUser={profileUser} />
       </Suspense>
     </nav>
   );

@@ -12,11 +12,11 @@ type Props = {
   label: string;
   icon: IconType;
   selected?: boolean;
-  currentUser: User | null;
+  profileUser?: User | null;
 };
 
 // Component.
-export default function UserProfileTab({ label, icon: Icon, selected, currentUser }: Props) {
+export default function UserProfileTab({ label, icon: Icon, selected, profileUser }: Props) {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -33,12 +33,12 @@ export default function UserProfileTab({ label, icon: Icon, selected, currentUse
     if (label.toLowerCase() === 'overview') delete updatedQuery.tab;
 
     const url = qs.stringifyUrl(
-      { url: `/profiles/${currentUser?.username}`, query: updatedQuery },
+      { url: `/profiles/${profileUser?.username}`, query: updatedQuery },
       { skipNull: true }
     );
 
     router.push(url);
-  }, [label, params, router, currentUser?.username]);
+  }, [label, params, router, profileUser?.username]);
 
   return (
     <div
