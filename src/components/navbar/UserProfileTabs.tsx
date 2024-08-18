@@ -28,43 +28,49 @@ export default function UserProfileTabs({ currentUser, profileUser }: Props) {
 
   const tab = params.get('tab');
 
-  if (!pathname.startsWith('/profiles')) return <></>;
-
-  return (
-    <Container>
-      <div className="pt-2 flex flex-row items-center justify-start gap-8 overflow-x-auto">
-        <UserProfileTab icon={GoBook} label="Overview" profileUser={profileUser} selected={!tab} />
-
-        <UserProfileTab
-          icon={RiGitRepositoryFill}
-          label="Projects"
-          profileUser={profileUser}
-          selected={tab === 'projects'}
-        />
-
-        <UserProfileTab
-          icon={GrDiamond}
-          label="Endorsements"
-          profileUser={profileUser}
-          selected={tab === 'endorsements'}
-        />
-
-        <UserProfileTab
-          icon={FiGitMerge}
-          label="Contributions"
-          profileUser={profileUser}
-          selected={tab === 'contributions'}
-        />
-
-        {currentUser?.username === profileUser?.username && (
+  if (pathname.startsWith('/profiles'))
+    return (
+      <Container>
+        <div className="pt-2 flex flex-row items-center justify-start gap-8 overflow-x-auto">
           <UserProfileTab
-            icon={MdFavorite}
-            label="Favorites"
+            icon={GoBook}
+            label="Overview"
             profileUser={profileUser}
-            selected={tab === 'favorites'}
+            selected={!tab}
           />
-        )}
-      </div>
-    </Container>
-  );
+
+          <UserProfileTab
+            icon={RiGitRepositoryFill}
+            label="Projects"
+            profileUser={profileUser}
+            selected={tab === 'projects'}
+          />
+
+          <UserProfileTab
+            icon={GrDiamond}
+            label="Endorsements"
+            profileUser={profileUser}
+            selected={tab === 'endorsements'}
+          />
+
+          <UserProfileTab
+            icon={FiGitMerge}
+            label="Contributions"
+            profileUser={profileUser}
+            selected={tab === 'contributions'}
+          />
+
+          {currentUser?.username === profileUser?.username && (
+            <UserProfileTab
+              icon={MdFavorite}
+              label="Favorites"
+              profileUser={profileUser}
+              selected={tab === 'favorites'}
+            />
+          )}
+        </div>
+      </Container>
+    );
+
+  return <></>;
 }
