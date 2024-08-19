@@ -6,7 +6,7 @@ import Container from '../Container';
 import Branding from './Branding';
 import Search from './Search';
 import UserMenu from './UserMenu';
-import UserProfileTabs from './UserProfileTabs';
+import SubnavTabs from './SubnavTabs';
 
 // Types.
 import { User } from '@prisma/client';
@@ -35,7 +35,7 @@ export default function Navbar({ currentUser, profileUser }: Props) {
       </div>
 
       <Suspense>
-        <UserProfileTabs currentUser={currentUser} profileUser={profileUser} />
+        <SubnavTabs currentUser={currentUser} profileUser={profileUser} />
       </Suspense>
     </nav>
   );

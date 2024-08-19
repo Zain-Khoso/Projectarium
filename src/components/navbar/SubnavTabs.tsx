@@ -8,11 +8,11 @@ import { GoBook } from 'react-icons/go';
 import { RiGitRepositoryFill } from 'react-icons/ri';
 import { GrDiamond } from 'react-icons/gr';
 import { FiGitMerge } from 'react-icons/fi';
-import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
+import { MdFavorite } from 'react-icons/md';
 
 // Components.
 import Container from '../Container';
-import UserProfileTab from '../UserProfileTab';
+import UserProfileTab from './UserProfileTab';
 
 // Types.
 import { User } from '@prisma/client';
@@ -22,7 +22,7 @@ type Props = {
 };
 
 // Component.
-export default function UserProfileTabs({ currentUser, profileUser }: Props) {
+export default function SubnavTabs({ currentUser, profileUser }: Props) {
   const params = useSearchParams();
   const pathname = usePathname();
 
