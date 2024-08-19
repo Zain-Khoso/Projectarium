@@ -7,7 +7,8 @@ import getUserByUsername from '@/actions/getUserByUsername';
 
 // Components.
 import Navbar from '@/components/navbar/Navbar';
-import UnderDevelopmentPage from '@/components/UnderDevelopmentPage';
+import Container from '@/components/Container';
+import UserContent from './UserContent';
 
 // Types.
 type Props = {
@@ -52,7 +53,14 @@ export default async function ProfilePage({ params: { username } }: Props) {
   return (
     <>
       <Navbar currentUser={currentUser} profileUser={profileUser} />
-      <UnderDevelopmentPage title="The user section is currently under development." />
+
+      <Container>
+        <main className="min-h-screen flex flex-col md:flex-row gap-8 pt-40 lg:pt-48 pb-8">
+          <UserContent currentUser={currentUser} profileUser={profileUser} />
+
+          <section className="flex-1"></section>
+        </main>
+      </Container>
     </>
   );
 }

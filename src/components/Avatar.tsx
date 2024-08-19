@@ -6,15 +6,16 @@ import Image from 'next/image';
 // Types.
 type Props = {
   src: string | null | undefined;
+  size?: number;
 };
 
-export default function Avatar({ src }: Props) {
+export default function Avatar({ src, size = 35 }: Props) {
   return (
     <Image
       alt="Avatar"
       src={src || '/images/user-placeholder.png'}
-      width={35}
-      height={35}
+      width={size}
+      height={size}
       className="rounded-full"
     />
   );
