@@ -6,12 +6,12 @@ import { useSearchParams } from 'next/navigation';
 // Components.
 import FeatureSection from './FeatureSection';
 import ProjectsTab from './ProjectsTab';
-
-// Types.
-import { User } from '@prisma/client';
 import EndorsementsTab from './EndorsementsTab';
 import ContributionsTab from './ContributionsTab';
 import FavoritesTab from './FavoritesTab';
+
+// Types.
+import { User } from '@prisma/client';
 type Props = {
   currentUser: User | null;
   profileUser: User | null;

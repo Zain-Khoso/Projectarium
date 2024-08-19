@@ -1,5 +1,6 @@
 // Lib Imports.
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 // Actions.
 import getCurrentUser from '@/actions/getCurrentUser';
@@ -10,7 +11,6 @@ import Navbar from '@/components/navbar/Navbar';
 import Container from '@/components/Container';
 import UserContent from './UserContent';
 import DynamicTabs from './DynamicTabs';
-import { Suspense } from 'react';
 
 // Types.
 type Props = {
