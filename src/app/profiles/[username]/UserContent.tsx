@@ -25,7 +25,7 @@ export default function UserContent({ currentUser, profileUser }: Props) {
       : profileUser?.username;
 
   return (
-    <section className="flex flex-col gap-8 md:w-[300px] md:border-r-2 border-neutral-200 pr-4">
+    <section className="flex flex-col gap-8 md:w-[300px] border-b-2 md:border-b-0 md:border-r-2 border-neutral-200 pb-8 md:pb-0 md:pr-8">
       {/* First Section */}
       <section className="flex flex-row items-center gap-4">
         <Avatar src={profileUser?.image} size={60} />

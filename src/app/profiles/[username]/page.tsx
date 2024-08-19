@@ -9,6 +9,8 @@ import getUserByUsername from '@/actions/getUserByUsername';
 import Navbar from '@/components/navbar/Navbar';
 import Container from '@/components/Container';
 import UserContent from './UserContent';
+import DynamicTabs from './DynamicTabs';
+import { Suspense } from 'react';
 
 // Types.
 type Props = {
@@ -58,7 +60,9 @@ export default async function ProfilePage({ params: { username } }: Props) {
         <main className="min-h-screen flex flex-col md:flex-row gap-8 pt-40 lg:pt-48 pb-8">
           <UserContent currentUser={currentUser} profileUser={profileUser} />
 
-          <section className="flex-1"></section>
+          <Suspense>
+            <DynamicTabs currentUser={currentUser} profileUser={profileUser} />
+          </Suspense>
         </main>
       </Container>
     </>
