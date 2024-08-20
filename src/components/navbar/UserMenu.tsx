@@ -37,16 +37,10 @@ export default function UserMenu({ currentUser }: Props) {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItem href={`/profiles/${currentUser.username}`} label="Profile" />
+                <MenuItem href={`/${currentUser.username}`} label="Profile" />
                 <MenuItem href="/messages" label="Messages" />
-                <MenuItem
-                  href={`/profiles/${currentUser.username}?tab=projects`}
-                  label="Projects"
-                />
-                <MenuItem
-                  href={`/profiles/${currentUser.username}?tab=favorites`}
-                  label="Favorites"
-                />
+                <MenuItem href={`/${currentUser.username}?tab=projects`} label="Projects" />
+                <MenuItem href={`/${currentUser.username}?tab=favorites`} label="Favorites" />
 
                 <hr />
 
