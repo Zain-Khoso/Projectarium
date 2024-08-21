@@ -7,17 +7,27 @@ type Props = {
   label: string;
   value: string;
   onChange: (value: string) => void;
+  rows?: number;
   disabled?: boolean;
   required?: boolean;
   errors: FieldErrors;
 };
 
 // Component.
-export default function Input({ id, label, value, onChange, disabled, required, errors }: Props) {
+export default function Textarea({
+  id,
+  label,
+  value,
+  onChange,
+  rows,
+  disabled,
+  required,
+  errors,
+}: Props) {
   const handleChange: React.ReactEventHandler = function (event) {
     event.preventDefault();
 
-    onChange((event.target as HTMLInputElement).value);
+    onChange((event.target as HTMLTextAreaElement).value);
   };
 
   return (
@@ -29,14 +39,15 @@ export default function Input({ id, label, value, onChange, disabled, required, 
         ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
         `}
     >
-      <input
+      <textarea
         id={id}
-        type="text"
         placeholder=" "
+        rows={rows ? rows : 4}
         value={value}
         onChange={handleChange}
         required={required}
-        className={`w-full peer text-lg outline-none ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+        className={`w-full peer text-lg outline-none resize-none 
+          ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
       />
 
       <label
@@ -46,13 +57,13 @@ export default function Input({ id, label, value, onChange, disabled, required, 
           bg-white 
           font-semibold
           px-1 
-          rounded-lg 
-          top-1/2
+          rounded-sm 
+          top-6
           left-[12px]
-          -translate-y-[170%] 
+          -translate-y-[150%] 
           peer-placeholder-shown:text-neutral-400
           peer-placeholder-shown:-translate-y-1/2 
-          peer-focus:-translate-y-[170%] 
+          peer-focus:-translate-y-[150%] 
           peer-focus:text-neutral-800
           transition
           ${errors[id] && 'text-rose-500 peer-placeholder-shown:text-rose-500'}
