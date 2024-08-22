@@ -1,7 +1,8 @@
 'use client';
 
 // Lib Imports.
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState, useCallback } from 'react';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -9,17 +10,23 @@ import toast from 'react-hot-toast';
 // Icons.
 import { FaArrowCircleLeft, FaArrowCircleRight, FaCheckCircle } from 'react-icons/fa';
 
+// Utils.
+import { isValidURL, isValidUsername } from '@/libs/validations';
+import { formatURL } from '@/libs/formatters';
+
 // Components.
 import Modal from './base';
 import Heading from '../Heading';
 import { Input, Textarea, ImageUpload } from '../Input';
 import CountrySelect from '../Input/CountrySelect';
-import { isValidUsername } from '@/libs/validations';
 
 // Types.
+import { User } from '@prisma/client';
+import useCountries from '@/hooks/useCountries';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  currentUser: User | null;
 };
 enum STEPS {
   USERNAME_IMAGE = 0,
@@ -28,23 +35,28 @@ enum STEPS {
 }
 
 // Component.
-export default function EditProfileModal({ isOpen, onClose }: Props) {
+export default function EditProfileModal({ isOpen, onClose, currentUser }: Props) {
+  const router = useRouter();
+
+  const { getByValue } = useCountries();
+
   const {
     watch,
     handleSubmit,
     setError,
+    clearErrors,
     getValues,
     setValue,
     reset,
     formState: { errors, isLoading, isSubmitting },
   } = useForm<FieldValues>({
     defaultValues: {
-      username: '',
-      image: '',
-      name: '',
-      bio: '',
-      location: '',
-      website: '',
+      username: currentUser?.username || '',
+      image: currentUser?.image || '',
+      name: currentUser?.name || '',
+      bio: currentUser?.bio || '',
+      location: currentUser?.locationValue ? getByValue(currentUser.locationValue) : '',
+      website: currentUser?.website || '',
     },
   });
 
@@ -59,13 +71,89 @@ export default function EditProfileModal({ isOpen, onClose }: Props) {
   const onNext = () => setStep((value) => value + 1);
   const onBack = () => setStep((value) => value - 1);
 
-  const onSubmit: SubmitHandler<FieldValues> = async function (data) {
-    if (step !== STEPS.LOCATION_WEBSITE) return onNext();
+  const onUsernameChange = useCallback(
+    (value: string) => {
+      setValue('username', value);
 
-    console.log(data);
-    reset();
-    setStep(STEPS.USERNAME_IMAGE);
-    onClose();
+      clearErrors('username');
+    },
+    [setValue, clearErrors]
+  );
+
+  const onWebsiteChange = useCallback(
+    (value: string) => {
+      setValue('website', value);
+
+      clearErrors('website');
+    },
+    [setValue, clearErrors]
+  );
+
+  const onSubmit: SubmitHandler<FieldValues> = async function (data) {
+    const { username, image, name, bio, location, website } = data;
+
+    if (step === STEPS.USERNAME_IMAGE) {
+      if (username.length === 0) return setError('username', { message: 'Username is required.' });
+
+      if (username.length > 14 || !isValidUsername(username)) {
+        toast.error('14 alpha-numeric characters atmost.');
+
+        return setError('username', { message: '14 alpha-numeric characters atmost.' });
+      }
+
+      try {
+        const response = await axios.post('/api/users/username-already-exists', {
+          username,
+          currentUserId: currentUser?.id,
+        });
+
+        if (!response.data.isClear) {
+          toast.error('Username already taken.');
+
+          return setError('username', { message: 'Username takenalready .' });
+        }
+      } catch {
+        toast.error('Something went wrong.');
+
+        return setError('username', { message: 'Something went wrong.' });
+      }
+
+      return onNext();
+    }
+
+    if (step === STEPS.NAME_BIO) return onNext();
+
+    if (step === STEPS.LOCATION_WEBSITE) {
+      if (website !== '' && !isValidURL(website)) {
+        toast.error('Invalid URL.');
+
+        return setError('website', { message: 'Invalid URL.' });
+      }
+
+      try {
+        await axios.post('/api/users', {
+          currentUserId: currentUser?.id,
+          username,
+          image,
+          name,
+          bio,
+          locationValue: location.value || '',
+          website: formatURL(website),
+        });
+
+        toast.success('Profile updated.');
+        reset();
+        setStep(STEPS.USERNAME_IMAGE);
+        onClose();
+        router.push(`/${username}`);
+      } catch {
+        toast.error('Something went wrong.');
+        reset();
+        setStep(STEPS.USERNAME_IMAGE);
+        onClose();
+        router.refresh();
+      }
+    }
   };
 
   let bodyContent = (
@@ -80,7 +168,7 @@ export default function EditProfileModal({ isOpen, onClose }: Props) {
           id="username"
           label="Username"
           value={username}
-          onChange={(value) => setValue('username', value)}
+          onChange={onUsernameChange}
           errors={errors}
           required
         />
@@ -135,7 +223,7 @@ export default function EditProfileModal({ isOpen, onClose }: Props) {
             id="website"
             label="Website"
             value={website}
-            onChange={(value) => setValue('website', value)}
+            onChange={onWebsiteChange}
             errors={errors}
           />
 

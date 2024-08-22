@@ -61,7 +61,9 @@ export default function UserContent({ currentUser, profileUser }: Props) {
         ))}
 
       {/* Final Section */}
-      {currentUser?.username === profileUser?.username && <EditProfileButton />}
+      {currentUser?.username === profileUser?.username && (
+        <EditProfileButton currentUser={currentUser} />
+      )}
     </section>
   );
 }
