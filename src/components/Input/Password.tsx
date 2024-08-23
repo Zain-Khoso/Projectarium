@@ -7,19 +7,34 @@ import { useState } from 'react';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 // Types.
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { FieldErrors } from 'react-hook-form';
 type Props = {
   id: string;
   label: string;
+  value: string;
+  onChange: (value: string) => void;
   disabled?: boolean;
   required?: boolean;
-  register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
 };
 
 // Component.
-export default function Password({ id, label, disabled, required, register, errors }: Props) {
+export default function Password({
+  id,
+  label,
+  value,
+  onChange,
+  disabled,
+  required,
+  errors,
+}: Props) {
   const [show, setShow] = useState(false);
+
+  const handleChange: React.ReactEventHandler = function (event) {
+    event.preventDefault();
+
+    onChange((event.target as HTMLInputElement).value);
+  };
 
   return (
     <label
@@ -33,8 +48,10 @@ export default function Password({ id, label, disabled, required, register, erro
       <input
         id={id}
         type={show ? 'text' : 'password'}
-        {...register(id, { required, disabled })}
         placeholder=" "
+        value={value}
+        onChange={handleChange}
+        required={required}
         className={`flex-1 peer text-lg outline-none ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
       />
 

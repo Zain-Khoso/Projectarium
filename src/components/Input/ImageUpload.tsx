@@ -38,7 +38,7 @@ export default function ImageUpload({ label, value, onChange }: Props) {
           >
             <TbPhotoPlus size={50} />
 
-            <div className="font-semibold text-lg">{label}</div>
+            <div className="font-semibold text-lg text-pretty text-center">{label}</div>
 
             {value && (
               <div className="absolute inset-0 w-full h-full">

@@ -3,28 +3,32 @@
 // Lib Imports.
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useCallback } from 'react';
 import { signIn } from 'next-auth/react';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-// Local Imports.
+// Icons.
+import { RiLoginCircleFill } from 'react-icons/ri';
+
+// Utils.
 import { isValidEmail } from '@/libs/validations';
 
 // Components.
 import { Button } from '@/components/Button';
 import { Input, Password } from '@/components/Input';
 
-// Icons.
-import { RiLoginCircleFill } from 'react-icons/ri';
-
 // Component.
 export default function LoginForm() {
   const router = useRouter();
 
   const {
-    register,
+    watch,
     handleSubmit,
     setError,
+    clearErrors,
+    getValues,
+    setValue,
     reset,
     formState: { errors, isLoading, isSubmitting },
   } = useForm<FieldValues>({
@@ -33,6 +37,9 @@ export default function LoginForm() {
       password: '',
     },
   });
+
+  const email = watch('email');
+  const password = watch('password');
 
   const onSubmit: SubmitHandler<FieldValues> = function (data) {
     const { email, password } = data;
@@ -64,12 +71,22 @@ export default function LoginForm() {
     });
   };
 
+  const onInputChange = useCallback(
+    (id: string, value: string) => {
+      setValue(id, value);
+
+      clearErrors(id);
+    },
+    [setValue, clearErrors]
+  );
+
   return (
     <form className="w-full flex flex-col items-center gap-4">
       <Input
         id="email"
         label="Email"
-        register={register}
+        value={email}
+        onChange={(value) => onInputChange('email', value)}
         errors={errors}
         required
         disabled={isLoading || isSubmitting}
@@ -78,7 +95,8 @@ export default function LoginForm() {
       <Password
         id="password"
         label="Password"
-        register={register}
+        value={password}
+        onChange={(value) => onInputChange('password', value)}
         errors={errors}
         required
         disabled={isLoading || isSubmitting}

@@ -3,12 +3,13 @@
 // Lib Imports.
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useCallback } from 'react';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
-// Local Imports.
+// Utils.
 import { isValidEmail, isValidUsername } from '@/libs/validations';
 
 // Components.
@@ -23,9 +24,11 @@ export default function SignUpForm() {
   const router = useRouter();
 
   const {
-    register,
+    watch,
     handleSubmit,
     setError,
+    clearErrors,
+    setValue,
     reset,
     formState: { errors, isLoading, isSubmitting },
   } = useForm<FieldValues>({
@@ -36,35 +39,34 @@ export default function SignUpForm() {
     },
   });
 
+  const email = watch('email');
+  const username = watch('username');
+  const password = watch('password');
+
   const onSubmit: SubmitHandler<FieldValues> = function (data) {
     const { email, username, password } = data;
 
     if (!email) {
       setError('email', { message: 'Email is required.' });
-      toast.error('Email is required.');
-      return;
+      return toast.error('Email is required.');
     }
     if (!isValidEmail(email)) {
       setError('email', { message: 'Invalid email.' });
-      toast.error('Invalid email.');
-      return;
+      return toast.error('Invalid email.');
     }
 
-    if (username.length < 4) {
+    if (!username) {
       setError('username', { message: 'Username is required.' });
-      toast.error('Username requires atleast 4 characters.');
-      return;
+      return toast.error('Username is required.');
     }
     if (!isValidUsername(username)) {
       setError('username', { message: 'Invalid username.' });
-      toast.error('Invalid username.');
-      return;
+      return toast.error('Invalid username.');
     }
 
     if (password.length < 8) {
       setError('password', { message: 'Password is required.' });
-      toast.error('Password requires atleast 8 characters.');
-      return;
+      return toast.error('Password requires atleast 8 characters.');
     }
 
     axios
@@ -87,12 +89,22 @@ export default function SignUpForm() {
       .catch(() => toast.error('Signup Failed.'));
   };
 
+  const onInputChange = useCallback(
+    (id: string, value: string) => {
+      setValue(id, value);
+
+      clearErrors(id);
+    },
+    [setValue, clearErrors]
+  );
+
   return (
     <form className="w-full flex flex-col items-center gap-4">
       <Input
         id="email"
         label="Email"
-        register={register}
+        value={email}
+        onChange={(value) => onInputChange('email', value)}
         errors={errors}
         required
         disabled={isLoading || isSubmitting}
@@ -101,7 +113,8 @@ export default function SignUpForm() {
       <Input
         id="username"
         label="Username"
-        register={register}
+        value={username}
+        onChange={(value) => onInputChange('username', value)}
         errors={errors}
         required
         disabled={isLoading || isSubmitting}
@@ -110,7 +123,8 @@ export default function SignUpForm() {
       <Password
         id="password"
         label="Password"
-        register={register}
+        value={password}
+        onChange={(value) => onInputChange('password', value)}
         errors={errors}
         required
         disabled={isLoading || isSubmitting}
