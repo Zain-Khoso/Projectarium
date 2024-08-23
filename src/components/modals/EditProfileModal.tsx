@@ -2,7 +2,7 @@
 
 // Lib Imports.
 import { useRouter } from 'next/navigation';
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -67,6 +67,15 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
   const location = watch('location');
 
   const [step, setStep] = useState(STEPS.USERNAME_IMAGE);
+
+  useEffect(() => {
+    setValue('username', currentUser?.username || '');
+    setValue('image', currentUser?.image || '');
+    setValue('name', currentUser?.name || '');
+    setValue('bio', currentUser?.bio || '');
+    setValue('location', currentUser?.locationValue ? getByValue(currentUser.locationValue) : '');
+    setValue('website', currentUser?.website || '');
+  }, [isOpen]);
 
   const onNext = () => setStep((value) => value + 1);
   const onBack = () => setStep((value) => value - 1);
@@ -157,6 +166,12 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
     }
   };
 
+  const handleClose = function () {
+    reset();
+    setStep(STEPS.USERNAME_IMAGE);
+    onClose();
+  };
+
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
@@ -237,7 +252,7 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
     <Modal
       title="Edit your profile"
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={handleClose}
       onSubmit={handleSubmit(onSubmit)}
       secondaryAction={onBack}
       actionLabel={step === STEPS.LOCATION_WEBSITE ? 'Confirm' : 'Next'}
