@@ -12,6 +12,7 @@ import EditProfileButton from './EditProfileButton';
 
 // Types.
 import { User } from '@prisma/client';
+import LocationText from './LocationText';
 type Props = {
   currentUser: User | null;
   profileUser: User | null;
@@ -39,26 +40,25 @@ export default function UserContent({ currentUser, profileUser }: Props) {
       )}
 
       {/* Third Section */}
-      {profileUser?.locationValue ||
-        (profileUser?.website && (
-          <section className="flex flex-col gap-2">
-            {profileUser?.locationValue && (
-              <div className="flex flex-row gap-2 items-center">
-                <IoLocationSharp className="fill-8eutral-500" />
+      {(profileUser?.locationValue || profileUser?.website) && (
+        <section className="flex flex-col gap-2">
+          {profileUser?.locationValue && (
+            <div className="flex flex-row gap-2 items-center">
+              <IoLocationSharp className="fill-8eutral-500" />
 
-                <span className="font-normal text-neutral-800">LOCATION HERE</span>
-              </div>
-            )}
+              <LocationText locationValue={profileUser.locationValue} />
+            </div>
+          )}
 
-            {profileUser?.website && (
-              <Link href={profileUser.website} className="flex flex-row gap-2 items-center">
-                <FaLink className="fill-neutral-800" />
+          {profileUser?.website && (
+            <Link href={profileUser.website} className="flex flex-row gap-2 items-center">
+              <FaLink className="fill-neutral-800" />
 
-                <span className="font-normal text-neutral-800">Website</span>
-              </Link>
-            )}
-          </section>
-        ))}
+              <span className="font-normal text-neutral-800">Portfolio</span>
+            </Link>
+          )}
+        </section>
+      )}
 
       {/* Final Section */}
       {currentUser?.username === profileUser?.username && (
