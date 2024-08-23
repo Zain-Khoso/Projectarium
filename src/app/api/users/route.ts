@@ -7,9 +7,9 @@ export async function POST(request: Request) {
     const { currentUserId, username, image, name, bio, locationValue, website } =
       await request.json();
 
-    const usernameExists = await prisma.user.findUnique({ where: { username } });
+    const userExists = await prisma.user.findUnique({ where: { username } });
 
-    if (usernameExists) return NextResponse.error();
+    if (userExists && userExists.id !== currentUserId) throw new Error('Username exists.');
 
     const updatedUser: Record<string, any> = {};
 

@@ -131,7 +131,7 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
       }
 
       try {
-        await axios.post('/api/users', {
+        const response = await axios.post('/api/users', {
           currentUserId: currentUser?.id,
           username,
           image,
@@ -145,7 +145,8 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
         reset();
         setStep(STEPS.USERNAME_IMAGE);
         onClose();
-        router.push(`/${username}`);
+        if (response.data.username === currentUser?.username) router.refresh();
+        else router.push(`/${username}`);
       } catch {
         toast.error('Something went wrong.');
         reset();
