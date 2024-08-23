@@ -57,7 +57,7 @@ export default async function ProfilePage({ params: { username } }: Props) {
       <Navbar currentUser={currentUser} profileUser={profileUser} />
 
       <Container>
-        <main className="min-h-screen flex flex-col md:flex-row gap-8 pt-40 lg:pt-48 pb-8">
+        <main className="min-h-screen flex flex-col md:flex-row gap-8 pt-32 lg:pt-36 pb-8">
           <UserContent currentUser={currentUser} profileUser={profileUser} />
 
           <Suspense>
