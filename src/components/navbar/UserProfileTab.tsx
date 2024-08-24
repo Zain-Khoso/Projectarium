@@ -33,7 +33,7 @@ export default function UserProfileTab({ label, icon: Icon, selected, profileUse
     if (label.toLowerCase() === 'overview') delete updatedQuery.tab;
 
     const url = qs.stringifyUrl(
-      { url: `/profiles/${profileUser?.username}`, query: updatedQuery },
+      { url: `/${profileUser?.username}`, query: updatedQuery },
       { skipNull: true }
     );
 
