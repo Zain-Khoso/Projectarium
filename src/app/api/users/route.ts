@@ -4,8 +4,12 @@ import prisma from '@/libs/prismadb';
 
 export async function POST(request: Request) {
   try {
+    const reservedRoutes = ['api', 'login', 'signup', 'messages'];
+
     const { currentUserId, username, image, name, bio, locationValue, website } =
       await request.json();
+
+    if (reservedRoutes.includes(username)) throw new Error('Username exists.');
 
     const userExists = await prisma.user.findUnique({ where: { username } });
 

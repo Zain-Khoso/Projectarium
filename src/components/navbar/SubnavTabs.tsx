@@ -26,10 +26,11 @@ export default function SubnavTabs({ currentUser, profileUser }: Props) {
   const params = useSearchParams();
   const pathname = usePathname();
 
-  const tab = params.get('tab');
   const isUserProfile = pathname.match(/^\/[^\/]+$/);
 
-  if (!isUserProfile) return null;
+  if (!isUserProfile || pathname === '/messages') return null;
+
+  const tab = params.get('tab');
 
   return (
     <Container>
