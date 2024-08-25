@@ -6,7 +6,6 @@ Projectarium is a social media platform designed for programmers to share their 
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Usage](#usage)
 - [License](#license)
 - [Contact](#contact)
 
@@ -25,16 +24,7 @@ Projectarium is a social media platform designed for programmers to share their 
 - **Frontend**: [Next.js 14](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/)
 - **Backend**: [Next.js 14](https://nextjs.org/), [Prisma](https://www.prisma.io/)
 - **Database**: [MongoDB](https://www.mongodb.com/)
-- **Authentication**: [Next-Auth](https://next-auth.js.org/)
 - **Deployment**: [View the live project](https://projectarium.vercel.app/)
-
-## Usage
-
-1. **Sign Up/Login:** Create an account or log in to access the platform.
-2. **Create a Project:** Share your current projects with the community.
-3. **Collaborate:** Invite others to contribute to your project.
-4. **Feedback:** Receive suggestions and thoughts on your projects through the chat and review pages.
-5. **Explore:** View other users' projects, profiles, and leave your feedback.
 
 ## License
 
