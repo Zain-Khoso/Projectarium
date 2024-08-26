@@ -11,38 +11,61 @@ datasource db {
 
 // Central user model of the app.
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  username String? @unique @default(uuid())
-  email String? @unique
-  emailVerified DateTime?
-  hashedPassword String?
-  name String?
-  image String?
-  bio String?
-  website String?
-  locationValue String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  username        String? @unique @default(uuid())
+  email           String? @unique
+  emailVerified   DateTime?
+  hashedPassword  String?
+  name            String?
+  image           String?
+  bio             String?
+  website         String?
+  locationValue   String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   account Account[]
+  ownedProjects Project[] @relation(name: "Owner")
 }
 
 // Additional user model for OAuth users.
 model Account {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
-  type String
-  provider String
-  providerAccountId String
-  refresh_token String? @db.String
-  access_token String? @db.String
-  expires_at Int?
-  token_type String?
-  scope String?
-  id_token String? @db.String
-  session_state String?
+  id                  String @id @default(auto()) @map("_id") @db.ObjectId
+  userId              String @db.ObjectId
+  type                String
+  provider            String
+  providerAccountId   String
+  refresh_token       String? @db.String
+  access_token        String? @db.String
+  expires_at          Int?
+  token_type          String?
+  scope               String?
+  id_token            String? @db.String
+  session_state       String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+}
+
+model Project {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  title         String @unique
+  coverImage    String?
+  description   String
+  technologies  String[]
+  status        ProjectStatus  @default(IN_DEVELOPMENT)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  ownerId String @db.ObjectId
+  
+  owner User @relation(name: "Owner", fields: [ownerId], references: [id])
+}
+
+// Project status options.
+enum ProjectStatus {
+  IN_DEVELOPMENT
+  COMPLETED
+  ARCHIVED
 }
