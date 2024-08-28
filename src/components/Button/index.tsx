@@ -1,5 +1,2 @@
-// Imports.
-import Button from './Button';
-
 // Module Exports.
-export { Button };
+export { default as Button } from './Button';
