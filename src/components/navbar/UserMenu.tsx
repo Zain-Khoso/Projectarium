@@ -1,10 +1,9 @@
 'use client';
 
 // Lib Imports.
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useState } from 'react';
 import { signOut } from 'next-auth/react';
-import Swal from 'sweetalert2';
 
 // Icons.
 import { RiLoginCircleFill, RiLogoutCircleFill } from 'react-icons/ri';
@@ -22,33 +21,17 @@ type Props = {
 
 // Component.
 export default function UserMenu({ currentUser }: Props) {
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-
-  const onCreateProject = function () {
-    if (currentUser) {
-      router.push(`/${currentUser.username}/new`);
-      return;
-    }
-
-    Swal.fire({
-      title: 'Login Required.',
-      icon: 'info',
-      iconColor: '#0ea5e9',
-      confirmButtonColor: '#0ea5e9',
-    }).then(() => router.push('/login'));
-  };
 
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
-        <button
-          type="button"
-          onClick={onCreateProject}
+        <Link
+          href={currentUser ? `/${currentUser.username}/new` : '/login'}
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer underline underline-offset-4"
         >
           Create Project
-        </button>
+        </Link>
 
         <button
           type="button"
@@ -68,7 +51,7 @@ export default function UserMenu({ currentUser }: Props) {
                 <MenuItem href="/messages" label="Messages" />
                 <MenuItem href={`/${currentUser.username}?tab=projects`} label="Projects" />
                 <MenuItem href={`/${currentUser.username}?tab=favorites`} label="Favorites" />
-                <MenuItem href={false} onClick={onCreateProject} label="Create Project" />
+                <MenuItem href={`/${currentUser.username}/new`} label="Create Project" />
 
                 <hr />
 
