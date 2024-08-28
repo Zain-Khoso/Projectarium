@@ -1,7 +1,7 @@
 'use client';
 
 // Lib Imports.
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 // Icons
 import { GoBook } from 'react-icons/go';
@@ -23,14 +23,18 @@ type Props = {
 
 // Component.
 export default function SubnavTabs({ currentUser, profileUser }: Props) {
+  const router = useRouter();
   const params = useSearchParams();
   const pathname = usePathname();
+
+  const tab = params.get('tab');
+
+  if (currentUser?.username !== profileUser?.username && tab === 'favorites')
+    router.push(`${currentUser?.username}?tab=favorites`);
 
   const isUserProfile = pathname.match(/^\/[^\/]+$/);
 
   if (!isUserProfile || pathname === '/messages') return null;
-
-  const tab = params.get('tab');
 
   return (
     <Container>

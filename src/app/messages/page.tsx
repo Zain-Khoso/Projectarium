@@ -1,4 +1,5 @@
 // Actions.
+import authenticationRequired from '@/actions/authenticationRequired';
 import getCurrentUser from '@/actions/getCurrentUser';
 
 // Components.
@@ -7,6 +8,7 @@ import UnderDevelopmentPage from '@/components/UnderDevelopmentPage';
 
 // Component.
 export default async function MessagesPage() {
+  await authenticationRequired();
   const currentUser = await getCurrentUser();
 
   return (

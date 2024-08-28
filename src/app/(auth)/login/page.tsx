@@ -1,6 +1,9 @@
 // Lib Imports.
 import { Metadata } from 'next';
 
+// Actions.
+import noAuthenticationRequired from '@/actions/noAuthenticationRequired';
+
 // Components.
 import Background from '../Background';
 import Heading from '@/components/Heading';
@@ -23,7 +26,9 @@ export const metadata: Metadata = {
 };
 
 // Page.
-export default function SignupPage() {
+export default async function LoginPage() {
+  await noAuthenticationRequired();
+
   return (
     <>
       <Background />

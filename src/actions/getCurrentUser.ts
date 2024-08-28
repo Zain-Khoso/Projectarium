@@ -1,14 +1,8 @@
-// Lib Imports.
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/libs/nextAuthOptions';
-
 // Local Imports.
 import prisma from '@/libs/prismadb';
 
-// This action gets the current user session on the server.
-export async function getSession() {
-  return await getServerSession(authOptions);
-}
+// Utils.
+import { getSession } from '@/libs/getSession';
 
 // This action is used to get user data on the server.
 export default async function getCurrentUser() {
