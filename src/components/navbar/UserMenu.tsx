@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { signOut } from 'next-auth/react';
 
 // Icons.
-import { RiLoginCircleFill, RiLogoutCircleFill } from 'react-icons/ri';
+import { VscSignOut, VscSignIn } from 'react-icons/vsc';
 import { FaUserPlus } from 'react-icons/fa';
 
 // Components.
@@ -55,16 +55,11 @@ export default function UserMenu({ currentUser }: Props) {
 
                 <hr />
 
-                <MenuItem
-                  href={false}
-                  label="Logout"
-                  icon={RiLogoutCircleFill}
-                  onClick={() => signOut()}
-                />
+                <MenuItem href={false} label="Logout" icon={VscSignOut} onClick={() => signOut()} />
               </>
             ) : (
               <>
-                <MenuItem href="/login" label="Login" icon={RiLoginCircleFill} />
+                <MenuItem href="/login" label="Login" icon={VscSignIn} />
                 <MenuItem href="/signup" label="Sign up" icon={FaUserPlus} />
               </>
             )}
