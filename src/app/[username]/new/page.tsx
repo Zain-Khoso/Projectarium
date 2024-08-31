@@ -37,7 +37,7 @@ export default async function ShareProjectPage() {
       <Navbar currentUser={currentUser} />
 
       <Container>
-        <main className="pt-28">
+        <main className="pt-28 pb-8">
           <Heading
             title="Start Your Next Big Project"
             subtitle="Define your vision, gather your team, and bring your ideas to life."

@@ -51,7 +51,7 @@ model Account {
 model Project {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
   title         String @unique
-  coverImage    String?
+  coverImage    String
   description   String
   technologies  String[]
   status        ProjectStatus  @default(IN_DEVELOPMENT)
