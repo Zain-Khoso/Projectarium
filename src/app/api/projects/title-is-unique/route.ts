@@ -6,16 +6,20 @@ import prisma from '@/libs/prismadb';
 
 // Post Route.
 export async function POST(request: Request) {
+  const reservedRoutes = ['new'];
+
   try {
-    const { title, currentUserId } = await request.json();
+    const { title, ownerId } = await request.json();
 
-    if (!title || !currentUserId) throw new Error('Invalid credentials');
+    if (reservedRoutes.includes(title)) return NextResponse.json({ isClear: false });
 
-    const userExists = await prisma.project.findFirst({
-      where: { ownerId: currentUserId, AND: { title } },
+    if (!title || !ownerId) throw new Error('Invalid credentials');
+
+    const titleExists = await prisma.project.findFirst({
+      where: { ownerId, AND: { title } },
     });
 
-    if (userExists) return NextResponse.json({ isClear: false });
+    if (titleExists) return NextResponse.json({ isClear: false });
 
     return NextResponse.json({ isClear: true });
   } catch {

@@ -1,6 +1,7 @@
 'use client';
 
 // Lib Imports.
+import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -18,12 +19,15 @@ import { TechnologyT } from '@/hooks/useTechnologies';
 // Types.
 import { User } from '@prisma/client';
 import axios from 'axios';
+import { isValidUsername } from '@/libs/validations';
 type Props = {
   currentUser?: User | null;
 };
 
 // Component.
 export default function ShareProjectForm({ currentUser }: Props) {
+  const router = useRouter();
+
   const {
     watch,
     setError,
@@ -59,11 +63,15 @@ export default function ShareProjectForm({ currentUser }: Props) {
       setError('title', { message: 'Title is too long.' });
       toast.error('Title is too long.');
       return;
+    } else if (!isValidUsername(title)) {
+      setError('title', { message: 'Invalid Title.' });
+      toast.error('Invalid Title.');
+      return;
     } else {
       try {
         const response = await axios.post('/api/projects/title-is-unique', {
           title,
-          currentUserId: currentUser?.id,
+          ownerId: currentUser?.id,
         });
 
         if (!response.data.isClear) {
@@ -118,9 +126,18 @@ export default function ShareProjectForm({ currentUser }: Props) {
       coverImage,
       technologies: technologyValues,
       status: statusValue,
+      ownerId: currentUser?.id,
     };
 
-    console.log(newProjectData);
+    try {
+      const response = await axios.post('/api/projects/new', newProjectData);
+      toast.success('Project shared successfully');
+      router.push(`/${currentUser?.username}/${response.data.title}`);
+    } catch {
+      toast.error('Something went wrong.');
+      toast.error('Try again later.');
+      return;
+    }
   };
 
   const handleInputChange = useCallback(
