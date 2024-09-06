@@ -71,7 +71,6 @@ export default function ShareProjectForm({ currentUser }: Props) {
       try {
         const response = await axios.post('/api/projects/title-is-unique', {
           title,
-          ownerId: currentUser?.id,
         });
 
         if (!response.data.isClear) {
@@ -126,7 +125,6 @@ export default function ShareProjectForm({ currentUser }: Props) {
       coverImage,
       technologies: technologyValues,
       status: statusValue,
-      ownerId: currentUser?.id,
     };
 
     try {
