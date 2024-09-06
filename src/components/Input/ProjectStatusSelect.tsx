@@ -5,20 +5,21 @@ import { useState, useEffect, useMemo } from 'react';
 import Select from 'react-select';
 
 // Hooks.
-import { FieldErrors, FieldValues, UseFormSetValue } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormClearErrors, UseFormSetValue } from 'react-hook-form';
 
 // Types.
 type Props = {
   value?: ProjectStatus;
   onChange: UseFormSetValue<FieldValues>;
   errors: FieldErrors;
+  clearErrors: UseFormClearErrors<FieldValues>;
 };
 type ProjectStatus = {
   label: string;
   value: string;
 };
 
-export default function ProjectStatusSelect({ value, onChange, errors }: Props) {
+export default function ProjectStatusSelect({ value, onChange, errors, clearErrors }: Props) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => setIsMounted(true), []);
@@ -33,6 +34,11 @@ export default function ProjectStatusSelect({ value, onChange, errors }: Props) 
     []
   );
 
+  const handleChange = function (value: ProjectStatus) {
+    onChange('status', value);
+    clearErrors('status');
+  };
+
   return (
     <div className="w-full">
       {isMounted && (
@@ -42,7 +48,7 @@ export default function ProjectStatusSelect({ value, onChange, errors }: Props) 
           isClearable
           options={statuses}
           value={value}
-          onChange={(value: ProjectStatus) => onChange('status', value)}
+          onChange={handleChange}
           formatOptionLabel={(option: any) => (
             <div className="flex flex-row items-center gap-3">{option.label}</div>
           )}
@@ -51,6 +57,7 @@ export default function ProjectStatusSelect({ value, onChange, errors }: Props) 
               `p-3 !border-2 ${errors['status'] ? '!border-rose-500' : '!border-neutral-200'}`,
             input: () => 'text-lg',
             option: () => 'text-lg',
+            placeholder: () => (errors['status'] ? '!text-rose-500' : '!text-neutral-500'),
           }}
           theme={(theme) => ({
             ...theme,

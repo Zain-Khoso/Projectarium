@@ -7,7 +7,7 @@ import { CldUploadWidget } from 'next-cloudinary';
 
 // Icons.
 import { TbPhotoPlus } from 'react-icons/tb';
-import { FieldErrors, FieldValues, UseFormSetValue } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormClearErrors, UseFormSetValue } from 'react-hook-form';
 
 // Types.
 declare global {
@@ -19,15 +19,18 @@ type Props = {
   value: string;
   onChange: UseFormSetValue<FieldValues>;
   errors?: FieldErrors;
+  clearErrors?: UseFormClearErrors<FieldValues>;
 };
 
 // Component.
-export default function ImageUpload({ id, label, value, onChange, errors }: Props) {
+export default function ImageUpload({ id, label, value, onChange, errors, clearErrors }: Props) {
   const handleUpload = useCallback(
     (result: any) => {
       onChange(id, result.info.secure_url);
+
+      if (errors && clearErrors) clearErrors(id);
     },
-    [id, onChange]
+    [id, onChange, errors, clearErrors]
   );
 
   return (
@@ -36,12 +39,17 @@ export default function ImageUpload({ id, label, value, onChange, errors }: Prop
         return (
           <div
             onClick={() => open?.()}
-            className={`w-full relative cursor-pointer hover:opacity-70 transition border-dashed border-2 p-20 ${errors?.id ? 'border-rose-500' : 'border-neutral-200'} flex flex-col justify-center items-center gap-4 text-neutral-600`}
+            className={`w-full relative cursor-pointer hover:opacity-70 transition border-dashed border-2 p-20 ${!errors ? 'border-neutral-200' : errors[id] ? 'border-rose-500' : 'border-neutral-200'} flex flex-col justify-center items-center gap-4 text-neutral-600`}
           >
-            <TbPhotoPlus className={errors?.id ? 'text-rose-500' : 'text-neutral-500'} size={50} />
+            <TbPhotoPlus
+              className={
+                !errors ? 'text-neutral-500' : errors[id] ? 'text-rose-500' : 'text-neutral-500'
+              }
+              size={50}
+            />
 
             <div
-              className={`font-semibold text-lg text-pretty text-center ${errors?.id ? 'text-rose-500' : 'text-neutral-500'}`}
+              className={`font-semibold text-lg text-pretty text-center ${!errors ? 'text-neutral-500' : errors[id] ? 'text-rose-500' : 'text-neutral-500'}`}
             >
               {label}
             </div>

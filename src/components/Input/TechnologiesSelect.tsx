@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Select from 'react-select';
 
 // Hooks.
-import { FieldValues, UseFormSetValue, FieldErrors } from 'react-hook-form';
+import { FieldValues, UseFormSetValue, FieldErrors, UseFormClearErrors } from 'react-hook-form';
 import useTechnologies from '@/hooks/useTechnologies';
 
 // Types.
@@ -14,14 +14,20 @@ type Props = {
   value?: string;
   onChange: UseFormSetValue<FieldValues>;
   errors: FieldErrors;
+  clearErrors: UseFormClearErrors<FieldValues>;
 };
 
-export default function TechnologiesSelect({ value, onChange, errors }: Props) {
+export default function TechnologiesSelect({ value, onChange, errors, clearErrors }: Props) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => setIsMounted(true), []);
 
   const { getAll } = useTechnologies();
+
+  const handleChange = function (value: any) {
+    onChange('technologies', value);
+    clearErrors('technologies');
+  };
 
   return (
     <div className="w-full">
@@ -33,7 +39,7 @@ export default function TechnologiesSelect({ value, onChange, errors }: Props) {
           isMulti
           options={getAll()}
           value={value}
-          onChange={(value: any) => onChange('technologies', value)}
+          onChange={handleChange}
           formatOptionLabel={({ icon: Icon, label }: any) => (
             <div className="flex flex-row items-center gap-3">
               <div>
@@ -47,6 +53,7 @@ export default function TechnologiesSelect({ value, onChange, errors }: Props) {
               `p-3 !border-2 ${errors['technologies'] ? '!border-rose-500' : '!border-neutral-200'}`,
             input: () => 'text-lg',
             option: () => 'text-lg',
+            placeholder: () => (errors['technologies'] ? '!text-rose-500' : '!text-neutral-500'),
           }}
           theme={(theme) => ({
             ...theme,
