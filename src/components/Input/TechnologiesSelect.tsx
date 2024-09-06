@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Select from 'react-select';
 
 // Hooks.
-import { FieldValues, UseFormSetValue } from 'react-hook-form';
+import { FieldValues, UseFormSetValue, FieldErrors } from 'react-hook-form';
 import useTechnologies from '@/hooks/useTechnologies';
 
 // Types.
@@ -13,9 +13,10 @@ import { TechnologyT } from '@/hooks/useTechnologies';
 type Props = {
   value?: string;
   onChange: UseFormSetValue<FieldValues>;
+  errors: FieldErrors;
 };
 
-export default function TechnologiesSelect({ value, onChange }: Props) {
+export default function TechnologiesSelect({ value, onChange, errors }: Props) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => setIsMounted(true), []);
@@ -42,8 +43,8 @@ export default function TechnologiesSelect({ value, onChange }: Props) {
             </div>
           )}
           classNames={{
-            container: () => '',
-            control: () => 'p-3 border-2',
+            control: () =>
+              `p-3 !border-2 ${errors['technologies'] ? '!border-rose-500' : '!border-neutral-200'}`,
             input: () => 'text-lg',
             option: () => 'text-lg',
           }}

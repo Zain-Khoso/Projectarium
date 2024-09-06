@@ -190,6 +190,7 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
         />
 
         <ImageUpload
+          id="image"
           label="Click to upload your Avatar"
           value={getValues('image')}
           onChange={setValue}

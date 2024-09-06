@@ -76,16 +76,18 @@ export default function ShareProjectForm() {
       />
 
       {/* Technologies */}
-      <TechnologiesSelect value={technologies} onChange={setValue} />
+      <TechnologiesSelect value={technologies} onChange={setValue} errors={errors} />
 
       {/* Status */}
-      <ProjectStatusSelect value={status} onChange={setValue} />
+      <ProjectStatusSelect value={status} onChange={setValue} errors={errors} />
 
       {/* Cover Image */}
       <ImageUpload
+        id="coverImage"
         label="Click to upload Project Looks!"
         value={getValues('coverImage')}
         onChange={setValue}
+        errors={errors}
       />
 
       <section className="w-full flex items-end">

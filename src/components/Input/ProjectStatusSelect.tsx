@@ -5,19 +5,20 @@ import { useState, useEffect, useMemo } from 'react';
 import Select from 'react-select';
 
 // Hooks.
-import { FieldValues, UseFormSetValue } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormSetValue } from 'react-hook-form';
 
 // Types.
 type Props = {
   value?: ProjectStatus;
   onChange: UseFormSetValue<FieldValues>;
+  errors: FieldErrors;
 };
 type ProjectStatus = {
   label: string;
   value: string;
 };
 
-export default function ProjectStatusSelect({ value, onChange }: Props) {
+export default function ProjectStatusSelect({ value, onChange, errors }: Props) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => setIsMounted(true), []);
@@ -46,8 +47,8 @@ export default function ProjectStatusSelect({ value, onChange }: Props) {
             <div className="flex flex-row items-center gap-3">{option.label}</div>
           )}
           classNames={{
-            container: () => '',
-            control: () => 'p-3 border-2',
+            control: () =>
+              `p-3 !border-2 ${errors['status'] ? '!border-rose-500' : '!border-neutral-200'}`,
             input: () => 'text-lg',
             option: () => 'text-lg',
           }}
