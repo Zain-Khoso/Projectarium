@@ -50,7 +50,7 @@ model Account {
 
 model Project {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
-  title         String @unique
+  title         String
   coverImage    String
   description   String
   technologies  String[]
