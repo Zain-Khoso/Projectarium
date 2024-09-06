@@ -15,8 +15,15 @@ import ProjectStatusSelect from '@/components/Input/ProjectStatusSelect';
 import TechnologiesSelect from '@/components/Input/TechnologiesSelect';
 import { TechnologyT } from '@/hooks/useTechnologies';
 
+// Types.
+import { User } from '@prisma/client';
+import axios from 'axios';
+type Props = {
+  currentUser?: User | null;
+};
+
 // Component.
-export default function ShareProjectForm() {
+export default function ShareProjectForm({ currentUser }: Props) {
   const {
     watch,
     setError,
@@ -52,6 +59,22 @@ export default function ShareProjectForm() {
       setError('title', { message: 'Title is too long.' });
       toast.error('Title is too long.');
       return;
+    } else {
+      try {
+        const response = await axios.post('/api/projects/title-is-unique', {
+          title,
+          currentUserId: currentUser?.id,
+        });
+
+        if (!response.data.isClear) {
+          setError('title', { message: 'Title is already in use.' });
+          toast.error('Title is already in use.');
+          return;
+        }
+      } catch {
+        toast.error('Something went wrong.');
+        return;
+      }
     }
 
     // Description checks.

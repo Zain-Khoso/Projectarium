@@ -43,7 +43,7 @@ export default async function ShareProjectPage() {
             subtitle="Define your vision, gather your team, and bring your ideas to life."
           />
 
-          <ShareProjectForm />
+          <ShareProjectForm currentUser={currentUser} />
         </main>
       </Container>
     </>

@@ -1,7 +1,10 @@
 // Lib Imports.
 import { NextResponse } from 'next/server';
+
+// Local Imports.
 import prisma from '@/libs/prismadb';
 
+// Post Route.
 export async function POST(request: Request) {
   const reservedRoutes = ['api', 'login', 'signup', 'messages'];
 
