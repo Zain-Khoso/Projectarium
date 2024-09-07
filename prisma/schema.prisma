@@ -55,12 +55,15 @@ model Project {
   description   String
   technologies  String[]
   status        ProjectStatus  @default(IN_DEVELOPMENT)
+  liveDemo      String?
+  repositoryUrl String?
+
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  ownerId String @db.ObjectId
+  ownerId       String @db.ObjectId
   
-  owner User @relation(name: "Owner", fields: [ownerId], references: [id])
+  owner         User @relation(name: "Owner", fields: [ownerId], references: [id])
 }
 
 // Project status options.
