@@ -44,7 +44,7 @@ export default function ProjectStatusSelect({ value, onChange, errors, clearErro
       {isMounted && (
         <Select
           id="status"
-          placeholder="Idea..."
+          placeholder="Project Status"
           isClearable
           options={statuses}
           value={value}
@@ -57,7 +57,8 @@ export default function ProjectStatusSelect({ value, onChange, errors, clearErro
               `p-3 !border-2 ${errors['status'] ? '!border-rose-500' : '!border-neutral-200'}`,
             input: () => 'text-lg',
             option: () => 'text-lg',
-            placeholder: () => (errors['status'] ? '!text-rose-500' : '!text-neutral-500'),
+            placeholder: () =>
+              `font-semibold ${errors['status'] ? '!text-rose-500' : '!text-neutral-400'}`,
           }}
           theme={(theme) => ({
             ...theme,

@@ -19,7 +19,7 @@ import { TechnologyT } from '@/hooks/useTechnologies';
 // Types.
 import { User } from '@prisma/client';
 import axios from 'axios';
-import { isValidUsername } from '@/libs/validations';
+import { isValidURL, isValidUsername } from '@/libs/validations';
 type Props = {
   currentUser?: User | null;
 };
@@ -43,6 +43,8 @@ export default function ShareProjectForm({ currentUser }: Props) {
       description: '',
       technologies: [],
       status: '',
+      liveDemo: '',
+      repositoryUrl: '',
     },
   });
 
@@ -50,9 +52,18 @@ export default function ShareProjectForm({ currentUser }: Props) {
   const description = watch('description');
   const technologies = watch('technologies');
   const status = watch('status');
+  const liveDemo = watch('liveDemo');
+  const repositoryUrl = watch('repositoryUrl');
 
   const onSubmit: SubmitHandler<FieldValues> = async function (data) {
-    const { title, description, technologies, status, coverImage } = data;
+    const { title, description, technologies, status, coverImage, liveDemo, repositoryUrl } = data;
+
+    // CoverImage checks.
+    if (coverImage.length === 0) {
+      setError('coverImage', { message: 'Cover Image is required.' });
+      toast.error('Cover Image is required.');
+      return;
+    }
 
     // Title checks.
     if (title.length === 0) {
@@ -108,11 +119,18 @@ export default function ShareProjectForm({ currentUser }: Props) {
       toast.error('Status is required.');
       return;
     }
-    console.log(coverImage);
-    // CoverImage checks.
-    if (coverImage.length === 0) {
-      setError('coverImage', { message: 'Cover Image is required.' });
-      toast.error('Cover Image is required.');
+
+    // Repository.
+    if (repositoryUrl !== '' && !isValidURL(repositoryUrl)) {
+      setError('repositoryUrl', { message: 'Invalid URL.' });
+      toast.error('Invalid URL.');
+      return;
+    }
+
+    // Demo.
+    if (liveDemo !== '' && !isValidURL(liveDemo)) {
+      setError('liveDemo', { message: 'Invalid URL.' });
+      toast.error('Invalid URL.');
       return;
     }
 
@@ -125,6 +143,8 @@ export default function ShareProjectForm({ currentUser }: Props) {
       coverImage,
       technologies: technologyValues,
       status: statusValue,
+      liveDemo,
+      repositoryUrl,
     };
 
     try {
@@ -151,10 +171,20 @@ export default function ShareProjectForm({ currentUser }: Props) {
       onSubmit={handleSubmit(onSubmit)}
       className="max-w-screen-sm mt-8 md:mt-16 flex flex-col items-start gap-4 md:gap-8"
     >
+      {/* Cover Image */}
+      <ImageUpload
+        id="coverImage"
+        label="Click to upload Project Looks!"
+        value={getValues('coverImage')}
+        onChange={setValue}
+        errors={errors}
+        clearErrors={clearErrors}
+      />
+
       {/* Title */}
       <Input
         id="title"
-        label="Title"
+        label="Project Title"
         value={title}
         onChange={(value) => handleInputChange('title', value)}
         errors={errors}
@@ -164,7 +194,7 @@ export default function ShareProjectForm({ currentUser }: Props) {
       {/* Description */}
       <Textarea
         id="description"
-        label="Tell us about the project in detail"
+        label="Project Description"
         value={description}
         onChange={(value) => handleInputChange('description', value)}
         errors={errors}
@@ -187,14 +217,24 @@ export default function ShareProjectForm({ currentUser }: Props) {
         clearErrors={clearErrors}
       />
 
-      {/* Cover Image */}
-      <ImageUpload
-        id="coverImage"
-        label="Click to upload Project Looks!"
-        value={getValues('coverImage')}
-        onChange={setValue}
+      {/* Repository */}
+      <Input
+        id="repositoryUrl"
+        label="Project Repository"
+        value={repositoryUrl}
+        onChange={(value) => handleInputChange('repositoryUrl', value)}
         errors={errors}
-        clearErrors={clearErrors}
+        disabled={isLoading || isSubmitting}
+      />
+
+      {/* Demo */}
+      <Input
+        id="liveDemo"
+        label="Project Demo"
+        value={liveDemo}
+        onChange={(value) => handleInputChange('liveDemo', value)}
+        errors={errors}
+        disabled={isLoading || isSubmitting}
       />
 
       <section className="w-full flex items-end">

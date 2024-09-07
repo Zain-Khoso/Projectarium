@@ -15,7 +15,8 @@ export function isValidUsername(username: string) {
 // Function to verify a url's authenticity.
 export function isValidURL(url: string) {
   // Regular expression to check if the URL contains at least a domain name with a TLD
-  const domainRegex = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+  const domainRegex =
+    /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=%]*)?$/;
 
   return domainRegex.test(url);
 }

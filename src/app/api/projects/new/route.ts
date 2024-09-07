@@ -10,7 +10,8 @@ export async function POST(request: Request) {
   const reservedRoutes = ['new'];
 
   try {
-    const { title, coverImage, description, technologies, status } = await request.json();
+    const { title, coverImage, description, technologies, status, liveDemo, repositoryUrl } =
+      await request.json();
 
     if (reservedRoutes.includes(title)) return NextResponse.json({ isClear: false });
 
@@ -26,7 +27,16 @@ export async function POST(request: Request) {
     if (titleExists) throw new Error('Invalid credentials.');
 
     const project = await prisma.project.create({
-      data: { title, coverImage, description, technologies, status, ownerId: currentUser?.id },
+      data: {
+        title,
+        coverImage,
+        description,
+        technologies,
+        status,
+        liveDemo,
+        repositoryUrl,
+        ownerId: currentUser?.id,
+      },
     });
 
     return NextResponse.json(project);

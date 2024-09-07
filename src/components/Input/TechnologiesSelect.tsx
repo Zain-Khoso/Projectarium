@@ -34,7 +34,7 @@ export default function TechnologiesSelect({ value, onChange, errors, clearError
       {isMounted && (
         <Select
           id="technologies"
-          placeholder="Something"
+          placeholder="Technologies used"
           isClearable
           isMulti
           options={getAll()}
@@ -53,7 +53,8 @@ export default function TechnologiesSelect({ value, onChange, errors, clearError
               `p-3 !border-2 ${errors['technologies'] ? '!border-rose-500' : '!border-neutral-200'}`,
             input: () => 'text-lg',
             option: () => 'text-lg',
-            placeholder: () => (errors['technologies'] ? '!text-rose-500' : '!text-neutral-500'),
+            placeholder: () =>
+              `font-semibold ${errors['technologies'] ? '!text-rose-500' : '!text-neutral-400'}`,
           }}
           theme={(theme) => ({
             ...theme,
