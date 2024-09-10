@@ -3,7 +3,8 @@ import getCurrentUser from '@/actions/getCurrentUser';
 
 // Components.
 import Navbar from '@/components/navbar/Navbar';
-import UnderDevelopmentPage from '@/components/UnderDevelopmentPage';
+import Container from '@/components/Container';
+import InfiniteScroll from '@/components/InfiniteScroll';
 
 // Component.
 export default async function Home() {
@@ -12,7 +13,10 @@ export default async function Home() {
   return (
     <>
       <Navbar currentUser={currentUser} />
-      <UnderDevelopmentPage title="Projectarium is currently under development." />
+
+      <Container>
+        <InfiniteScroll />
+      </Container>
     </>
   );
 }
