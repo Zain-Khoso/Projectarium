@@ -3,7 +3,8 @@
 // Lib Imports.
 import Link from 'next/link';
 import Image from 'next/image';
-import { useMemo } from 'react';
+import { useRouter } from 'next/navigation';
+import { MouseEventHandler, useCallback, useMemo } from 'react';
 
 // Hooks.
 import useTechnologies from '@/hooks/useTechnologies';
@@ -29,14 +30,20 @@ type Props = {
 
 // Component.
 export default function ProjectCard({ owner, project }: Props) {
+  const router = useRouter();
   const { getByValue: getTechnologyByValue } = useTechnologies();
   const { getByValue: getCountryByValue } = useCountries();
+
+  const projectTitle = useMemo(
+    () => (project.title.length > 20 ? project.title.slice(0, 17) + '...' : project.title),
+    [project.title]
+  );
 
   const timePassed = useMemo(() => timeElapsed(project.createdAt), [project.createdAt]);
 
   const createdWith = useMemo(() => {
     const selectedTechnologies = project.technologies
-      .slice(0, 2)
+      .slice(0, 3)
       .map((technology) => getTechnologyByValue(technology)?.label);
 
     return selectedTechnologies.join(', ');
@@ -56,6 +63,15 @@ export default function ProjectCard({ owner, project }: Props) {
     return getCountryByValue(owner.locationValue)?.flag;
   }, [owner.locationValue, getCountryByValue]);
 
+  const handleOwnerClick: MouseEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      router.push(`/${owner.username}`);
+    },
+    [owner.username, router]
+  );
+
   return (
     <Link
       href={`/${owner.username}/${project.title}`}
@@ -74,7 +90,7 @@ export default function ProjectCard({ owner, project }: Props) {
 
       <section className="w-full flex flex-col gap-4 px-2 py-4">
         <div className="flex flex-row items-center justify-between">
-          <h4 className="font-bold text-xl">{project.title}</h4>
+          <h4 className="font-bold text-xl">{projectTitle}</h4>
 
           <Badge label={project.status} outline={project.status !== 'COMPLETED'} />
         </div>
@@ -88,12 +104,10 @@ export default function ProjectCard({ owner, project }: Props) {
         <div className="flex flex-row items-start gap-1">
           <FaClipboardList size={16} className="fill-neutral-600" />
 
-          <span className="font-medium text-sm text-neutral-600">
-            Created with {createdWith}, etc...
-          </span>
+          <span className="font-medium text-sm text-neutral-600">With {createdWith}, etc...</span>
         </div>
 
-        <div className="flex flex-row items-center gap-2">
+        <div onClick={handleOwnerClick} className="flex flex-row items-center gap-2">
           <Image
             alt={`Profile picture of owner of BellyBrains`}
             src={owner.image ? owner.image : '/images/user-placeholder.png'}
