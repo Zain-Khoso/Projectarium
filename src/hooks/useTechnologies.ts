@@ -1,5 +1,8 @@
 // Icons.
 import {
+  SiHtml5,
+  SiCss3,
+  SiSass,
   SiReact,
   SiNextdotjs,
   SiAngular,
@@ -57,6 +60,9 @@ export type TechnologyT = {
 
 // Static Data.
 const technologies = [
+  { icon: SiHtml5, label: 'HTML', value: 'html' },
+  { icon: SiCss3, label: 'CSS', value: 'css' },
+  { icon: SiSass, label: 'SASS', value: 'sass' },
   { icon: SiReact, label: 'React', value: 'react' },
   { icon: SiNextdotjs, label: 'Next', value: 'next' },
   { icon: SiAngular, label: 'Angular', value: 'angular' },
