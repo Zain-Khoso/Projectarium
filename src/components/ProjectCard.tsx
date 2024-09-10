@@ -1,6 +1,16 @@
+'use client';
+
 // Lib Imports.
 import Link from 'next/link';
 import Image from 'next/image';
+import { useMemo } from 'react';
+
+// Hooks.
+import useTechnologies from '@/hooks/useTechnologies';
+import useCountries from '@/hooks/useCountries';
+
+// Utils.
+import { timeElapsed } from '@/libs/timeElapsed';
 
 // Icons.
 import { FaCalendarCheck, FaClipboardList } from 'react-icons/fa';
@@ -10,14 +20,51 @@ import { FaLocationDot } from 'react-icons/fa6';
 import BookmarkButton from './BookmarkButton';
 import Badge from './Badge';
 
+// Types.
+import { User, Project } from '@prisma/client';
+type Props = {
+  owner: User;
+  project: Project;
+};
+
 // Component.
-export default function ProjectCard() {
+export default function ProjectCard({ owner, project }: Props) {
+  const { getByValue: getTechnologyByValue } = useTechnologies();
+  const { getByValue: getCountryByValue } = useCountries();
+
+  const timePassed = useMemo(() => timeElapsed(project.createdAt), [project.createdAt]);
+
+  const createdWith = useMemo(() => {
+    const selectedTechnologies = project.technologies
+      .slice(0, 2)
+      .map((technology) => getTechnologyByValue(technology)?.label);
+
+    return selectedTechnologies.join(', ');
+  }, [project.technologies, getTechnologyByValue]);
+
+  const ownerLabel = useMemo(() => {
+    if (owner.name) return owner.name;
+
+    if (!owner.username) return 'User';
+
+    return owner.username.length > 20 ? owner.username.slice(0, 17) + '...' : owner.username;
+  }, [owner.name, owner.username]);
+
+  const ownerCountry = useMemo(() => {
+    if (!owner.locationValue) return null;
+
+    return getCountryByValue(owner.locationValue)?.flag;
+  }, [owner.locationValue, getCountryByValue]);
+
   return (
-    <Link href={'/TestUser1/BellyBrains'} className="w-full flex flex-col overflow-hidden group">
+    <Link
+      href={`/${owner.username}/${project.title}`}
+      className="w-full flex flex-col overflow-hidden group"
+    >
       <section className="relative rounded-lg overflow-hidden w-full h-[200px]">
         <Image
-          alt={`Cover image of project BellyBrains`}
-          src={`https://res.cloudinary.com/dnbs8oqz6/image/upload/v1725690430/foxqrxgq5qfbfevbxwpo.png`}
+          alt={`Cover image of project ${project.title}`}
+          src={project.coverImage}
           fill
           className="w-full h-full object-cover object-center group-hover:scale-110 transition"
         />
@@ -27,40 +74,44 @@ export default function ProjectCard() {
 
       <section className="w-full flex flex-col gap-4 px-2 py-4">
         <div className="flex flex-row items-center justify-between">
-          <h4 className="font-bold text-xl">BellyBrains</h4>
+          <h4 className="font-bold text-xl">{project.title}</h4>
 
-          <Badge label="Archived" outline />
+          <Badge label={project.status} outline={project.status !== 'COMPLETED'} />
         </div>
 
         <div className="flex flex-row items-start gap-1">
           <FaCalendarCheck size={16} className="fill-neutral-600" />
 
-          <span className="font-medium text-sm text-neutral-600">Created 5 days ago</span>
+          <span className="font-medium text-sm text-neutral-600">Created {timePassed}</span>
         </div>
+
         <div className="flex flex-row items-start gap-1">
           <FaClipboardList size={16} className="fill-neutral-600" />
 
           <span className="font-medium text-sm text-neutral-600">
-            Created with Nextjs, Prisma, etc...
+            Created with {createdWith}, etc...
           </span>
         </div>
+
         <div className="flex flex-row items-center gap-2">
           <Image
             alt={`Profile picture of owner of BellyBrains`}
-            src={false ? '' : '/images/user-placeholder.png'}
+            src={owner.image ? owner.image : '/images/user-placeholder.png'}
             width={30}
             height={30}
             className="rounded-full object-cover object-center"
           />
 
           <div className="flex-1 h-full flex-col items-start justify-between">
-            <h4 className="font-bold text-md text-neutral-600">TestUser1</h4>
+            <h4 className="font-bold text-md text-neutral-600">{ownerLabel}</h4>
 
-            <div className="flex flex-row items-center gap-1">
-              <FaLocationDot size={12} className="fill-neutral-600" />
+            {ownerCountry && (
+              <div className="flex flex-row items-center gap-1">
+                <FaLocationDot size={12} className="fill-neutral-600" />
 
-              <span className="font-medium text-sm text-neutral-600">Pakistan</span>
-            </div>
+                <span className="font-medium text-sm text-neutral-600">{ownerCountry}</span>
+              </div>
+            )}
           </div>
         </div>
       </section>
