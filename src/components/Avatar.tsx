@@ -16,7 +16,7 @@ export default function Avatar({ src, size = 35 }: Props) {
       src={src || '/images/user-placeholder.png'}
       width={size}
       height={size}
-      className="rounded-full"
+      className="rounded-full object-cover object-center"
     />
   );
 }

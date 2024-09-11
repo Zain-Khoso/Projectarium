@@ -23,6 +23,7 @@ import Badge from './Badge';
 
 // Types.
 import { User, Project } from '@prisma/client';
+import Avatar from './Avatar';
 type Props = {
   owner: User;
   project: Project;
@@ -60,7 +61,7 @@ export default function ProjectCard({ owner, project }: Props) {
   const ownerCountry = useMemo(() => {
     if (!owner.locationValue) return null;
 
-    return getCountryByValue(owner.locationValue)?.flag;
+    return getCountryByValue(owner.locationValue);
   }, [owner.locationValue, getCountryByValue]);
 
   const handleOwnerClick: MouseEventHandler<HTMLDivElement> = useCallback(
@@ -108,13 +109,9 @@ export default function ProjectCard({ owner, project }: Props) {
         </div>
 
         <div onClick={handleOwnerClick} className="flex flex-row items-center gap-2">
-          <Image
-            alt={`Profile picture of owner of BellyBrains`}
-            src={owner.image ? owner.image : '/images/user-placeholder.png'}
-            width={30}
-            height={30}
-            className="rounded-full object-cover object-center"
-          />
+          <div className="w-fit h-fit rounded-full border border-neutral-300">
+            <Avatar src={owner.image ? owner.image : '/images/user-placeholder.png'} size={35} />
+          </div>
 
           <div className="flex-1 h-full flex-col items-start justify-between">
             <h4 className="font-bold text-md text-neutral-600">{ownerLabel}</h4>
@@ -123,7 +120,9 @@ export default function ProjectCard({ owner, project }: Props) {
               <div className="flex flex-row items-center gap-1">
                 <FaLocationDot size={12} className="fill-neutral-600" />
 
-                <span className="font-medium text-sm text-neutral-600">{ownerCountry}</span>
+                <span className="font-medium text-sm text-neutral-600">
+                  {ownerCountry.flag} {ownerCountry.label}
+                </span>
               </div>
             )}
           </div>
