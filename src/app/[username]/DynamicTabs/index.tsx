@@ -21,7 +21,8 @@ type Props = {
 export default function DynamicTab({ currentUser, profileUser }: Props) {
   const tab = useSearchParams().get('tab');
 
-  if (tab === 'projects') return <ProjectsTab profileUser={profileUser} />;
+  if (tab === 'projects')
+    return <ProjectsTab profileUser={profileUser} currentUser={currentUser} />;
 
   if (tab === 'contributions') return <ContributionsTab profileUser={profileUser} />;
 

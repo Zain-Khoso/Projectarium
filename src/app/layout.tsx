@@ -1,6 +1,9 @@
 // Libs
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
+
+// Local Imports.
+import ReactQueryProvider from '@/providers/ReactQueryProvider';
 import ToastProvider from '@/providers/ToasterProvider';
 
 // Styles.
@@ -57,8 +60,10 @@ export default function RootLayout({ children }: Readonly<ChildrenProps>) {
   return (
     <html lang="en">
       <body className={font.className}>
-        <ToastProvider />
-        {children}
+        <ReactQueryProvider>
+          <ToastProvider />
+          {children}
+        </ReactQueryProvider>
       </body>
     </html>
   );
