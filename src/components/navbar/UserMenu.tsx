@@ -50,7 +50,7 @@ export default function UserMenu({ currentUser }: Props) {
                 <MenuItem href={`/${currentUser.username}`} label="Profile" />
                 <MenuItem href="/messages" label="Messages" />
                 <MenuItem href={`/${currentUser.username}?tab=projects`} label="Projects" />
-                <MenuItem href={`/${currentUser.username}?tab=favorites`} label="Favorites" />
+                <MenuItem href={`/${currentUser.username}?tab=bookmarks`} label="Bookmarks" />
                 <MenuItem href={`/${currentUser.username}/new`} label="Create Project" />
 
                 <hr />

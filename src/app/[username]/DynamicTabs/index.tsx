@@ -8,7 +8,7 @@ import FeatureSection from './FeatureSection';
 import ProjectsTab from './ProjectsTab';
 import EndorsementsTab from './EndorsementsTab';
 import ContributionsTab from './ContributionsTab';
-import FavoritesTab from './FavoritesTab';
+import BookmarksTab from './BookmarksTab';
 
 // Types.
 import { User } from '@prisma/client';
@@ -27,7 +27,7 @@ export default function DynamicTab({ currentUser, profileUser }: Props) {
 
   if (tab === 'endorsements') return <EndorsementsTab profileUser={profileUser} />;
 
-  if (tab === 'favorites') return <FavoritesTab currentUser={currentUser} />;
+  if (tab === 'bookmarks') return <BookmarksTab currentUser={currentUser} />;
 
   return (
     <section className="flex-1 h-full flex flex-col gap-4">

@@ -8,7 +8,7 @@ import { GoBook } from 'react-icons/go';
 import { RiGitRepositoryFill } from 'react-icons/ri';
 import { GrDiamond } from 'react-icons/gr';
 import { FiGitMerge } from 'react-icons/fi';
-import { MdFavorite } from 'react-icons/md';
+import { TbBookmarkFilled } from 'react-icons/tb';
 
 // Components.
 import Container from '../Container';
@@ -29,8 +29,8 @@ export default function SubnavTabs({ currentUser, profileUser }: Props) {
 
   const tab = params.get('tab');
 
-  if (currentUser?.username !== profileUser?.username && tab === 'favorites')
-    router.push(`${currentUser?.username}?tab=favorites`);
+  if (currentUser?.username !== profileUser?.username && tab === 'bookmarks')
+    router.push(`${currentUser?.username}?tab=bookmarks`);
 
   const isUserProfile = pathname.match(/^\/[^\/]+$/);
 
@@ -64,10 +64,10 @@ export default function SubnavTabs({ currentUser, profileUser }: Props) {
 
         {currentUser?.username === profileUser?.username && (
           <UserProfileTab
-            icon={MdFavorite}
-            label="Favorites"
+            icon={TbBookmarkFilled}
+            label="Bookmarks"
             profileUser={profileUser}
-            selected={tab === 'favorites'}
+            selected={tab === 'bookmarks'}
           />
         )}
       </div>

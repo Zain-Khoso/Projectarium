@@ -8,10 +8,10 @@ type Props = {
 };
 
 // Component.
-export default function FavoritesTab({ currentUser }: Props) {
+export default function BookmarksTab({ currentUser }: Props) {
   return (
     <section className="flex-1 h-full flex flex-col gap-4">
-      <Heading title={`Your Favorites`} subtitle={`Your favorite projects.`} />
+      <Heading title={`Your bookmarks`} subtitle={`Your favorite projects.`} />
 
       <div className="h-full grid place-items-center">
         <span className="font-semibold text-lg">You don&apos;t have any favorite projects.</span>
