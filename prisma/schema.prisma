@@ -23,6 +23,7 @@ model User {
   locationValue   String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  bookmarkIds     String[] @db.ObjectId
 
   account Account[]
   ownedProjects Project[] @relation(name: "Owner")

@@ -15,7 +15,7 @@ export default async function Home() {
       <Navbar currentUser={currentUser} />
 
       <Container>
-        <InfiniteScroll />
+        <InfiniteScroll currentUser={currentUser} />
       </Container>
     </>
   );

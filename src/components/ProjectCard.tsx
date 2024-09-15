@@ -26,11 +26,12 @@ import { User, Project } from '@prisma/client';
 import Avatar from './Avatar';
 type Props = {
   owner: User;
+  currentUser?: User | null;
   project: Project;
 };
 
 // Component.
-export default function ProjectCard({ owner, project }: Props) {
+export default function ProjectCard({ owner, currentUser, project }: Props) {
   const router = useRouter();
   const { getByValue: getTechnologyByValue } = useTechnologies();
   const { getByValue: getCountryByValue } = useCountries();
@@ -86,7 +87,9 @@ export default function ProjectCard({ owner, project }: Props) {
           className="w-full h-full object-cover object-center group-hover:scale-110 transition"
         />
 
-        <BookmarkButton />
+        {owner.id !== currentUser?.id && (
+          <BookmarkButton projectId={project.id} currentUser={currentUser} />
+        )}
       </section>
 
       <section className="w-full flex flex-col gap-4 px-2 py-4">

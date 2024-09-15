@@ -1,31 +1,35 @@
 'use client';
 
-// Lib Imports.
-import { MouseEventHandler, useCallback, useState } from 'react';
+// Hooks.
+import useBookmark from '@/hooks/useBookmark';
 
 // Icons.
 import { TbBookmark } from 'react-icons/tb';
 
+// Types.
+import { User } from '@prisma/client';
+type Props = {
+  projectId: string;
+  currentUser?: User | null;
+};
+
 // Component.
-export default function BookmarkButton() {
-  const [isbookmarked, setIsbookmarked] = useState(false);
-
-  const handleBookmark: MouseEventHandler<SVGElement> = useCallback((event) => {
-    event.preventDefault();
-
-    setIsbookmarked((value) => !value);
-  }, []);
+export default function BookmarkButton({ projectId, currentUser }: Props) {
+  const { isBookmarked, toggleBookmark } = useBookmark({
+    projectId,
+    currentUser,
+  });
 
   return (
     <TbBookmark
       size={32}
-      onClick={handleBookmark}
+      onClick={toggleBookmark}
       className={`
         absolute 
         top-3 
         right-3 
         stroke-white
-        ${isbookmarked ? 'fill-orange-500' : 'fill-neutral-400'}
+        ${isBookmarked ? 'fill-orange-500' : 'fill-neutral-400'}
         `}
     />
   );

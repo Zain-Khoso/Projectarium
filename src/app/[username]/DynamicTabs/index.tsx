@@ -84,7 +84,12 @@ export default function DynamicTab({ currentUser, profileUser }: Props) {
         >
           <div className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] gap-8 py-4">
             {data.exdorsements.map((endorsement: any) => (
-              <ProjectCard key={endorsement.id} owner={endorsement.owner} project={endorsement} />
+              <ProjectCard
+                key={endorsement.id}
+                owner={endorsement.owner}
+                currentUser={currentUser}
+                project={endorsement}
+              />
             ))}
           </div>
         </FeatureSection>
@@ -101,6 +106,7 @@ export default function DynamicTab({ currentUser, profileUser }: Props) {
               <ProjectCard
                 key={contribution.id}
                 owner={contribution.owner}
+                currentUser={currentUser}
                 project={contribution}
               />
             ))}
@@ -116,7 +122,12 @@ export default function DynamicTab({ currentUser, profileUser }: Props) {
         >
           <div className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] gap-8 py-4">
             {data.projects.map((project: any) => (
-              <ProjectCard key={project.id} owner={project.owner} project={project} />
+              <ProjectCard
+                key={project.id}
+                owner={project.owner}
+                currentUser={currentUser}
+                project={project}
+              />
             ))}
           </div>
         </FeatureSection>
