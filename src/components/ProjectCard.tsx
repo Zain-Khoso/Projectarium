@@ -76,7 +76,7 @@ export default function ProjectCard({ owner, project }: Props) {
   return (
     <Link
       href={`/${owner.username}/${project.title}`}
-      className="w-full flex flex-col overflow-hidden group"
+      className="w-full max-w-[320px] flex flex-col overflow-hidden group"
     >
       <section className="relative rounded-lg overflow-hidden w-full h-[200px]">
         <Image

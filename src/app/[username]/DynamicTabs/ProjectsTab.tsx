@@ -4,6 +4,7 @@
 import { useMemo } from 'react';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { SyncLoader } from 'react-spinners';
 
 // Components.
 import Heading from '@/components/Heading';
@@ -30,10 +31,8 @@ export default function ProjectsTab({ profileUser, currentUser }: Props) {
   }, [profileUser?.name, profileUser?.username, currentUser?.username]);
 
   const getUserProjects = async function () {
-    const response = await axios.get('/api/projects/get-user-projects', {
-      params: {
-        userId: profileUser?.id,
-      },
+    const response = await axios.post('/api/projects/get-user-projects', {
+      userId: profileUser?.id,
     });
     return response.data;
   };
@@ -46,6 +45,24 @@ export default function ProjectsTab({ profileUser, currentUser }: Props) {
     queryKey: ['currentUserProject'],
     queryFn: async () => await getUserProjects(),
   });
+
+  if (isLoading)
+    return (
+      <section className="flex-1 h-[25vh] flex items-center justify-center">
+        <SyncLoader />
+      </section>
+    );
+
+  if (isError)
+    return (
+      <Heading
+        title={headingTitle}
+        subtitle="Something went wrong on our end. Please try again later."
+      />
+    );
+
+  if (projects.length === 0)
+    return <Heading title={headingTitle} subtitle="User has not created any projects yet." />;
 
   return (
     <section className="flex-1 h-full flex flex-col gap-4">

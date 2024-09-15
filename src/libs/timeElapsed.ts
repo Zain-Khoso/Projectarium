@@ -1,7 +1,9 @@
 // This util function accepts a Date object as a parameter.
 // And returns the time period elapsed since the provided date.
 // As a string.
-export function timeElapsed(pastDate: Date): string {
+export function timeElapsed(pastDate: Date | string): string {
+  if (typeof pastDate === 'string') pastDate = new Date(pastDate);
+
   const past = pastDate.getTime();
   const now = new Date().getTime();
   const diffInMilliseconds = now - past;
