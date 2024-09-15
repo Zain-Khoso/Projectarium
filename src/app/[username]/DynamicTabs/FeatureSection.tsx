@@ -10,7 +10,7 @@ type Props = ChildrenProps & {
 // Component.
 export default function FeatureSection({ title, subtitle, children }: Props) {
   return (
-    <section className="flex flex-col gap-4 p-4 border-2 border-neutral-400 rounded-lg">
+    <section className="flex flex-col gap-4 p-4">
       <Heading title={title} subtitle={subtitle} />
 
       <hr className="border-neutral-300" />

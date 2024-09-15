@@ -42,7 +42,7 @@ export default function ProjectsTab({ profileUser, currentUser }: Props) {
     isError,
     data: projects,
   } = useQuery({
-    queryKey: ['currentUserProject'],
+    queryKey: ['userProject'],
     queryFn: async () => await getUserProjects(),
   });
 
