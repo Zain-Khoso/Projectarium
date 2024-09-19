@@ -12,6 +12,7 @@ import useCountries from '@/hooks/useCountries';
 
 // Utils.
 import { timeElapsed } from '@/libs/timeElapsed';
+import { getDisplayNameOfUser } from '@/libs/getDisplayNameOfUser';
 
 // Icons.
 import { FaCalendarCheck, FaClipboardList } from 'react-icons/fa';
@@ -20,10 +21,10 @@ import { FaLocationDot } from 'react-icons/fa6';
 // Components.
 import BookmarkButton from './BookmarkButton';
 import Badge from './Badge';
+import Avatar from './Avatar';
 
 // Types.
 import { User, Project } from '@prisma/client';
-import Avatar from './Avatar';
 type Props = {
   owner: User;
   currentUser?: User | null;
@@ -51,13 +52,7 @@ export default function ProjectCard({ owner, currentUser, project }: Props) {
     return selectedTechnologies.join(', ');
   }, [project.technologies, getTechnologyByValue]);
 
-  const ownerLabel = useMemo(() => {
-    if (owner.name) return owner.name;
-
-    if (!owner.username) return 'User';
-
-    return owner.username.length > 20 ? owner.username.slice(0, 17) + '...' : owner.username;
-  }, [owner.name, owner.username]);
+  const ownerLabel = useMemo(() => getDisplayNameOfUser(owner), [owner]);
 
   const ownerCountry = useMemo(() => {
     if (!owner.locationValue) return null;

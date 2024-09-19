@@ -5,12 +5,17 @@ import { notFound } from 'next/navigation';
 // Actions.
 import getCurrentUser from '@/actions/getCurrentUser';
 import getUserByUsername from '@/actions/getUserByUsername';
+import getUserProjects from '@/actions/getUserProjects';
+
+// Utils.
+import { getDisplayNameOfUser } from '@/libs/getDisplayNameOfUser';
 
 // Components.
 import Navbar from '@/components/navbar/Navbar';
 import Container from '@/components/Container';
 import UserContent from './UserContent';
 import Heading from '@/components/Heading';
+import ProjectCard from '@/components/ProjectCard';
 
 // Types.
 type Props = {
@@ -54,6 +59,10 @@ export default async function ProfilePage({ params: { username } }: Props) {
 
   if (!profileUser) return notFound();
 
+  const projects = await getUserProjects(profileUser.id);
+
+  const displayName = getDisplayNameOfUser(profileUser);
+
   return (
     <>
       <Navbar currentUser={currentUser} />
@@ -62,12 +71,26 @@ export default async function ProfilePage({ params: { username } }: Props) {
         <main className="min-h-screen flex flex-col md:flex-row gap-8 pt-28 pb-8">
           <UserContent currentUser={currentUser} profileUser={profileUser} />
 
-          <section className="flex-1 h-full flex flex-col gap-4">
-            <Heading title="Projects" />
+          <section className="flex-1 h-full flex flex-col gap-2">
+            <Heading
+              title="Projects"
+              subtitle={
+                projects.length === 0
+                  ? `${displayName} has no projects.`
+                  : `Projects created by ${displayName}`
+              }
+            />
 
-            <hr />
-
-            <div className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] gap-8 py-8"></div>
+            <div className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] gap-8 py-8">
+              {projects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  currentUser={currentUser}
+                  owner={project.owner}
+                  project={project}
+                />
+              ))}
+            </div>
           </section>
         </main>
       </Container>
