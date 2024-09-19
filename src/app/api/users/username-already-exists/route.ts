@@ -6,7 +6,7 @@ import prisma from '@/libs/prismadb';
 
 // Post Route.
 export async function POST(request: Request) {
-  const reservedRoutes = ['api', 'login', 'signup', 'messages'];
+  const reservedRoutes = ['api', 'login', 'signup'];
 
   try {
     const { username, currentUserId } = await request.json();

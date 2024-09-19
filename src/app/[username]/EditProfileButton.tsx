@@ -20,6 +20,7 @@ export default function EditProfileButton({ currentUser }: Props) {
   return (
     <>
       <Button small outline label="Edit Profile" onClick={editProfileModal.onOpen} />
+
       <EditProfileModal
         isOpen={editProfileModal.isOpen}
         onClose={editProfileModal.onClose}
