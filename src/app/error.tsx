@@ -16,7 +16,7 @@ type Props = {
 };
 
 // Application Error Page.
-export default function error({ error, reset }: Props) {
+export default function Error({ error, reset }: Props) {
   return (
     <>
       <Navbar />
