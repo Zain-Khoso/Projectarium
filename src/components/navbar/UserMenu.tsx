@@ -16,7 +16,7 @@ import Avatar from '../Avatar';
 // Types.
 import { User } from '@prisma/client';
 type Props = {
-  currentUser: User | null;
+  currentUser?: User | null;
 };
 
 // Component.
@@ -48,9 +48,7 @@ export default function UserMenu({ currentUser }: Props) {
             {currentUser ? (
               <>
                 <MenuItem href={`/${currentUser.username}`} label="Profile" />
-                <MenuItem href="/messages" label="Messages" />
-                <MenuItem href={`/${currentUser.username}?tab=projects`} label="Projects" />
-                <MenuItem href={`/${currentUser.username}?tab=bookmarks`} label="Bookmarks" />
+                <MenuItem href={'/bookmarks'} label="Bookmarks" />
                 <MenuItem href={`/${currentUser.username}/new`} label="Create Project" />
 
                 <hr />

@@ -1,22 +1,17 @@
-// Lib Imports.
-import { Suspense } from 'react';
-
 // Components
 import Container from '../Container';
 import Branding from './Branding';
 import Search from './Search';
 import UserMenu from './UserMenu';
-import SubnavTabs from './SubnavTabs';
 
 // Types.
 import { User } from '@prisma/client';
 type Props = {
-  currentUser: User | null;
-  profileUser?: User | null;
+  currentUser?: User | null;
 };
 
 // Component.
-export default function Navbar({ currentUser, profileUser }: Props) {
+export default function Navbar({ currentUser }: Props) {
   return (
     <nav className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -33,10 +28,6 @@ export default function Navbar({ currentUser, profileUser }: Props) {
           </div>
         </Container>
       </div>
-
-      <Suspense>
-        <SubnavTabs currentUser={currentUser} profileUser={profileUser} />
-      </Suspense>
     </nav>
   );
 }
