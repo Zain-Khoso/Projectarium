@@ -17,6 +17,7 @@ import { getDisplayNameOfUser } from '@/libs/getDisplayNameOfUser';
 // Icons.
 import { FaCalendarCheck, FaClipboardList } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
+import { TbThumbUp } from 'react-icons/tb';
 
 // Components.
 import BookmarkButton from './BookmarkButton';
@@ -25,6 +26,9 @@ import Avatar from './Avatar';
 
 // Types.
 import { User, Project } from '@prisma/client';
+import LikeButton from './LikeButton';
+import CommentButton from './CommentButton';
+import ShareButton from './ShareButton';
 type Props = {
   owner: User;
   currentUser?: User | null;
@@ -72,7 +76,7 @@ export default function ProjectCard({ owner, currentUser, project }: Props) {
   return (
     <Link
       href={`/${owner.username}/${project.title}`}
-      className="w-full max-w-[320px] flex flex-col overflow-hidden group"
+      className="w-full h-full max-w-[320px] flex flex-col overflow-hidden group"
     >
       <section className="relative rounded-lg overflow-hidden w-full h-[200px]">
         <Image
@@ -106,7 +110,7 @@ export default function ProjectCard({ owner, currentUser, project }: Props) {
           <span className="font-medium text-sm text-neutral-600">With {createdWith}, etc...</span>
         </div>
 
-        <div onClick={handleOwnerClick} className="flex flex-row items-center gap-2">
+        <div onClick={handleOwnerClick} className="h-11 flex flex-row items-center gap-2">
           <div className="w-fit h-fit rounded-full border border-neutral-300">
             <Avatar src={owner.image ? owner.image : '/images/user-placeholder.png'} size={35} />
           </div>
@@ -125,6 +129,16 @@ export default function ProjectCard({ owner, currentUser, project }: Props) {
             )}
           </div>
         </div>
+      </section>
+
+      <hr />
+
+      <section className="w-full flex flex-row justify-between items-center pt-4">
+        <LikeButton />
+
+        <CommentButton />
+
+        <ShareButton />
       </section>
     </Link>
   );
