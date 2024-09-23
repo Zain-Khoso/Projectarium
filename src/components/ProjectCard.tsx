@@ -17,18 +17,14 @@ import { getDisplayNameOfUser } from '@/libs/getDisplayNameOfUser';
 // Icons.
 import { FaCalendarCheck, FaClipboardList } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
-import { TbThumbUp } from 'react-icons/tb';
 
 // Components.
-import BookmarkButton from './BookmarkButton';
-import Badge from './Badge';
 import Avatar from './Avatar';
+import Badge from './Badge';
+import { BookmarkButton, LikeButton, CommentButton, ShareButton } from './Button';
 
 // Types.
 import { User, Project } from '@prisma/client';
-import LikeButton from './LikeButton';
-import CommentButton from './CommentButton';
-import ShareButton from './ShareButton';
 type Props = {
   owner: User;
   currentUser?: User | null;
