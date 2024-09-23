@@ -74,3 +74,11 @@ enum ProjectStatus {
   COMPLETED
   ARCHIVED
 }
+
+// Model to store project/post likes.
+model Like {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  projectId     String @db.ObjectId
+  userId        String @db.ObjectId
+  createdAt     DateTime @default(now())
+}
