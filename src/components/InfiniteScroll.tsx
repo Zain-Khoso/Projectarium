@@ -22,6 +22,7 @@ export default async function InfiniteScroll({ currentUser }: Props) {
           owner={project.owner}
           currentUser={currentUser}
           project={project}
+          likes={project.likes}
         />
       ))}
     </main>

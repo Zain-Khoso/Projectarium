@@ -56,6 +56,7 @@ export default async function BookmarksPage() {
                 owner={bookmark.owner}
                 currentUser={currentUser}
                 project={bookmark}
+                likes={bookmark.likes}
               />
             ))}
           </section>

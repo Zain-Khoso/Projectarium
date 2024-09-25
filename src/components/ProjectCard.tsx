@@ -24,15 +24,16 @@ import Badge from './Badge';
 import { BookmarkButton, LikeButton, CommentButton, ShareButton } from './Button';
 
 // Types.
-import { User, Project } from '@prisma/client';
+import { User, Project, Like } from '@prisma/client';
 type Props = {
   owner: User;
   currentUser?: User | null;
   project: Project;
+  likes: Like[];
 };
 
 // Component.
-export default function ProjectCard({ owner, currentUser, project }: Props) {
+export default function ProjectCard({ owner, currentUser, project, likes }: Props) {
   const router = useRouter();
   const { getByValue: getTechnologyByValue } = useTechnologies();
   const { getByValue: getCountryByValue } = useCountries();
@@ -130,7 +131,7 @@ export default function ProjectCard({ owner, currentUser, project }: Props) {
       <hr />
 
       <section className="w-full flex flex-row justify-between items-center pt-4">
-        <LikeButton />
+        <LikeButton currentUser={currentUser} project={project} likes={likes} />
 
         <CommentButton />
 

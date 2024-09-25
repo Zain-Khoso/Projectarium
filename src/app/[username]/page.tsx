@@ -88,6 +88,7 @@ export default async function ProfilePage({ params: { username } }: Props) {
                   currentUser={currentUser}
                   owner={project.owner}
                   project={project}
+                  likes={project.likes}
                 />
               ))}
             </div>

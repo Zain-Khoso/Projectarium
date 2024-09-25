@@ -7,7 +7,7 @@ export default async function getUserProjects(userId: string) {
     const projects = await prisma.project.findMany({
       where: { ownerId: userId },
       orderBy: { createdAt: 'asc' },
-      include: { owner: true },
+      include: { owner: true, likes: true },
     });
 
     if (!projects) return [];
