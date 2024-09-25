@@ -16,9 +16,9 @@ type Props = {
   onClose: () => void;
   title: string;
   body: React.ReactElement;
-  actionLabel: string;
+  actionLabel?: string;
   actionIcon?: IconType;
-  onSubmit: () => void;
+  onSubmit?: () => void;
   footer?: React.ReactElement;
   disabled?: boolean;
   secondaryAction?: () => void;
@@ -57,7 +57,7 @@ export default function Modal({
   }, [disabled, onClose]);
 
   const handleSubmit = useCallback(() => {
-    if (disabled) return;
+    if (disabled || !onSubmit) return;
 
     onSubmit();
   }, [disabled, onSubmit]);
@@ -107,14 +107,15 @@ export default function Modal({
                       icon={secondaryActionIcon}
                     />
                   )}
-
-                  <Button
-                    disabled={disabled}
-                    label={actionLabel}
-                    onClick={handleSubmit}
-                    icon={actionIcon}
-                    iconSide="right"
-                  />
+                  {onSubmit && actionLabel && (
+                    <Button
+                      disabled={disabled}
+                      label={actionLabel}
+                      onClick={handleSubmit}
+                      icon={actionIcon}
+                      iconSide="right"
+                    />
+                  )}
                 </div>
 
                 {footer}

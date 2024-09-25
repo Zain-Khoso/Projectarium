@@ -71,11 +71,11 @@ export default function ProjectCard({ owner, currentUser, project, likes }: Prop
   );
 
   return (
-    <Link
-      href={`/${owner.username}/${project.title}`}
-      className="w-full h-full max-w-[320px] flex flex-col overflow-hidden group"
-    >
-      <section className="relative rounded-lg overflow-hidden w-full h-[200px]">
+    <div className="w-full h-full max-w-[320px] flex flex-col overflow-hidden group">
+      <Link
+        href={`/${owner.username}/${project.title}`}
+        className="relative rounded-lg overflow-hidden w-full h-[200px]"
+      >
         <Image
           alt={`Cover image of project ${project.title}`}
           src={project.coverImage}
@@ -86,14 +86,17 @@ export default function ProjectCard({ owner, currentUser, project, likes }: Prop
         {owner.id !== currentUser?.id && (
           <BookmarkButton projectId={project.id} currentUser={currentUser} />
         )}
-      </section>
+      </Link>
 
       <section className="w-full flex flex-col gap-4 px-2 py-4">
-        <div className="flex flex-row items-center justify-between">
+        <Link
+          href={`/${owner.username}/${project.title}`}
+          className="flex flex-row items-center justify-between"
+        >
           <h4 className="font-bold text-xl">{projectTitle}</h4>
 
           <Badge label={project.status} outline={project.status !== 'COMPLETED'} />
-        </div>
+        </Link>
 
         <div className="flex flex-row items-start gap-1">
           <FaCalendarCheck size={16} className="fill-neutral-600" />
@@ -107,7 +110,10 @@ export default function ProjectCard({ owner, currentUser, project, likes }: Prop
           <span className="font-medium text-sm text-neutral-600">With {createdWith}, etc...</span>
         </div>
 
-        <div onClick={handleOwnerClick} className="h-11 flex flex-row items-center gap-2">
+        <div
+          onClick={handleOwnerClick}
+          className="h-11 flex flex-row items-center gap-2 cursor-pointer"
+        >
           <div className="w-fit h-fit rounded-full border border-neutral-300">
             <Avatar src={owner.image ? owner.image : '/images/user-placeholder.png'} size={35} />
           </div>
@@ -135,8 +141,8 @@ export default function ProjectCard({ owner, currentUser, project, likes }: Prop
 
         <CommentButton />
 
-        <ShareButton />
+        <ShareButton project={project} />
       </section>
-    </Link>
+    </div>
   );
 }
