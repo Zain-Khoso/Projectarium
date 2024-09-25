@@ -8,6 +8,7 @@ import { TbThumbUp } from 'react-icons/tb';
 
 // Types.
 import { User, Project, Like } from '@prisma/client';
+import { formatLikes } from '@/libs/formatters';
 type Props = {
   currentUser?: User | null;
   project: Project;
@@ -16,11 +17,15 @@ type Props = {
 
 // Component.
 export default function LikeButton({ currentUser, project, likes }: Props) {
-  const { isLiked, toggleLike } = useLike({ currentUser, projectId: project.id, likes });
+  const { isLiked, toggleLike, likesCount } = useLike({
+    currentUser,
+    projectId: project.id,
+    likes,
+  });
 
   return (
     <div className="flex flex-row gap-2 justify-center items-center">
-      <span className="text-neutral-600 font-semibold">2.1K</span>
+      <span className="text-neutral-600 font-semibold">{formatLikes(likesCount)}</span>
 
       <div className="h-4 w-[1px] border border-neutral-400"></div>
 

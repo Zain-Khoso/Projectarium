@@ -141,7 +141,7 @@ export default function ProjectCard({ owner, currentUser, project, likes }: Prop
 
         <CommentButton />
 
-        <ShareButton project={project} />
+        <ShareButton owner={owner} project={project} />
       </section>
     </div>
   );

@@ -17,16 +17,17 @@ import { FaLinkedin } from 'react-icons/fa';
 import Modal from './base';
 
 // Types.
-import { Project } from '@prisma/client';
+import { User, Project } from '@prisma/client';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  owner: User;
   project: Project;
 };
 
 // Component.
-export default function ShareProjectModel({ isOpen, onClose, project }: Props) {
-  const url = `https://projectarium.vercel.app/${project.ownerId}/${project.title}`;
+export default function ShareProjectModel({ isOpen, onClose, owner, project }: Props) {
+  const url = `https://projectarium.vercel.app/${owner.username}/${project.title}`;
 
   const email = useMemo(
     () => ({

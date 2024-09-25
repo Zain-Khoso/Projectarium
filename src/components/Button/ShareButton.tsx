@@ -10,13 +10,14 @@ import { FaShare } from 'react-icons/fa';
 import ShareProjectModel from '../modals/ShareProjectModel';
 
 // Types.
-import { Project } from '@prisma/client';
+import { User, Project } from '@prisma/client';
 type Props = {
   project: Project;
+  owner: User;
 };
 
 // Component.
-export default function ShareButton({ project }: Props) {
+export default function ShareButton({ owner, project }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const onOpen = () => setIsOpen(true);
@@ -43,7 +44,7 @@ export default function ShareButton({ project }: Props) {
         <span className="text-neutral-600 font-semibold">Share</span>
       </button>
 
-      <ShareProjectModel project={project} isOpen={isOpen} onClose={onClose} />
+      <ShareProjectModel owner={owner} project={project} isOpen={isOpen} onClose={onClose} />
     </>
   );
 }
