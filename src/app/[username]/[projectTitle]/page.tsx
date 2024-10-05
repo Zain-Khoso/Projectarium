@@ -1,16 +1,29 @@
+// Lib Imports.
+import { notFound, permanentRedirect } from 'next/navigation';
+import Image from 'next/image';
+import React from 'react';
+
 // Actions.
 import getCurrentUser from '@/actions/getCurrentUser';
 import getUserByUsername from '@/actions/getUserByUsername';
 import getProjectByTitle from '@/actions/getProjectByTitle';
 
+// Utils.
+import { getDisplayNameOfUser } from '@/libs/getDisplayNameOfUser';
+
+// Icons.
+import { FaExternalLinkSquareAlt } from 'react-icons/fa';
+
 // Components.
 import Navbar from '@/components/navbar/Navbar';
 import Container from '@/components/Container';
+import Header from './Header';
+import Badge from '@/components/Badge';
+import { LinkButton, BookmarkButton, ShareButton, LikeButton } from '@/components/Button';
 
 // Types.
 import { Metadata } from 'next';
-import { notFound, permanentRedirect } from 'next/navigation';
-import { getDisplayNameOfUser } from '@/libs/getDisplayNameOfUser';
+import UserRibbon from '@/components/UserRibbon';
 type ParamsT = {
   username?: string;
   projectTitle?: string;
@@ -101,7 +114,68 @@ export default async function IndividualProjectPage({
     <>
       <Navbar currentUser={currentUser} />
 
-      <Container> </Container>
+      <Container>
+        <main className="max-w-screen-lg flex flex-col gap-8 pt-28 pb-8 mx-auto">
+          <section className="w-full flex flex-row items-center justify-between">
+            <Header heading={project.title} technologies={project.technologies} />
+
+            <div className="hidden md:flex flex-row items-center justify-center gap-4">
+              <ShareButton project={project} owner={project.owner} />
+              <Badge label={project.status} outline={project.status !== 'COMPLETED'} />
+            </div>
+          </section>
+
+          <section className="w-full flex flex-col gap-8">
+            <div className="relative rounded-lg overflow-hidden w-full max-w-screen-md aspect-video">
+              <Image
+                alt={`Cover image of project ${project.title}`}
+                src={project.coverImage}
+                fill
+                className="w-full h-full object-cover object-center hover:scale-110 transition"
+              />
+
+              {project.owner.id !== currentUser?.id && (
+                <BookmarkButton projectId={project.id} currentUser={currentUser} />
+              )}
+            </div>
+
+            <div className="flex flex-row items-center justify-between gap-4">
+              <UserRibbon owner={project.owner} size="lg" />
+
+              <LikeButton currentUser={currentUser} project={project} likes={project.likes} />
+            </div>
+          </section>
+
+          <section className="w-full flex flex-col gap-8">
+            <p className="w-full text-lg">{project.description}</p>
+
+            <div className="w-full flex flex-row items-center gap-2 md:max-w-[350px]">
+              {project.liveDemo ? (
+                <LinkButton
+                  label="Live Demo"
+                  icon={FaExternalLinkSquareAlt}
+                  href={project.liveDemo}
+                  target="_blank"
+                />
+              ) : (
+                <></>
+              )}
+
+              {project.repositoryUrl ? (
+                <LinkButton
+                  label="Source Code"
+                  icon={FaExternalLinkSquareAlt}
+                  href={project.repositoryUrl}
+                  target="_blank"
+                  outline
+                />
+              ) : (
+                <></>
+              )}
+            </div>
+          </section>
+        </main>
+      </Container>
     </>
   );
 }

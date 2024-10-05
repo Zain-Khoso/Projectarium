@@ -29,6 +29,7 @@ export default function BookmarkButton({ projectId, currentUser }: Props) {
         top-3 
         right-3 
         stroke-white
+        cursor-pointer
         ${isBookmarked ? 'fill-orange-500' : 'fill-neutral-400'}
         `}
     />

@@ -1,4 +1,4 @@
-'uise client';
+'use client';
 
 // Lib Imports.
 import { MouseEventHandler, useState } from 'react';

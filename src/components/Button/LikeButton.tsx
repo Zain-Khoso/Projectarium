@@ -1,4 +1,4 @@
-'uise client';
+'use client';
 
 // Hooks.
 import useLike from '@/hooks/useLike';
