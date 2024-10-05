@@ -119,11 +119,6 @@ export default async function IndividualProjectPage({
         <main className="max-w-screen-lg flex flex-col gap-8 pt-28 pb-8 mx-auto">
           <section className="w-full flex flex-row items-center justify-between">
             <Header heading={project.title} technologies={project.technologies} />
-
-            <div className="hidden md:flex flex-row items-center justify-center gap-4">
-              <ShareButton project={project} owner={project.owner} />
-              <Badge label={project.status} outline={project.status !== 'COMPLETED'} />
-            </div>
           </section>
 
           <section className="w-full flex flex-col gap-8">
@@ -141,9 +136,16 @@ export default async function IndividualProjectPage({
             </div>
 
             <div className="flex flex-row items-center justify-between gap-4">
-              <UserRibbon owner={project.owner} size="lg" />
+              <div className="flex flex-row items-center justify-center gap-4 md:gap-8">
+                <LikeButton currentUser={currentUser} project={project} likes={project.likes} />
+                <ShareButton project={project} owner={project.owner} />
+              </div>
 
-              <LikeButton currentUser={currentUser} project={project} likes={project.likes} />
+              <Badge label={project.status} outline={project.status !== 'COMPLETED'} />
+            </div>
+
+            <div className="flex flex-row items-center justify-between gap-4">
+              <UserRibbon owner={project.owner} size="lg" />
             </div>
           </section>
 
