@@ -24,6 +24,7 @@ import { LinkButton, BookmarkButton, ShareButton, LikeButton } from '@/component
 // Types.
 import { Metadata } from 'next';
 import UserRibbon from '@/components/UserRibbon';
+import Heading from '@/components/Heading';
 type ParamsT = {
   username?: string;
   projectTitle?: string;
@@ -126,7 +127,7 @@ export default async function IndividualProjectPage({
           </section>
 
           <section className="w-full flex flex-col gap-8">
-            <div className="relative rounded-lg overflow-hidden w-full max-w-screen-md aspect-video">
+            <div className="relative rounded-lg overflow-hidden w-full aspect-video">
               <Image
                 alt={`Cover image of project ${project.title}`}
                 src={project.coverImage}
