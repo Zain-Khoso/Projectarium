@@ -1,5 +1,4 @@
 // Libs
-import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 
 // Local Imports.
@@ -8,6 +7,10 @@ import ToastProvider from '@/providers/ToasterProvider';
 
 // Styles.
 import './globals.css';
+
+// Types.
+import type { Metadata } from 'next';
+import { ChildrenProps } from '../../types';
 
 // Metadata.
 export const metadata: Metadata = {

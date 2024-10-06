@@ -1,6 +1,6 @@
 import { Comment, User } from '@prisma/client';
 
-interface ChildrenProps {
+export interface ChildrenProps {
   children: React.ReactNode;
 }
 
