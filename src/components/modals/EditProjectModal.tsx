@@ -18,237 +18,299 @@ import { formatURL } from '@/libs/formatters';
 import Modal from './base';
 import Heading from '../Heading';
 import { Input, Textarea, ImageUpload } from '../Input';
-import CountrySelect from '../Input/CountrySelect';
+import TechnologiesSelect from '../Input/TechnologiesSelect';
+import ProjectStatusSelect from '../Input/ProjectStatusSelect';
 
 // Types.
 import { Project } from '@prisma/client';
-import useCountries from '@/hooks/useCountries';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
   project: Project;
 };
-enum STEPS {}
+enum STEPS {
+  IMAGE_TITLE = 0,
+  STATUS_DESCRIPTION = 1,
+  TECHNOLOGIES_LIVEDEMO_REPO = 2,
+}
 
 // Component.
 export default function EditProjectModal({ isOpen, onClose, project }: Props) {
-  // const router = useRouter();
+  const router = useRouter();
 
-  // const {
-  //   watch,
-  //   handleSubmit,
-  //   setError,
-  //   clearErrors,
-  //   getValues,
-  //   setValue,
-  //   reset,
-  //   formState: { errors, isLoading, isSubmitting },
-  // } = useForm<FieldValues>({
-  //   defaultValues: {},
-  // });
+  const {
+    watch,
+    handleSubmit,
+    setError,
+    clearErrors,
+    getValues,
+    setValue,
+    reset,
+    formState: { errors, isLoading, isSubmitting },
+  } = useForm<FieldValues>({
+    defaultValues: {
+      title: project.title,
+      coverImage: project.coverImage,
+      description: project.description,
+      technologies: project.technologies,
+      status: project.status,
+      liveDemo: project.liveDemo,
+      repositoryUrl: project.repositoryUrl,
+    },
+  });
 
-  // const username = watch('username');
-  // const name = watch('name');
-  // const bio = watch('bio');
-  // const website = watch('website');
-  // const location = watch('location');
+  const title = watch('title');
+  const description = watch('description');
+  const liveDemo = watch('liveDemo');
+  const technologies = watch('technologies');
+  const status = watch('status');
+  const repositoryUrl = watch('repositoryUrl');
 
-  // const [step, setStep] = useState(STEPS.USERNAME_IMAGE);
+  const [step, setStep] = useState(STEPS.IMAGE_TITLE);
 
-  // useEffect(() => {
-  //   setValue('username', project?.username || '');
-  //   setValue('image', project?.image || '');
-  //   setValue('name', project?.name || '');
-  //   setValue('bio', project?.bio || '');
-  //   setValue('location', project?.locationValue ? getByValue(project.locationValue) : '');
-  //   setValue('website', project?.website || '');
-  // }, [isOpen]);
+  useEffect(() => {
+    setValue('title', project?.title || '');
+    setValue('coverImage', project?.coverImage || '');
+    setValue('description', project?.description || '');
+    setValue('liveDemo', project?.liveDemo || '');
+    setValue('repositoryUrl', project?.repositoryUrl || '');
+    setValue('technologies', project?.technologies || '');
+    setValue('status', project?.status || '');
+  }, [isOpen]);
 
-  // const onNext = () => setStep((value) => value + 1);
-  // const onBack = () => setStep((value) => value - 1);
+  const onNext = () => setStep((value) => value + 1);
+  const onBack = () => setStep((value) => value - 1);
 
-  // const onUsernameChange = useCallback(
-  //   (value: string) => {
-  //     setValue('username', value);
+  const onInputChange = useCallback(
+    (id: string, value: string) => {
+      setValue(id, value);
 
-  //     clearErrors('username');
-  //   },
-  //   [setValue, clearErrors]
-  // );
+      clearErrors(id);
+    },
+    [setValue, clearErrors]
+  );
 
-  // const onWebsiteChange = useCallback(
-  //   (value: string) => {
-  //     setValue('website', value);
+  const onSubmit: SubmitHandler<FieldValues> = async function (data) {
+    const { title, coverImage, description, technologies, status, liveDemo, repositoryUrl } = data;
 
-  //     clearErrors('website');
-  //   },
-  //   [setValue, clearErrors]
-  // );
+    if (step === STEPS.IMAGE_TITLE) {
+      // CoverImage checks.
+      if (coverImage.length === 0) {
+        setError('coverImage', { message: 'Cover Image is required.' });
+        toast.error('Cover Image is required.');
+        return;
+      }
 
-  // const onSubmit: SubmitHandler<FieldValues> = async function (data) {
-  //   const { username, image, name, bio, location, website } = data;
+      // Title checks.
+      if (title.length === 0) {
+        setError('title', { message: 'Title is required.' });
+        toast.error('Title is required.');
+        return;
+      } else if (title.length > 30) {
+        setError('title', { message: 'Title is too long.' });
+        toast.error('Title is too long.');
+        return;
+      } else if (!isValidUsername(title)) {
+        setError('title', { message: 'Invalid Title.' });
+        toast.error('Invalid Title.');
+        return;
+      } else if (project.title.toLowerCase() !== title.toLowerCase()) {
+        try {
+          const response = await axios.post('/api/projects/title-is-unique', {
+            title,
+          });
 
-  //   if (step === STEPS.USERNAME_IMAGE) {
-  //     if (username.length === 0) return setError('username', { message: 'Username is required.' });
+          if (!response.data.isClear) {
+            setError('title', { message: 'Title is already in use.' });
+            toast.error('Title is already in use.');
+            return;
+          }
+        } catch {
+          toast.error('Something went wrong.');
+          return;
+        }
+      }
 
-  //     if (username.length > 14 || !isValidUsername(username)) {
-  //       toast.error('14 alpha-numeric characters atmost.');
+      return onNext();
+    }
 
-  //       return setError('username', { message: '14 alpha-numeric characters atmost.' });
-  //     }
+    if (step === STEPS.STATUS_DESCRIPTION) {
+      // Status checks.
+      if (status === '') {
+        setError('status', { message: 'Status is required.' });
+        toast.error('Status is required.');
+        return;
+      }
 
-  //     try {
-  //       const response = await axios.post('/api/users/username-already-exists', {
-  //         username,
-  //         projectId: project?.id,
-  //       });
+      // Description checks.
+      if (description.length === 0) {
+        setError('description', { message: 'Description is required.' });
+        toast.error('Description is required.');
+        return;
+      } else if (description.length > 3000) {
+        setError('description', { message: 'Description is too long.' });
+        toast.error('Description is too long.');
+        return;
+      }
 
-  //       if (!response.data.isClear) {
-  //         toast.error('Username already taken.');
+      return onNext();
+    }
 
-  //         return setError('username', { message: 'Username takenalready .' });
-  //       }
-  //     } catch {
-  //       toast.error('Something went wrong.');
+    if (step === STEPS.TECHNOLOGIES_LIVEDEMO_REPO) {
+      // Technologies checks.
+      if (technologies.length === 0) {
+        setError('technologies', { message: 'Provide at least one technology.' });
+        toast.error('Provide at least one technology.');
+        return;
+      }
 
-  //       return setError('username', { message: 'Something went wrong.' });
-  //     }
+      // Demo.
+      if (liveDemo !== '' && !isValidURL(liveDemo)) {
+        setError('liveDemo', { message: 'Invalid URL.' });
+        toast.error('Invalid URL.');
+        return;
+      }
 
-  //     return onNext();
-  //   }
+      // Repository.
+      if (repositoryUrl !== '' && !isValidURL(repositoryUrl)) {
+        setError('repositoryUrl', { message: 'Invalid URL.' });
+        toast.error('Invalid URL.');
+        return;
+      }
+    }
 
-  //   if (step === STEPS.NAME_BIO) return onNext();
+    const projectData = {
+      title,
+      description,
+      coverImage,
+      technologies,
+      status,
+      liveDemo: liveDemo === '' ? '' : formatURL(liveDemo),
+      repositoryUrl: repositoryUrl === '' ? '' : formatURL(repositoryUrl),
+    };
 
-  //   if (step === STEPS.LOCATION_WEBSITE) {
-  //     if (website !== '' && !isValidURL(website)) {
-  //       toast.error('Invalid URL.');
+    try {
+      const response = await axios.post(`/api/projects/update/${project.id}`, projectData);
+      toast.success('Project updated successfully.');
+      router.replace(response.data.redirectUrl);
+      handleClose();
+    } catch {
+      toast.error('Something went wrong.');
+      toast.error('Try again later.');
+      return;
+    }
+  };
 
-  //       return setError('website', { message: 'Invalid URL.' });
-  //     }
-
-  //     try {
-  //       const response = await axios.post('/api/users', {
-  //         projectId: project?.id,
-  //         username,
-  //         image,
-  //         name,
-  //         bio,
-  //         locationValue: location.value || '',
-  //         website: formatURL(website),
-  //       });
-
-  //       toast.success('Profile updated.');
-  //       reset();
-  //       setStep(STEPS.USERNAME_IMAGE);
-  //       onClose();
-  //       if (response.data.username === project?.username) router.refresh();
-  //       else router.push(`/${username}`);
-  //     } catch {
-  //       toast.error('Something went wrong.');
-  //       reset();
-  //       setStep(STEPS.USERNAME_IMAGE);
-  //       onClose();
-  //       router.refresh();
-  //     }
-  //   }
-  // };
-
-  // const handleClose = function () {
-  //   reset();
-  //   setStep(STEPS.USERNAME_IMAGE);
-  //   onClose();
-  // };
+  const handleClose = function () {
+    reset();
+    setStep(STEPS.IMAGE_TITLE);
+    onClose();
+  };
 
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
-        title="Personalize Your Identity"
-        subtitle="Set your unique username and choose an avatar that represents you."
+        title="Project Details"
+        subtitle="Update your project's cover image and title to make a lasting impression."
       />
 
-      {/* <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
         <Input
-          id="username"
-          label="Username"
-          value={username}
-          onChange={onUsernameChange}
+          id="title"
+          label="Title"
+          value={title}
+          onChange={(value) => onInputChange('title', value)}
           errors={errors}
           required
         />
 
         <ImageUpload
-          id="image"
-          label="Click to upload your Avatar"
-          value={getValues('image')}
+          id="coverImage"
+          label="Click to upload your Image"
+          value={getValues('coverImage')}
           onChange={setValue}
         />
-      </div> */}
+      </div>
     </div>
   );
 
-  // if (step === STEPS.NAME_BIO)
-  //   bodyContent = (
-  //     <div className="flex flex-col gap-8">
-  //       <Heading
-  //         title="Introduce Yourself"
-  //         subtitle="Share your name and a brief bio to tell others about your background and skills."
-  //       />
+  if (step === STEPS.STATUS_DESCRIPTION)
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Project Overview"
+          subtitle="Refine your project's status and description to reflect your progress and vision."
+        />
 
-  //       <div className="flex flex-col gap-4">
-  //         <Input
-  //           id="name"
-  //           label="Name"
-  //           value={name}
-  //           onChange={(value) => setValue('name', value)}
-  //           errors={errors}
-  //         />
+        <div className="flex flex-col gap-4">
+          <ProjectStatusSelect
+            value={status}
+            onChange={setValue}
+            errors={errors}
+            clearErrors={clearErrors}
+          />
 
-  //         <Textarea
-  //           id="bio"
-  //           label="Bio"
-  //           value={bio}
-  //           onChange={(value) => setValue('bio', value)}
-  //           errors={errors}
-  //         />
-  //       </div>
-  //     </div>
-  //   );
+          <Textarea
+            id="description"
+            label="Description"
+            value={description}
+            onChange={(value) => onInputChange('description', value)}
+            errors={errors}
+          />
+        </div>
+      </div>
+    );
 
-  // if (step === STEPS.LOCATION_WEBSITE)
-  //   bodyContent = (
-  //     <div className="flex flex-col gap-8">
-  //       <Heading
-  //         title="Connect with the Community"
-  //         subtitle="Provide your location and a link to your personal website or portfolio."
-  //       />
+  if (step === STEPS.TECHNOLOGIES_LIVEDEMO_REPO)
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Technical Details"
+          subtitle="Specify the technologies, live demo, and repository to showcase your project's implementation and source."
+        />
 
-  //       <div className="flex flex-col gap-4">
-  //         <Input
-  //           id="website"
-  //           label="Website"
-  //           value={website}
-  //           onChange={onWebsiteChange}
-  //           errors={errors}
-  //         />
+        <div className="flex flex-col gap-4">
+          <TechnologiesSelect
+            value={technologies}
+            onChange={setValue}
+            errors={errors}
+            clearErrors={clearErrors}
+          />
 
-  //         <CountrySelect value={location} onChange={setValue} />
-  //       </div>
-  //     </div>
-  //   );
+          <Input
+            id="liveDemo"
+            label="Project Demo"
+            value={liveDemo}
+            onChange={(value) => onInputChange('liveDemo', value)}
+            errors={errors}
+            disabled={isLoading || isSubmitting}
+          />
+
+          <Input
+            id="repositoryUrl"
+            label="Project Repository"
+            value={repositoryUrl}
+            onChange={(value) => onInputChange('repositoryUrl', value)}
+            errors={errors}
+            disabled={isLoading || isSubmitting}
+          />
+        </div>
+      </div>
+    );
 
   return (
     <Modal
-      title="Edit project"
+      title={`Edit ${project.title}`}
       isOpen={isOpen}
-      onClose={onClose}
-      // onSubmit={() => {}}
-      // secondaryAction={onBack}
-      // actionLabel={step === STEPS.LOCATION_WEBSITE ? 'Confirm' : 'Next'}
-      // actionIcon={step === STEPS.LOCATION_WEBSITE ? FaCheckCircle : FaArrowCircleRight}
-      // secondaryActionLabel={step === STEPS.USERNAME_IMAGE ? undefined : 'Back'}
-      // secondaryActionIcon={FaArrowCircleLeft}
+      onClose={handleClose}
+      onSubmit={handleSubmit(onSubmit)}
+      secondaryAction={onBack}
+      actionLabel={step === STEPS.TECHNOLOGIES_LIVEDEMO_REPO ? 'Confirm' : 'Next'}
+      actionIcon={step === STEPS.TECHNOLOGIES_LIVEDEMO_REPO ? FaCheckCircle : FaArrowCircleRight}
+      secondaryActionLabel={step === STEPS.IMAGE_TITLE ? undefined : 'Back'}
+      secondaryActionIcon={FaArrowCircleLeft}
       body={bodyContent}
-      // disabled={isSubmitting || isLoading}
+      disabled={isSubmitting || isLoading}
     />
   );
 }

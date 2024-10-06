@@ -114,5 +114,8 @@ export default function useTechnologies() {
 
   const getByValue = (value: string) => technologies.find((item) => item.value === value);
 
-  return { getAll, getByValue };
+  const filterByValue = (values: string[]) =>
+    technologies.filter((item) => values.includes(item.value));
+
+  return { getAll, getByValue, filterByValue };
 }

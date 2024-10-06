@@ -3,8 +3,13 @@
 // Lib Imports.
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
+import axios from 'axios';
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
+
+// Utils.
+import { isValidURL, isValidUsername } from '@/libs/validations';
+import { formatURL } from '@/libs/formatters';
 
 // Icons.
 import { FaPlusCircle } from 'react-icons/fa';
@@ -14,12 +19,9 @@ import { Input, Textarea, ImageUpload } from '@/components/Input';
 import { Button } from '@/components/Button';
 import ProjectStatusSelect from '@/components/Input/ProjectStatusSelect';
 import TechnologiesSelect from '@/components/Input/TechnologiesSelect';
-import { TechnologyT } from '@/hooks/useTechnologies';
 
 // Types.
 import { User } from '@prisma/client';
-import axios from 'axios';
-import { isValidURL, isValidUsername } from '@/libs/validations';
 type Props = {
   currentUser?: User | null;
 };
@@ -134,17 +136,14 @@ export default function ShareProjectForm({ currentUser }: Props) {
       return;
     }
 
-    const technologyValues = technologies.map((technology: TechnologyT) => technology.value);
-    const statusValue = status.value;
-
     const newProjectData = {
       title,
       description,
       coverImage,
-      technologies: technologyValues,
-      status: statusValue,
-      liveDemo,
-      repositoryUrl,
+      technologies,
+      status,
+      liveDemo: liveDemo === '' ? '' : formatURL(liveDemo),
+      repositoryUrl: repositoryUrl === '' ? '' : formatURL(repositoryUrl),
     };
 
     try {

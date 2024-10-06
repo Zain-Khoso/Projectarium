@@ -9,7 +9,7 @@ import { FieldErrors, FieldValues, UseFormClearErrors, UseFormSetValue } from 'r
 
 // Types.
 type Props = {
-  value?: ProjectStatus;
+  value?: string;
   onChange: UseFormSetValue<FieldValues>;
   errors: FieldErrors;
   clearErrors: UseFormClearErrors<FieldValues>;
@@ -34,10 +34,12 @@ export default function ProjectStatusSelect({ value, onChange, errors, clearErro
     []
   );
 
-  const handleChange = function (value: ProjectStatus) {
-    onChange('status', value);
+  const handleChange = function (value: ProjectStatus | null) {
+    onChange('status', value?.value || '');
     clearErrors('status');
   };
+
+  const selectedStatus = value ? statuses.find((status) => status.value === value) : '';
 
   return (
     <div className="w-full">
@@ -47,7 +49,7 @@ export default function ProjectStatusSelect({ value, onChange, errors, clearErro
           placeholder="Project Status"
           isClearable
           options={statuses}
-          value={value}
+          value={selectedStatus}
           onChange={handleChange}
           formatOptionLabel={(option: any) => (
             <div className="flex flex-row items-center gap-3">{option.label}</div>

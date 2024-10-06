@@ -1,17 +1,16 @@
 'use client';
 
 // Lib Imports.
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import Select from 'react-select';
 
 // Hooks.
 import { FieldValues, UseFormSetValue, FieldErrors, UseFormClearErrors } from 'react-hook-form';
-import useTechnologies from '@/hooks/useTechnologies';
+import useTechnologies, { TechnologyT } from '@/hooks/useTechnologies';
 
 // Types.
-import { TechnologyT } from '@/hooks/useTechnologies';
 type Props = {
-  value?: string;
+  value?: string[];
   onChange: UseFormSetValue<FieldValues>;
   errors: FieldErrors;
   clearErrors: UseFormClearErrors<FieldValues>;
@@ -22,10 +21,12 @@ export default function TechnologiesSelect({ value, onChange, errors, clearError
 
   useEffect(() => setIsMounted(true), []);
 
-  const { getAll } = useTechnologies();
+  const { getAll, filterByValue } = useTechnologies();
+
+  const selectedTechnologies = value ? filterByValue(value) : '';
 
   const handleChange = function (value: any) {
-    onChange('technologies', value);
+    onChange('technologies', value?.map((technology: TechnologyT) => technology.value) || []);
     clearErrors('technologies');
   };
 
@@ -38,7 +39,7 @@ export default function TechnologiesSelect({ value, onChange, errors, clearError
           isClearable
           isMulti
           options={getAll()}
-          value={value}
+          value={selectedTechnologies}
           onChange={handleChange}
           formatOptionLabel={({ icon: Icon, label }: any) => (
             <div className="flex flex-row items-center gap-3">
