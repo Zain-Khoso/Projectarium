@@ -28,7 +28,7 @@ export default function CommentRibbon({ comment, user, currentUser }: Props) {
           <span className="text-md">{displayName}</span>
           &middot;
           <span className="text-md font-light text-neutral-400">{timePassed}</span>
-          {user.id === currentUser?.id && <CommentControls />}
+          {user.id === currentUser?.id && <CommentControls comment={comment} />}
         </div>
 
         <p className="text-lg font-semibold">{comment.text}</p>
