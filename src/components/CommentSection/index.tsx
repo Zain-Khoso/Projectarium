@@ -23,7 +23,12 @@ export default function CommentSection({ projectId, comments, currentUser }: Pro
 
       <div className="flex flex-col gap-8">
         {comments.map((comment) => (
-          <CommentRibbon key={comment.id} comment={comment} user={comment.user} />
+          <CommentRibbon
+            key={comment.id}
+            comment={comment}
+            user={comment.user}
+            currentUser={currentUser}
+          />
         ))}
       </div>
     </section>

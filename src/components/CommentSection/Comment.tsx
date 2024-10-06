@@ -2,18 +2,20 @@
 import { getDisplayNameOfUser } from '@/libs/getDisplayNameOfUser';
 import { timeElapsed } from '@/libs/timeElapsed';
 
-// Comments.
+// Components.
 import Avatar from '../Avatar';
+import CommentControls from './CommentControls';
 
 // Types.
 import { Comment, User } from '@prisma/client';
 type Props = {
   comment: Comment;
   user: User;
+  currentUser?: User | null;
 };
 
 // Component.
-export default function CommentRibbon({ comment, user }: Props) {
+export default function CommentRibbon({ comment, user, currentUser }: Props) {
   const displayName = getDisplayNameOfUser(user);
   const timePassed = timeElapsed(comment.createdAt);
 
@@ -22,10 +24,11 @@ export default function CommentRibbon({ comment, user }: Props) {
       <Avatar src={user.image} />
 
       <div className="flex flex-col">
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row gap-2 items-center">
           <span className="text-md">{displayName}</span>
           &middot;
           <span className="text-md font-light text-neutral-400">{timePassed}</span>
+          {user.id === currentUser?.id && <CommentControls />}
         </div>
 
         <p className="text-lg font-semibold">{comment.text}</p>
