@@ -17,15 +17,14 @@ import { FaExternalLinkSquareAlt } from 'react-icons/fa';
 import Navbar from '@/components/navbar/Navbar';
 import Container from '@/components/Container';
 import Header from './Header';
+import EditProjectButton from './EditProjectButton';
+import DeleteProjectButton from './DeleteProjectButton';
+import UserRibbon from '@/components/UserRibbon';
 import Badge from '@/components/Badge';
-import { LinkButton, BookmarkButton, ShareButton, LikeButton, Button } from '@/components/Button';
+import { LinkButton, BookmarkButton, ShareButton, LikeButton } from '@/components/Button';
 
 // Types.
 import { Metadata } from 'next';
-import UserRibbon from '@/components/UserRibbon';
-import Heading from '@/components/Heading';
-import EditProjectButton from './EditProjectButton';
-import DeleteProjectButton from './DeleteProjectButton';
 type ParamsT = {
   username?: string;
   projectTitle?: string;
