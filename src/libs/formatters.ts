@@ -11,8 +11,8 @@ export function formatURL(url: string) {
   return url;
 }
 
-// This function formats likes into standard forms.
-export function formatLikes(count: number): string {
+// This function formats large numbers into readable strings.
+export function formatNumber(count: number): string {
   if (count >= 1_000_000_000_000) {
     return (count / 1_000_000_000_000).toFixed(1).replace(/\.0$/, '') + 'T';
   } else if (count >= 1_000_000_000) {

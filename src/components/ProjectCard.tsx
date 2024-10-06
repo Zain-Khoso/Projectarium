@@ -20,17 +20,18 @@ import Badge from './Badge';
 import { BookmarkButton, LikeButton, CommentButton, ShareButton } from './Button';
 
 // Types.
-import { User, Project, Like } from '@prisma/client';
+import { User, Project, Like, Comment } from '@prisma/client';
 import UserRibbon from './UserRibbon';
 type Props = {
   owner: User;
   currentUser?: User | null;
   project: Project;
   likes: Like[];
+  comments: Comment[];
 };
 
 // Component.
-export default function ProjectCard({ owner, currentUser, project, likes }: Props) {
+export default function ProjectCard({ owner, currentUser, project, likes, comments }: Props) {
   const { getByValue: getTechnologyByValue } = useTechnologies();
 
   const projectTitle = useMemo(
@@ -96,7 +97,7 @@ export default function ProjectCard({ owner, currentUser, project, likes }: Prop
       <section className="w-full flex flex-row justify-between items-center pt-4">
         <LikeButton currentUser={currentUser} project={project} likes={likes} />
 
-        <CommentButton />
+        <CommentButton comments={comments} projectLink={`/${owner.username}/${project.title}`} />
 
         <ShareButton owner={owner} project={project} />
       </section>

@@ -9,7 +9,6 @@ import toast from 'react-hot-toast';
 
 // Utils.
 import { isValidURL, isValidUsername } from '@/libs/validations';
-import { formatURL } from '@/libs/formatters';
 
 // Icons.
 import { FaPlusCircle } from 'react-icons/fa';
@@ -142,8 +141,8 @@ export default function ShareProjectForm({ currentUser }: Props) {
       coverImage,
       technologies,
       status,
-      liveDemo: liveDemo === '' ? '' : formatURL(liveDemo),
-      repositoryUrl: repositoryUrl === '' ? '' : formatURL(repositoryUrl),
+      liveDemo,
+      repositoryUrl,
     };
 
     try {

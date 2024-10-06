@@ -5,6 +5,6 @@ import prisma from '@/libs/prismadb';
 export default async function getUserBookmarks(bookmarkIds: string[] = []) {
   return await prisma.project.findMany({
     where: { id: { in: bookmarkIds || [] } },
-    include: { owner: true, likes: true },
+    include: { owner: true, likes: true, comments: true },
   });
 }

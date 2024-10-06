@@ -185,8 +185,8 @@ export default function EditProjectModal({ isOpen, onClose, project }: Props) {
       coverImage,
       technologies,
       status,
-      liveDemo: liveDemo === '' ? '' : formatURL(liveDemo),
-      repositoryUrl: repositoryUrl === '' ? '' : formatURL(repositoryUrl),
+      liveDemo,
+      repositoryUrl,
     };
 
     try {

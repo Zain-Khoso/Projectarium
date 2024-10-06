@@ -89,6 +89,7 @@ export default async function ProfilePage({ params: { username } }: Props) {
                   owner={project.owner}
                   project={project}
                   likes={project.likes}
+                  comments={project.comments}
                 />
               ))}
             </div>
