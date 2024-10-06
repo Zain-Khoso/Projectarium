@@ -58,7 +58,7 @@ export default function ProjectCard({ owner, currentUser, project, likes }: Prop
           alt={`Cover image of project ${project.title}`}
           src={project.coverImage}
           fill
-          className="w-full h-full object-cover object-center group-hover:scale-110 transition"
+          className="w-full scale-110 h-full object-cover object-center group-hover:scale-[120%] transition"
         />
 
         {owner.id !== currentUser?.id && (
