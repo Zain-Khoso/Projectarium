@@ -27,9 +27,7 @@ export default function LoginForm() {
     handleSubmit,
     setError,
     clearErrors,
-    getValues,
     setValue,
-    reset,
     formState: { errors, isLoading, isSubmitting },
   } = useForm<FieldValues>({
     defaultValues: {

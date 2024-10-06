@@ -28,6 +28,7 @@ model User {
   account         Account[]
   ownedProjects   Project[] @relation(name: "Owner")
   likedProjects   Like[] @relation(name: "UserLikes")
+  comments        Comment[] @relation(name: "UserComments")
 }
 
 // Additional user model for OAuth users.
@@ -67,6 +68,7 @@ model Project {
   
   owner         User @relation(name: "Owner", fields: [ownerId], references: [id])
   likes         Like[] @relation(name: "ProjectLikes")
+  comments      Comment[] @relation(name: "ProjectComments")
 }
 
 // Project status options.
@@ -86,4 +88,16 @@ model Like {
 
   user          User @relation(name: "UserLikes", fields: [userId], references: [id], onDelete: Cascade)
   project       Project @relation(name: "ProjectLikes", fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+// Model to store project/post comments.
+model Comment {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  text          String
+  projectId     String @db.ObjectId
+  userId        String @db.ObjectId
+  createdAt     DateTime @default(now())
+
+  user          User @relation(name: "UserComments", fields: [userId], references: [id], onDelete: Cascade)
+  project       Project @relation(name: "ProjectComments", fields: [projectId], references: [id], onDelete: Cascade)
 }

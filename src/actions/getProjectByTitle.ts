@@ -5,6 +5,10 @@ import prisma from '@/libs/prismadb';
 export default async function getProjectByTitle(userId: string, projectTitle: string) {
   return await prisma.project.findFirst({
     where: { ownerId: userId, AND: { title: projectTitle } },
-    include: { likes: true, owner: true },
+    include: {
+      likes: true,
+      owner: true,
+      comments: { include: { user: true }, orderBy: { createdAt: 'desc' } },
+    },
   });
 }

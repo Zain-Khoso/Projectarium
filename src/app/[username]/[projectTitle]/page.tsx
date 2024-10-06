@@ -25,6 +25,7 @@ import { LinkButton, BookmarkButton, ShareButton, LikeButton } from '@/component
 
 // Types.
 import { Metadata } from 'next';
+import CommentSection from '@/components/CommentSection';
 type ParamsT = {
   username?: string;
   projectTitle?: string;
@@ -187,6 +188,12 @@ export default async function IndividualProjectPage({
               )}
             </div>
           </section>
+
+          <CommentSection
+            projectId={project.id}
+            comments={project.comments}
+            currentUser={currentUser}
+          />
         </main>
       </Container>
     </>
