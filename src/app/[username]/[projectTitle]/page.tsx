@@ -1,7 +1,6 @@
 // Lib Imports.
 import { notFound, permanentRedirect } from 'next/navigation';
 import Image from 'next/image';
-import React from 'react';
 
 // Actions.
 import getCurrentUser from '@/actions/getCurrentUser';
@@ -19,12 +18,14 @@ import Navbar from '@/components/navbar/Navbar';
 import Container from '@/components/Container';
 import Header from './Header';
 import Badge from '@/components/Badge';
-import { LinkButton, BookmarkButton, ShareButton, LikeButton } from '@/components/Button';
+import { LinkButton, BookmarkButton, ShareButton, LikeButton, Button } from '@/components/Button';
 
 // Types.
 import { Metadata } from 'next';
 import UserRibbon from '@/components/UserRibbon';
 import Heading from '@/components/Heading';
+import EditProjectButton from './EditProjectButton';
+import DeleteProjectButton from './DeleteProjectButton';
 type ParamsT = {
   username?: string;
   projectTitle?: string;
@@ -146,6 +147,16 @@ export default async function IndividualProjectPage({
 
             <div className="flex flex-row items-center justify-between gap-4">
               <UserRibbon owner={project.owner} size="lg" />
+
+              {currentUser?.id === project.ownerId ? (
+                <div className="flex flex-row items-center gap-2">
+                  <EditProjectButton project={project} />
+
+                  <DeleteProjectButton project={project} />
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </section>
 

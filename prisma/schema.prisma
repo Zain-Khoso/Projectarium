@@ -84,6 +84,6 @@ model Like {
   userId        String @db.ObjectId
   createdAt     DateTime @default(now())
 
-  user          User @relation(name: "UserLikes", fields: [userId], references: [id])
-  project       Project @relation(name: "ProjectLikes", fields: [projectId], references: [id])
+  user          User @relation(name: "UserLikes", fields: [userId], references: [id], onDelete: Cascade)
+  project       Project @relation(name: "ProjectLikes", fields: [projectId], references: [id], onDelete: Cascade)
 }
