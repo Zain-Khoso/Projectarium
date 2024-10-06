@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useCallback } from 'react';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
-import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
@@ -74,12 +73,8 @@ export default function SignUpForm() {
       .then((data) => {
         if (!data.data?.errorField) {
           reset();
-          Swal.fire({
-            title: 'Account created successfully.',
-            icon: 'success',
-            confirmButtonColor: '#0ea5e9',
-          }).then(() => router.push('/login'));
-
+          toast.success('Account created successfully.');
+          router.push('/login');
           return;
         }
 
