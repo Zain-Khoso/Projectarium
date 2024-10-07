@@ -21,7 +21,7 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   setDisabled: Dispatch<SetStateAction<boolean>>;
-  setControlsOpen: Dispatch<SetStateAction<boolean>>;
+  onControlsClose: () => void;
   comment: Comment;
 };
 
@@ -30,7 +30,7 @@ export default function EditCommentModal({
   isOpen,
   onClose,
   setDisabled,
-  setControlsOpen,
+  onControlsClose,
   comment,
 }: Props) {
   const router = useRouter();
@@ -85,7 +85,7 @@ export default function EditCommentModal({
   const handleClose = function () {
     reset();
     onClose();
-    setControlsOpen(false);
+    onControlsClose();
   };
 
   let bodyContent = (

@@ -6,6 +6,9 @@ import { useState, useCallback } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+// Hooks.
+import useModal from '@/hooks/useModal';
+
 // Icons.
 import { TbDots, TbEdit, TbTrash } from 'react-icons/tb';
 
@@ -23,7 +26,7 @@ type Props = {
 export default function CommentControls({ comment }: Props) {
   const router = useRouter();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, onOpen, onClose } = useModal();
   const [disabled, setDisabled] = useState(false);
   const [isModelOpen, setIsModelOpen] = useState(false);
 
@@ -43,7 +46,7 @@ export default function CommentControls({ comment }: Props) {
     <div className="relative">
       <button
         type="button"
-        onClick={() => setIsOpen((value) => !value)}
+        onClick={() => (isOpen ? onClose() : onOpen())}
         className="p-1 rounded-md hover:bg-neutral-100"
       >
         <TbDots />
@@ -62,7 +65,7 @@ export default function CommentControls({ comment }: Props) {
           isOpen={isModelOpen}
           onClose={() => setIsModelOpen(false)}
           setDisabled={setDisabled}
-          setControlsOpen={setIsOpen}
+          onControlsClose={onClose}
           comment={comment}
         />
 

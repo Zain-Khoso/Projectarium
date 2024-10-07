@@ -1,7 +1,7 @@
 'use client';
 
 // Hooks.
-import useEditProjectModal from '@/hooks/useEditProjectModal';
+import useModal from '@/hooks/useModal';
 
 // Icons.
 import { TbEdit } from 'react-icons/tb';
@@ -18,7 +18,7 @@ type Props = {
 
 // Component.
 export default function EditProjectButton({ project }: Props) {
-  const editProjectModal = useEditProjectModal();
+  const editProjectModal = useModal();
 
   return (
     <>

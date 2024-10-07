@@ -1,7 +1,7 @@
 'use client';
 
 // Hooks.
-import useEditProfileModal from '@/hooks/useEditProfileModal';
+import useModal from '@/hooks/useModal';
 
 // Components.
 import { Button } from '@/components/Button';
@@ -15,7 +15,7 @@ type Props = {
 
 // Component.
 export default function EditProfileButton({ currentUser }: Props) {
-  const editProfileModal = useEditProfileModal();
+  const editProfileModal = useModal();
 
   return (
     <>

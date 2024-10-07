@@ -14,7 +14,7 @@ import Modal from './base';
 import Heading from '../Heading';
 
 // Types.
-import { User, Project } from '@prisma/client';
+import { Project } from '@prisma/client';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -37,7 +37,8 @@ export default function EditProjectModal({ isOpen, onClose, project }: Props) {
   );
 
   const deleteProject = useCallback(async function () {
-    setIsLoading(false);
+    setIsLoading(true);
+
     try {
       const response = await axios.delete(`/api/projects/project/${project.title}`);
       toast.success(`Deleted ${project.title}`);
