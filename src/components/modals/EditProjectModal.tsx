@@ -76,7 +76,17 @@ export default function EditProjectModal({ isOpen, onClose, project }: Props) {
     setValue('repositoryUrl', project?.repositoryUrl || '');
     setValue('technologies', project?.technologies || '');
     setValue('status', project?.status || '');
-  }, [isOpen]);
+  }, [
+    isOpen,
+    setValue,
+    project.title,
+    project.coverImage,
+    project.description,
+    project.technologies,
+    project.status,
+    project.liveDemo,
+    project.repositoryUrl,
+  ]);
 
   const onNext = () => setStep((value) => value + 1);
   const onBack = () => setStep((value) => value - 1);

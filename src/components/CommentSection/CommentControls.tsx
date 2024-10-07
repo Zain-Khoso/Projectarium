@@ -40,7 +40,7 @@ export default function CommentControls({ comment }: Props) {
     } finally {
       router.refresh();
     }
-  }, []);
+  }, [comment.id, router]);
 
   return (
     <div className="relative">

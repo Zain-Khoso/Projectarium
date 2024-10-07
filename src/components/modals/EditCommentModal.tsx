@@ -53,7 +53,7 @@ export default function EditCommentModal({
 
   useEffect(() => {
     setValue('text', comment.text || '');
-  }, [isOpen]);
+  }, [isOpen, comment.text, setValue]);
 
   const onTextChange = useCallback(
     (value: string) => {

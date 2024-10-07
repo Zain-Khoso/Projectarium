@@ -36,21 +36,24 @@ export default function EditProjectModal({ isOpen, onClose, project }: Props) {
     </div>
   );
 
-  const deleteProject = useCallback(async function () {
-    setIsLoading(true);
+  const deleteProject = useCallback(
+    async function () {
+      setIsLoading(true);
 
-    try {
-      const response = await axios.delete(`/api/projects/project/${project.title}`);
-      toast.success(`Deleted ${project.title}`);
-      router.push(response.data.redirectUrl);
-    } catch {
-      toast.error(`Unable to delete ${project.title}`);
-      router.refresh();
-    } finally {
-      setIsLoading(false);
-      onClose();
-    }
-  }, []);
+      try {
+        const response = await axios.delete(`/api/projects/project/${project.title}`);
+        toast.success(`Deleted ${project.title}`);
+        router.push(response.data.redirectUrl);
+      } catch {
+        toast.error(`Unable to delete ${project.title}`);
+        router.refresh();
+      } finally {
+        setIsLoading(false);
+        onClose();
+      }
+    },
+    [onClose, project.title, router]
+  );
 
   return (
     <Modal

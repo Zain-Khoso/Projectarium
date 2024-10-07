@@ -7,6 +7,9 @@ import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+// Hooks.
+import useCountries from '@/hooks/useCountries';
+
 // Icons.
 import { FaArrowCircleLeft, FaArrowCircleRight, FaCheckCircle } from 'react-icons/fa';
 
@@ -22,7 +25,6 @@ import CountrySelect from '../Input/CountrySelect';
 
 // Types.
 import { User } from '@prisma/client';
-import useCountries from '@/hooks/useCountries';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -75,7 +77,18 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
     setValue('bio', currentUser?.bio || '');
     setValue('location', currentUser?.locationValue ? getByValue(currentUser.locationValue) : '');
     setValue('website', currentUser?.website || '');
-  }, [isOpen]);
+    console.log('Hello');
+  }, [
+    isOpen,
+    setValue,
+    getByValue,
+    currentUser?.username,
+    currentUser?.image,
+    currentUser?.name,
+    currentUser?.bio,
+    currentUser?.locationValue,
+    currentUser?.website,
+  ]);
 
   const onNext = () => setStep((value) => value + 1);
   const onBack = () => setStep((value) => value - 1);

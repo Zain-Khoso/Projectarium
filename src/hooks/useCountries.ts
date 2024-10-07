@@ -1,4 +1,5 @@
 // Lib Import.
+import { useCallback } from 'react';
 import countries from 'world-countries';
 
 const formattedCountries = countries.map((country) => ({
@@ -11,9 +12,12 @@ const formattedCountries = countries.map((country) => ({
 
 // Hook.
 export default function useCountries() {
-  const getAll = () => formattedCountries;
+  const getAll = useCallback(() => formattedCountries, []);
 
-  const getByValue = (value: string) => formattedCountries.find((item) => item.value === value);
+  const getByValue = useCallback(
+    (value: string) => formattedCountries.find((item) => item.value === value),
+    []
+  );
 
   return { getAll, getByValue };
 }
