@@ -80,20 +80,11 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
   const onNext = () => setStep((value) => value + 1);
   const onBack = () => setStep((value) => value - 1);
 
-  const onUsernameChange = useCallback(
-    (value: string) => {
-      setValue('username', value);
+  const onInputChange = useCallback(
+    (id: string, value: string) => {
+      setValue(id, value);
 
-      clearErrors('username');
-    },
-    [setValue, clearErrors]
-  );
-
-  const onWebsiteChange = useCallback(
-    (value: string) => {
-      setValue('website', value);
-
-      clearErrors('website');
+      clearErrors(id);
     },
     [setValue, clearErrors]
   );
@@ -130,7 +121,15 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
       return onNext();
     }
 
-    if (step === STEPS.NAME_BIO) return onNext();
+    if (step === STEPS.NAME_BIO) {
+      if (name.length > 20) {
+        toast.error('20 characters atmost.');
+
+        return setError('name', { message: '20 characters atmost.' });
+      }
+
+      return onNext();
+    }
 
     if (step === STEPS.LOCATION_WEBSITE) {
       if (website !== '' && !isValidURL(website)) {
@@ -184,7 +183,7 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
           id="username"
           label="Username"
           value={username}
-          onChange={onUsernameChange}
+          onChange={(value) => onInputChange('username', value)}
           errors={errors}
           required
         />
@@ -212,7 +211,7 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
             id="name"
             label="Name"
             value={name}
-            onChange={(value) => setValue('name', value)}
+            onChange={(value) => onInputChange('name', value)}
             errors={errors}
           />
 
@@ -240,7 +239,7 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
             id="website"
             label="Website"
             value={website}
-            onChange={onWebsiteChange}
+            onChange={(value) => onInputChange('website', value)}
             errors={errors}
           />
 
