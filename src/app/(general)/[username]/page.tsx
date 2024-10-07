@@ -77,7 +77,7 @@ export default async function ProfilePage({ params: { username } }: Props) {
             }
           />
 
-          <div className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] gap-8 py-8">
+          <div className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] place-items-center md:place-items-start gap-8 py-8">
             {projects.map((project) => (
               <ProjectCard
                 key={project.id}
