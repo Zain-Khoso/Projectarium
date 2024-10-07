@@ -45,7 +45,7 @@ export default async function BookmarksPage() {
       <main className="flex flex-col gap-8 pt-28 pb-8">
         <Heading title="Your Bookmarks" />
 
-        <section className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] gap-8">
+        <section className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] place-items-center md:place-items-start gap-8">
           {bookmarks?.map((bookmark) => (
             <ProjectCard
               key={bookmark.id}
