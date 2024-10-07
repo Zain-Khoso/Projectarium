@@ -113,7 +113,7 @@ export default async function IndividualProjectPage({
 
   return (
     <Container>
-      <main className="max-w-screen-lg flex flex-col gap-8 pt-28 pb-8 mx-auto">
+      <main className="max-w-screen-lg flex flex-col gap-8 pt-28 pb-20 mx-auto">
         <section className="w-full flex flex-row items-center justify-between">
           <Header heading={project.title} technologies={project.technologies} />
         </section>
