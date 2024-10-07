@@ -10,7 +10,7 @@ type Props = {
   href: string | false;
   label: string;
   icon?: IconType;
-  onClick?: () => void;
+  onClick: () => void;
 };
 
 export default function MenuItem({ href, label, icon: Icon, onClick }: Props) {
@@ -19,7 +19,7 @@ export default function MenuItem({ href, label, icon: Icon, onClick }: Props) {
   if (href === false)
     return (
       <div
-        onClick={onClick ? onClick : () => router.refresh()}
+        onClick={onClick}
         className="flex flex-row items-center justify-start gap-2 px-4 py-3 hover:bg-neutral-100 transition font-semibold"
       >
         {Icon && <Icon className="fill-neutral-800" size={16} />}
@@ -31,6 +31,7 @@ export default function MenuItem({ href, label, icon: Icon, onClick }: Props) {
   return (
     <Link
       href={href}
+      onClick={onClick}
       className="flex flex-row items-center justify-start gap-2 px-4 py-3 hover:bg-neutral-100 transition font-semibold"
     >
       {Icon && <Icon className="fill-neutral-800" size={16} />}

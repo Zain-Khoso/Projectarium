@@ -2,7 +2,6 @@
 import getCurrentUser from '@/actions/getCurrentUser';
 
 // Components.
-import Navbar from '@/components/navbar/Navbar';
 import Container from '@/components/Container';
 import InfiniteScroll from '@/components/InfiniteScroll';
 
@@ -11,12 +10,8 @@ export default async function Home() {
   const currentUser = await getCurrentUser();
 
   return (
-    <>
-      <Navbar currentUser={currentUser} />
-
-      <Container>
-        <InfiniteScroll currentUser={currentUser} />
-      </Container>
-    </>
+    <Container>
+      <InfiniteScroll currentUser={currentUser} />
+    </Container>
   );
 }

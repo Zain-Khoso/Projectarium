@@ -11,7 +11,6 @@ import getUserProjects from '@/actions/getUserProjects';
 import { getDisplayNameOfUser } from '@/libs/getDisplayNameOfUser';
 
 // Components.
-import Navbar from '@/components/navbar/Navbar';
 import Container from '@/components/Container';
 import UserContent from './UserContent';
 import Heading from '@/components/Heading';
@@ -64,38 +63,34 @@ export default async function ProfilePage({ params: { username } }: Props) {
   const displayName = getDisplayNameOfUser(profileUser);
 
   return (
-    <>
-      <Navbar currentUser={currentUser} />
+    <Container>
+      <main className="min-h-screen flex flex-col md:flex-row gap-8 pt-28 pb-8">
+        <UserContent currentUser={currentUser} profileUser={profileUser} />
 
-      <Container>
-        <main className="min-h-screen flex flex-col md:flex-row gap-8 pt-28 pb-8">
-          <UserContent currentUser={currentUser} profileUser={profileUser} />
+        <section className="flex-1 h-full flex flex-col gap-2">
+          <Heading
+            title="Projects"
+            subtitle={
+              projects.length === 0
+                ? `${displayName} has no projects.`
+                : `Projects created by ${displayName}`
+            }
+          />
 
-          <section className="flex-1 h-full flex flex-col gap-2">
-            <Heading
-              title="Projects"
-              subtitle={
-                projects.length === 0
-                  ? `${displayName} has no projects.`
-                  : `Projects created by ${displayName}`
-              }
-            />
-
-            <div className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] gap-8 py-8">
-              {projects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  currentUser={currentUser}
-                  owner={project.owner}
-                  project={project}
-                  likes={project.likes}
-                  comments={project.comments}
-                />
-              ))}
-            </div>
-          </section>
-        </main>
-      </Container>
-    </>
+          <div className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] gap-8 py-8">
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                currentUser={currentUser}
+                owner={project.owner}
+                project={project}
+                likes={project.likes}
+                comments={project.comments}
+              />
+            ))}
+          </div>
+        </section>
+      </main>
+    </Container>
   );
 }

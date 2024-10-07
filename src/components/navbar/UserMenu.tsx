@@ -47,9 +47,17 @@ export default function UserMenu({ currentUser }: Props) {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItem href={`/${currentUser.username}`} label="Profile" />
-                <MenuItem href={'/bookmarks'} label="Bookmarks" />
-                <MenuItem href={`/${currentUser.username}/new`} label="Create Project" />
+                <MenuItem
+                  href={`/${currentUser.username}`}
+                  label="Profile"
+                  onClick={() => setIsOpen(false)}
+                />
+                <MenuItem href={'/bookmarks'} label="Bookmarks" onClick={() => setIsOpen(false)} />
+                <MenuItem
+                  href={`/${currentUser.username}/new`}
+                  label="Create Project"
+                  onClick={() => setIsOpen(false)}
+                />
 
                 <hr />
 
@@ -57,8 +65,18 @@ export default function UserMenu({ currentUser }: Props) {
               </>
             ) : (
               <>
-                <MenuItem href="/login" label="Login" icon={VscSignIn} />
-                <MenuItem href="/signup" label="Sign up" icon={FaUserPlus} />
+                <MenuItem
+                  href="/login"
+                  label="Login"
+                  icon={VscSignIn}
+                  onClick={() => setIsOpen(false)}
+                />
+                <MenuItem
+                  href="/signup"
+                  label="Sign up"
+                  icon={FaUserPlus}
+                  onClick={() => setIsOpen(false)}
+                />
               </>
             )}
           </div>
