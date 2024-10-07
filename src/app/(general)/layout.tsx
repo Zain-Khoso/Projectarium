@@ -2,6 +2,7 @@
 import { Nunito } from 'next/font/google';
 
 // Local Imports.
+import ReactQueryProvider from '@/providers/ReactQueryProvider';
 import ToastProvider from '@/providers/ToasterProvider';
 
 // Styles.
@@ -73,7 +74,7 @@ export default async function RootLayout({ children }: Readonly<ChildrenProps>) 
         <Navbar currentUser={currentUser} />
 
         <ToastProvider />
-        {children}
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );
