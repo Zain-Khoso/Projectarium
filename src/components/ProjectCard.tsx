@@ -3,7 +3,6 @@
 // Lib Imports.
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
 // Hooks.
@@ -67,15 +66,15 @@ export default function ProjectCard({ owner, currentUser, project, likes, commen
         )}
       </Link>
 
-      <section className="w-full flex flex-col gap-4 px-2 py-4">
-        <Link
-          href={`/${owner.username}/${project.title}`}
-          className="flex flex-row items-center justify-between"
-        >
+      <Link
+        href={`/${owner.username}/${project.title}`}
+        className="w-full flex flex-col gap-4 px-2 py-4"
+      >
+        <div className="flex flex-row items-center justify-between">
           <h4 className="font-bold text-xl">{projectTitle}</h4>
 
           <Badge label={project.status} outline={project.status !== 'COMPLETED'} />
-        </Link>
+        </div>
 
         <div className="flex flex-row items-start gap-1">
           <FaCalendarCheck size={16} className="fill-neutral-600" />
@@ -90,7 +89,7 @@ export default function ProjectCard({ owner, currentUser, project, likes, commen
         </div>
 
         <UserRibbon owner={owner} />
-      </section>
+      </Link>
 
       <hr />
 
