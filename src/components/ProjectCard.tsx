@@ -27,10 +27,18 @@ type Props = {
   project: Project;
   likes: Like[];
   comments: Comment[];
+  refreshOnBookmark?: boolean;
 };
 
 // Component.
-export default function ProjectCard({ owner, currentUser, project, likes, comments }: Props) {
+export default function ProjectCard({
+  owner,
+  currentUser,
+  project,
+  likes,
+  comments,
+  refreshOnBookmark = false,
+}: Props) {
   const { getByValue: getTechnologyByValue } = useTechnologies();
 
   const projectTitle = useMemo(
@@ -63,7 +71,11 @@ export default function ProjectCard({ owner, currentUser, project, likes, commen
         />
 
         {owner.id !== currentUser?.id && (
-          <BookmarkButton projectId={project.id} currentUser={currentUser} />
+          <BookmarkButton
+            projectId={project.id}
+            currentUser={currentUser}
+            refresh={refreshOnBookmark}
+          />
         )}
       </Link>
 

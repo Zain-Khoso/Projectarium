@@ -11,13 +11,15 @@ import { User } from '@prisma/client';
 type Props = {
   projectId: string;
   currentUser?: User | null;
+  refresh?: boolean;
 };
 
 // Component.
-export default function BookmarkButton({ projectId, currentUser }: Props) {
+export default function BookmarkButton({ projectId, currentUser, refresh = false }: Props) {
   const { isBookmarked, toggleBookmark } = useBookmark({
     projectId,
     currentUser,
+    refresh,
   });
 
   return (

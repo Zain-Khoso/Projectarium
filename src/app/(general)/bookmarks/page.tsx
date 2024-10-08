@@ -54,6 +54,7 @@ export default async function BookmarksPage() {
               project={bookmark}
               likes={bookmark.likes}
               comments={bookmark.comments}
+              refreshOnBookmark
             />
           ))}
         </section>

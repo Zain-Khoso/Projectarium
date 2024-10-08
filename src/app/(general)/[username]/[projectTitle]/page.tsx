@@ -129,7 +129,7 @@ export default async function IndividualProjectPage({
             />
 
             {project.owner.id !== currentUser?.id && (
-              <BookmarkButton projectId={project.id} currentUser={currentUser} />
+              <BookmarkButton projectId={project.id} currentUser={currentUser} refresh />
             )}
           </div>
 

@@ -9,12 +9,14 @@ import { User } from '@prisma/client';
 type UseBookmarkT = {
   projectId: string;
   currentUser?: User | null;
+  refresh?: boolean;
 };
 
 // Hook.
-export default function useBookmark({ projectId, currentUser }: UseBookmarkT) {
+export default function useBookmark({ projectId, currentUser, refresh = false }: UseBookmarkT) {
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(() => {
     const list = currentUser?.bookmarkIds || [];
 
@@ -27,6 +29,9 @@ export default function useBookmark({ projectId, currentUser }: UseBookmarkT) {
 
       if (!currentUser) return router.push('/login');
 
+      if (isLoading) return;
+      setIsLoading(true);
+
       try {
         let request;
 
@@ -35,12 +40,15 @@ export default function useBookmark({ projectId, currentUser }: UseBookmarkT) {
 
         const response = await request();
 
-        setIsBookmarked(response.data.isBookmarked);
+        if (refresh) router.refresh();
+        else setIsBookmarked(response.data.isBookmarked);
       } catch (error: any) {
         toast.error('Something went wrong.');
+      } finally {
+        setIsLoading(false);
       }
     },
-    [currentUser, isBookmarked, projectId, router]
+    [currentUser, isLoading, isBookmarked, projectId, router, refresh]
   );
 
   return {
