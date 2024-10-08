@@ -15,8 +15,9 @@ type UseLikeT = {
 // Hook.
 export default function useLike({ currentUser, projectId, likes }: UseLikeT) {
   const router = useRouter();
-  const [likesCount, setLikesCount] = useState<number>(likes.length);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [likesCount, setLikesCount] = useState<number>(likes.length);
   const [isLiked, setIsLiked] = useState<boolean>(() => {
     const liked = likes.find((like) => like.userId === currentUser?.id || '');
 
@@ -28,6 +29,9 @@ export default function useLike({ currentUser, projectId, likes }: UseLikeT) {
       event.preventDefault();
 
       if (!currentUser) return router.push('/login');
+
+      if (isLoading) return;
+      setIsLoading(true);
 
       try {
         let request;
@@ -41,9 +45,11 @@ export default function useLike({ currentUser, projectId, likes }: UseLikeT) {
         setLikesCount((value) => (response.data.isLiked ? ++value : --value));
       } catch (error: any) {
         toast.error('Something went wrong.');
+      } finally {
+        setIsLoading(false);
       }
     },
-    [currentUser, isLiked, projectId, router]
+    [currentUser, isLoading, isLiked, projectId, router]
   );
 
   return {
