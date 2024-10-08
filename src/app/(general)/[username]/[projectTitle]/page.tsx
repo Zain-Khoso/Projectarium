@@ -121,9 +121,10 @@ export default async function IndividualProjectPage({
         <section className="w-full flex flex-col gap-8">
           <div className="relative rounded-lg overflow-hidden w-full aspect-video">
             <Image
+              fill
+              sizes="(max-width: 768px) 100vw, 70vw"
               alt={`Cover image of project ${project.title}`}
               src={project.coverImage}
-              fill
               className="w-full h-full object-cover object-center hover:scale-110 transition"
             />
 

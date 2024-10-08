@@ -55,9 +55,10 @@ export default function ProjectCard({ owner, currentUser, project, likes, commen
         className="relative rounded-lg overflow-hidden w-full h-[200px]"
       >
         <Image
+          fill
+          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 30vw, 25vw"
           alt={`Cover image of project ${project.title}`}
           src={project.coverImage}
-          fill
           className="w-full scale-110 h-full object-cover object-center group-hover:scale-[120%] transition"
         />
 

@@ -7,6 +7,7 @@ export default function Background() {
     <>
       <Image
         fill
+        sizes="(max-width: 768px) 0vw, 100vw"
         alt="Authentication UI background image."
         src="/images/auth-bg.webp"
         className="fixed inset-0 -z-10 w-[100dvw] h-[100dvh] object-cover object-center"
