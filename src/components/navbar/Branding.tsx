@@ -8,8 +8,8 @@ import LogoImage from '@/app/icon.png';
 // Component.
 export default function Branding() {
   return (
-    <Link href="/" className="hidden md:flex flex-row items-center gap-4">
-      <Image alt="Application logo" src={LogoImage} width={52} height={52} />
+    <Link href="/" className="flex flex-row items-center gap-2">
+      <Image alt="Application logo" src={LogoImage} width={46} height={46} />
 
       <h2 className="text-2xl font-semibold">Projectarium</h2>
     </Link>

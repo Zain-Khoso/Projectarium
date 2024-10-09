@@ -1,7 +1,6 @@
 // Components
 import Container from '../Container';
 import Branding from './Branding';
-import Search from './Search';
 import UserMenu from './UserMenu';
 
 // Types.
@@ -19,9 +18,6 @@ export default function Navbar({ currentUser }: Props) {
           <div className="flex flex-row items-center justify-between gap-4 md:gap-0">
             {/* Application Logo and Name */}
             <Branding />
-
-            {/* Search & Filtering options */}
-            <Search />
 
             {/* User Option Dropdown */}
             <UserMenu currentUser={currentUser} />
