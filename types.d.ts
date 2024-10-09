@@ -1,4 +1,4 @@
-import { Comment, User } from '@prisma/client';
+import { User, Project, Comment, Like } from '@prisma/client';
 
 export interface ChildrenProps {
   children: React.ReactNode;
@@ -6,4 +6,10 @@ export interface ChildrenProps {
 
 export type CommentWithUser = Omit<Comment, 'user'> & {
   user: User;
+};
+
+export type WholeProject = Omit<Comment, 'owner', 'comments', 'likes'> & {
+  owner: User;
+  comments: Comment[];
+  likes: Like[];
 };
