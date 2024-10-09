@@ -1,47 +1,30 @@
 'use client';
 
 // Lib Imports.
-import { Fragment, useEffect } from 'react';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useInView } from 'react-intersection-observer';
+import { Fragment } from 'react';
 
-// Utils.
-import infiniteScrollQuery from '@/libs/infiniteScrollQuery';
+// Hooks.
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 // Components.
 import ProjectCard from './ProjectCard';
 
 // Types.
 import { User } from '@prisma/client';
-import { WholeProject } from '../../types';
 type Props = {
   currentUser?: User | null;
 };
 
 // Component.
 export default function InfiniteScroll({ currentUser }: Props) {
-  const [ref, inView] = useInView();
-
-  const { isLoading, isError, data, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ['infinite-scroll'],
-      queryFn: infiniteScrollQuery,
-      initialPageParam: '',
-      getNextPageParam: (lastPage, _) => lastPage.nextCursor,
-    });
-
-  useEffect(() => {
-    if (isLoading || isFetchingNextPage || !inView) return;
-
-    fetchNextPage();
-  }, [isLoading, isFetchingNextPage, inView, fetchNextPage]);
+  const { ref, isLoading, isError, data, hasNextPage, isFetchingNextPage } = useInfiniteScroll();
 
   return (
     <>
       <main className="grid grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] gap-8 gap-y-12 place-items-center pt-28 pb-8">
         {data?.pages?.map((page) => (
           <Fragment key={page.nextCursor ?? 'lastPage'}>
-            {page.projects.map((project: WholeProject) => (
+            {page.projects.map((project) => (
               <ProjectCard
                 key={project.id}
                 owner={project.owner}

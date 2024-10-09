@@ -64,6 +64,7 @@ export default function ProjectCard({
       >
         <Image
           fill
+          priority
           sizes="(max-width: 768px) 90vw, (max-width: 1200px) 30vw, 25vw"
           alt={`Cover image of project ${project.title}`}
           src={project.coverImage}
