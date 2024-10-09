@@ -227,7 +227,7 @@ export default function EditProjectModal({ isOpen, onClose, project }: Props) {
       <div className="flex flex-col gap-4">
         <Input
           id="title"
-          label="Title"
+          label="Title *"
           value={title}
           onChange={(value) => onInputChange('title', value)}
           errors={errors}
@@ -236,7 +236,7 @@ export default function EditProjectModal({ isOpen, onClose, project }: Props) {
 
         <ImageUpload
           id="coverImage"
-          label="Click to upload your Image"
+          label="Click to upload your Image *"
           value={getValues('coverImage')}
           onChange={setValue}
         />
@@ -262,7 +262,7 @@ export default function EditProjectModal({ isOpen, onClose, project }: Props) {
 
           <Textarea
             id="description"
-            label="Description"
+            label="Description *"
             value={description}
             onChange={(value) => onInputChange('description', value)}
             errors={errors}

@@ -82,7 +82,7 @@ export default function LoginForm() {
     <form className="w-full flex flex-col items-center gap-4">
       <Input
         id="email"
-        label="Email"
+        label="Email *"
         value={email}
         onChange={(value) => onInputChange('email', value)}
         errors={errors}
@@ -92,7 +92,7 @@ export default function LoginForm() {
 
       <Password
         id="password"
-        label="Password"
+        label="Password *"
         value={password}
         onChange={(value) => onInputChange('password', value)}
         errors={errors}

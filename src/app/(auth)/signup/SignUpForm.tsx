@@ -97,7 +97,7 @@ export default function SignUpForm() {
     <form className="w-full flex flex-col items-center gap-4">
       <Input
         id="email"
-        label="Email"
+        label="Email *"
         value={email}
         onChange={(value) => onInputChange('email', value)}
         errors={errors}
@@ -107,7 +107,7 @@ export default function SignUpForm() {
 
       <Input
         id="username"
-        label="Username"
+        label="Username *"
         value={username}
         onChange={(value) => onInputChange('username', value)}
         errors={errors}
@@ -117,7 +117,7 @@ export default function SignUpForm() {
 
       <Password
         id="password"
-        label="Password"
+        label="Password *"
         value={password}
         onChange={(value) => onInputChange('password', value)}
         errors={errors}

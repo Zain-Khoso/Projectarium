@@ -172,7 +172,7 @@ export default function ShareProjectForm({ currentUser }: Props) {
       {/* Cover Image */}
       <ImageUpload
         id="coverImage"
-        label="Click to upload Project Looks!"
+        label="Click to upload Project Looks! *"
         value={getValues('coverImage')}
         onChange={setValue}
         errors={errors}
@@ -182,7 +182,7 @@ export default function ShareProjectForm({ currentUser }: Props) {
       {/* Title */}
       <Input
         id="title"
-        label="Project Title"
+        label="Project Title *"
         value={title}
         onChange={(value) => handleInputChange('title', value)}
         errors={errors}
@@ -192,7 +192,7 @@ export default function ShareProjectForm({ currentUser }: Props) {
       {/* Description */}
       <Textarea
         id="description"
-        label="Project Description"
+        label="Project Description *"
         value={description}
         onChange={(value) => handleInputChange('description', value)}
         errors={errors}

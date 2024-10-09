@@ -35,7 +35,7 @@ export default function TechnologiesSelect({ value, onChange, errors, clearError
       {isMounted && (
         <Select
           id="technologies"
-          placeholder="Technologies used"
+          placeholder="Technologies used *"
           isClearable
           isMulti
           options={getAll()}

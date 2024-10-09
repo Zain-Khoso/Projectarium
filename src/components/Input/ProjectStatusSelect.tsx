@@ -46,7 +46,7 @@ export default function ProjectStatusSelect({ value, onChange, errors, clearErro
       {isMounted && (
         <Select
           id="status"
-          placeholder="Project Status"
+          placeholder="Project Status *"
           isClearable
           options={statuses}
           value={selectedStatus}

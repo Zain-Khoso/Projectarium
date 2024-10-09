@@ -193,7 +193,7 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
       <div className="flex flex-col gap-4">
         <Input
           id="username"
-          label="Username"
+          label="Username *"
           value={username}
           onChange={(value) => onInputChange('username', value)}
           errors={errors}
