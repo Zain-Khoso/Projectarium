@@ -157,7 +157,7 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
           image,
           name: name || '',
           bio: bio || '',
-          locationValue: location.value || '',
+          locationValue: location?.value || '',
           website: formatURL(website),
         });
 
