@@ -15,6 +15,7 @@ import { FaLinkedin } from 'react-icons/fa';
 
 // Components.
 import Modal from './base';
+import CopyText from '../CopyText';
 
 // Types.
 import { User, Project } from '@prisma/client';
@@ -49,40 +50,48 @@ export default function ShareProjectModel({ isOpen, onClose, owner, project }: P
   );
 
   let bodyContent = (
-    <div className="w-full flex flex-row flex-wrap items-center justify-around gap-4">
-      <EmailShareButton url={url} subject={email.subject} body={email.body}>
-        <div className="flex flex-col items-center justify-center gap-2">
-          <MdEmail size={50} />
-          <span>Email</span>
-        </div>
-      </EmailShareButton>
+    <main className="space-y-12">
+      <div className="w-full flex flex-row flex-wrap items-center justify-around gap-4">
+        <EmailShareButton url={url} subject={email.subject} body={email.body}>
+          <div className="flex flex-col items-center justify-center gap-2">
+            <MdEmail size={50} />
+            <span>Email</span>
+          </div>
+        </EmailShareButton>
 
-      <FacebookShareButton url={url} hashtag="projectarium">
-        <div className="flex flex-col items-center justify-center gap-2">
-          <MdFacebook size={50} fill="#1877F2" />
-          <span>Facebook</span>
-        </div>
-      </FacebookShareButton>
+        <FacebookShareButton url={url} hashtag="projectarium">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <MdFacebook size={50} fill="#1877F2" />
+            <span>Facebook</span>
+          </div>
+        </FacebookShareButton>
 
-      <WhatsappShareButton url={url} title={email.subject}>
-        <div className="flex flex-col items-center justify-center gap-2">
-          <MdWhatsapp size={50} fill="#25D366" />
-          <span>Whatsapp</span>
-        </div>
-      </WhatsappShareButton>
+        <WhatsappShareButton url={url} title={email.subject}>
+          <div className="flex flex-col items-center justify-center gap-2">
+            <MdWhatsapp size={50} fill="#25D366" />
+            <span>Whatsapp</span>
+          </div>
+        </WhatsappShareButton>
 
-      <LinkedinShareButton
-        url={url}
-        title={email.subject}
-        summary={email.body}
-        source="Projectarium"
-      >
-        <div className="flex flex-col items-center justify-center gap-2">
-          <FaLinkedin size={50} fill="#0077B5" />
-          <span>Linkedin</span>
-        </div>
-      </LinkedinShareButton>
-    </div>
+        <LinkedinShareButton
+          url={url}
+          title={email.subject}
+          summary={email.body}
+          source="Projectarium"
+        >
+          <div className="flex flex-col items-center justify-center gap-2">
+            <FaLinkedin size={50} fill="#0077B5" />
+            <span>Linkedin</span>
+          </div>
+        </LinkedinShareButton>
+      </div>
+
+      <div className="space-y-2">
+        <h4 className="text-xl font-semibold">Want to share somewhere else?</h4>
+
+        <CopyText text={url} />
+      </div>
+    </main>
   );
 
   return (
