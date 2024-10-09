@@ -53,7 +53,9 @@ export default function ProjectCard({
       .slice(0, 3)
       .map((technology) => getTechnologyByValue(technology)?.label);
 
-    return selectedTechnologies.join(', ');
+    return project.technologies.length <= 3
+      ? selectedTechnologies.join(', ')
+      : selectedTechnologies.join(', ') + ', etc...';
   }, [project.technologies, getTechnologyByValue]);
 
   return (
@@ -99,7 +101,7 @@ export default function ProjectCard({
         <div className="flex flex-row items-start gap-1">
           <FaClipboardList size={16} className="fill-neutral-600" />
 
-          <span className="font-medium text-sm text-neutral-600">With {createdWith}, etc...</span>
+          <span className="font-medium text-sm text-neutral-600">With {createdWith}</span>
         </div>
 
         <UserRibbon owner={owner} />
