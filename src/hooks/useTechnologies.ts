@@ -47,6 +47,7 @@ import {
   SiBabel,
   SiEslint,
 } from 'react-icons/si';
+import { MdFiberNew } from 'react-icons/md';
 
 // Types.
 import { IconType } from 'react-icons';
@@ -106,6 +107,7 @@ const technologies = [
   { icon: SiWebpack, label: 'Webpack', value: 'webpack' },
   { icon: SiBabel, label: 'Babel', value: 'babel' },
   { icon: SiEslint, label: 'Eslint', value: 'eslint' },
+  { icon: MdFiberNew, label: 'Others', value: 'others' },
 ];
 
 // Hook.
