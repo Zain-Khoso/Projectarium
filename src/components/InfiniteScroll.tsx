@@ -2,6 +2,8 @@
 
 // Lib Imports.
 import { Fragment } from 'react';
+import toast from 'react-hot-toast';
+import { PropagateLoader } from 'react-spinners';
 
 // Hooks.
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
@@ -18,6 +20,8 @@ type Props = {
 // Component.
 export default function InfiniteScroll({ currentUser }: Props) {
   const { ref, isLoading, isError, data, hasNextPage, isFetchingNextPage } = useInfiniteScroll();
+
+  if (isError) toast.error("Something's wrong. 🔃");
 
   return (
     <>
@@ -38,8 +42,11 @@ export default function InfiniteScroll({ currentUser }: Props) {
         ))}
       </main>
 
-      {isLoading || isFetchingNextPage ? <h1 className="text-4xl">Loader</h1> : <></>}
-      {isError ? <h1 className="text-4xl text-red-500">Error</h1> : <></>}
+      {(isLoading || isFetchingNextPage) && (
+        <section className="w-full h-20 grid place-items-center">
+          <PropagateLoader color="#0ea5e9" />
+        </section>
+      )}
 
       <div ref={ref} className="invisible w-full h-2"></div>
     </>
