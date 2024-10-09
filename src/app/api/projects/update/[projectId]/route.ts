@@ -23,13 +23,13 @@ export async function POST(request: Request, { params }: { params: ParamsT }) {
 
     const updatedProject: Record<string, any> = {};
 
-    if (title) updatedProject['title'] = title;
-    if (description) updatedProject['description'] = description;
-    if (coverImage) updatedProject['coverImage'] = coverImage;
-    if (technologies) updatedProject['technologies'] = technologies;
-    if (status) updatedProject['status'] = status;
-    if (liveDemo) updatedProject['liveDemo'] = liveDemo;
-    if (repositoryUrl) updatedProject['repositoryUrl'] = repositoryUrl;
+    updatedProject['title'] = title;
+    updatedProject['description'] = description;
+    updatedProject['coverImage'] = coverImage;
+    updatedProject['technologies'] = technologies;
+    updatedProject['status'] = status;
+    updatedProject['liveDemo'] = liveDemo;
+    updatedProject['repositoryUrl'] = repositoryUrl;
 
     const project = await prisma.project.update({
       where: { id: projectId },

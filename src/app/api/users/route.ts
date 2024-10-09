@@ -17,11 +17,11 @@ export async function POST(request: Request) {
 
     const updatedUser: Record<string, any> = {};
 
-    if (image) updatedUser['image'] = image;
-    if (name) updatedUser['name'] = name;
-    if (bio) updatedUser['bio'] = bio;
-    if (locationValue) updatedUser['locationValue'] = locationValue;
-    if (website) updatedUser['website'] = website;
+    updatedUser['image'] = image;
+    updatedUser['name'] = name;
+    updatedUser['bio'] = bio;
+    updatedUser['locationValue'] = locationValue;
+    updatedUser['website'] = website;
 
     const user = await prisma.user.update({
       where: { id: currentUserId },

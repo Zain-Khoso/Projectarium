@@ -195,8 +195,8 @@ export default function EditProjectModal({ isOpen, onClose, project }: Props) {
       coverImage,
       technologies,
       status,
-      liveDemo,
-      repositoryUrl,
+      liveDemo: liveDemo || '',
+      repositoryUrl: repositoryUrl || '',
     };
 
     try {

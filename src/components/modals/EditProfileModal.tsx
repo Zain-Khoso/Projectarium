@@ -77,7 +77,6 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
     setValue('bio', currentUser?.bio || '');
     setValue('location', currentUser?.locationValue ? getByValue(currentUser.locationValue) : '');
     setValue('website', currentUser?.website || '');
-    console.log('Hello');
   }, [
     isOpen,
     setValue,
@@ -156,8 +155,8 @@ export default function EditProfileModal({ isOpen, onClose, currentUser }: Props
           currentUserId: currentUser?.id,
           username,
           image,
-          name,
-          bio,
+          name: name || '',
+          bio: bio || '',
           locationValue: location.value || '',
           website: formatURL(website),
         });
